@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Main>
+  <File1>
+    <Level>30</Level>
+    <HardMode>True</HardMode>
+    <MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels-->
+    <SubCoasters></SubCoasters>
+  </File1>
+  <File2>
+    <Level>0</Level>
+    <HardMode>True</HardMode>
+    <MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels-->
+    <SubCoasters></SubCoasters>
+  </File2>
+  <File3>
+    <Level>0</Level>
+    <HardMode>False</HardMode>
+    <MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels-->
+    <SubCoasters></SubCoasters>
+  </File3>
+</Main>

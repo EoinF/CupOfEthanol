@@ -1,0 +1,276 @@
+﻿
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Dog Jobs  **/////////////////////////////////
+---------------------------------------------------------------------------------
+
+Dog1:	The enemy will not fall down from high places and turns at the edges.
+		[NOTE: Only works when on static blocks]
+		
+Dog2:	Same as "Dog1" but will collide with other enemies.
+		
+Dog3:	The enemy will not turn unless it hits an object.
+
+Dog4:	Same as "Dog3 but will collide with other enemies
+
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Bird Jobs  **////////////////////////////////
+---------------------------------------------------------------------------------
+
+Bird1:	The enemy moves horizontally and will not turn unless it hits an object.
+
+Bird2:	The enemy moves horizontally and turns after a specified distance has
+		been reached.
+
+Bird3:	The enemy moves vertically and will not turn unless it hits an object.
+
+Bird4:	The enemy moves vertically and turns after a specified distance has
+		been reached.
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Flamer Jobs  **///////////////////////////////
+---------------------------------------------------------------------------------
+
+Flamer1:	See "Dog1".
+
+Flamer2:	See "Dog2".
+
+Flamer3:	See "Dog3".
+
+Flamer4:	See "Dog4".
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Troller Jobs  **///////////////////////////////
+---------------------------------------------------------------------------------
+
+Troller1:	Creature that jumps with slightly random velocities. There's also random
+			time intervals between jumps.
+
+Troller2:	Time intervals between jumps are more random than "Troller1".
+			Jumps Higher than "Troller1".
+
+Troller3:	Time intervals between jumps are more random than "Troller1". Also changes
+			direction towards the player when the player gets close to it.
+
+Troller4:	[Doesnt work yet!] Jump velocity is not random but intervals between 
+			jumps are. The enemy makes a calculated jump toward the player.
+		
+		
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Wolf Jobs  **///////////////////////////////
+---------------------------------------------------------------------------------
+
+Wolf1:	Same as "Dog1" but will lunge at the player when close.
+
+Wolf2:	Same as "Dog2" but will lunge at the player when close.
+
+Wolf3:	Same as "Dog3" but will lunge at the player when close.
+
+Wolf4:	Same as "Dog4" but will lunge at the player when close.
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Stealth Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+Stealth1:	Walks while invisible over and back in short bursts. When it stops 
+			it reveals its location.
+
+Stealth2:	Same as "Stealth1" but collides with other enemies.
+
+Stealth3:	Walks while invisible over and back continuously, revealing its	
+			location every so often.
+
+Stealth4:	Same as "Stealth3" but collides with other enemies.
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Tentacle Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+Tentacle1:	Floats in the air spewing tentacle particles about the place.
+			Chases the player when it gets close.
+
+Tentacle2:	Same as "Tentacle1" but spews out tentacles that move.
+
+Tentacle3:	[Doesnt work! :(] Same as "Tentacle1" but aims at the player and
+			chases more intensely.
+
+Tentacle4:	[Doesnt work! :(] Same as "Tentacle2" but aims at the player and
+			chases more intensely.
+			
+			
+			
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Platform Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+Platform1:	Moves Horizontally
+
+Platform2:	Moves Vertically
+
+Platform3:
+
+Platform4:
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Cannon Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+CannonX:	Fires a shot at a rate of X.
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Wheelbot Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+WheelbotX:	Combination of dog1 and cannonX
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Robot Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+RobotX:	Flying version of cannonX
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Shadow Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+Note: Only visible when Player is close
+
+Shadow1:	Moves over and back but jumps over 1 block high steps
+
+Shadow2:	Same as Shadow1 but moves faster and is less visible
+
+Shadow3:	Same as Shadow1 but chases the player
+
+Shadow4:	Same as Shadow2 but chases the player
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Shadowplayer Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+Shadowplayer1:	When near(i.e. visible to the player in this case) the player it
+				has the same vertical velocity and opposite horizontal velocity 
+				of the player.
+
+Shadowplayer2:	When near the player(i.e. visible to the player in this case), it 
+				has the same vertical velocity and horizontal velocity of the 
+				player.
+
+Shadowplayer3:	Same as Sp1 but makes sudden dashes now and again.
+
+Shadowplayer4:	Same as Sp2 but makes sudden dashes now and again.
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Clancy Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+Clancy1:	To be decided [BOSS]
+
+Clancy2:	Constantly follows the player at a constant speed, approaching
+			horizontally.
+
+Clancy3:	Constantly follows the player at a variable speed(nearly always in
+			the player's sight), approaching horizontally. Summons raining 
+			embers(See below).
+
+Clancy4:	Constantly follows the player at a variable speed(nearly always in
+			the player's sight), approaching vertically. Summons raining 
+			embers(See below).
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  VanishBlock Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+
+VanishBlock1:	Disappears shortly after the player touches it.
+
+VanishBlockX:	Disappears at a rate of X.
+
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  RainingEmber Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+
+RainingEmberX:	Falls downward at an angle, at a rate of X and respawns at its spawning point
+				when it collides.
+		
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Icicle Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+
+Icicle1:	Falls straight down after 1 second when player is very close.
+			Respawns at its spawning point when it collides.
+
+Icicle2:	Falls straight down after 2 seconds when player is very close.
+			Respawns at its spawning point when it collides.
+
+Icicle3:	Falls straight down after 3 seconds when player is very close.
+			Respawns at its spawning point when it collides.
+
+Icicle4:	Falls straight down after 1 second when player is somewhat close.
+			Respawns at its spawning point when it collides.
+			
+Icicle5:	Falls straight down after 2 second when player is somewhat close.
+			Respawns at its spawning point when it collides.
+			
+Icicle6:	Falls straight down after 3 second when player is somewhat close.
+			Respawns at its spawning point when it collides.
+			
+Icicle7:	Falls straight down after 1 second when player is close.
+			Respawns at its spawning point when it collides.
+			
+Icicle8:	Falls straight down after 2 second when player is close.
+			Respawns at its spawning point when it collides.
+			
+Icicle9:	Falls straight down after 3 second when player is close.
+			Respawns at its spawning point when it collides.
+			
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Maureen Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+
+Maureen1:	Moves extremely slow and Pulls the player toward her
+
+Maureen2:	Same as Maureen1 but moves toward the player[Boss]
+
+Maureen3:	Moves extremely slow and Pushes the player away from her
+
+Maureen4:	Same as Maureen3 but moves toward the player
+
+
+---------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  GuinnessVan Jobs  **/////////////////////////////
+---------------------------------------------------------------------------------
+
+
+VanX: Moves horizontally[BOSS] (X = number of lives)
+
+
+
+------------------------------------------------------------------------------------
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Blaster Jobs  **////////////////////////////////
+------------------------------------------------------------------------------------
+
+
+BlasterX: Moves diagonally clockwise shooting horizontally and vertically at the 
+		  same time at a rate of X

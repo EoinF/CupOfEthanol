@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2A9D0DBC-8FD7-407A-BDA7-09C8DB86E6A2}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>CupOfEthanolFNA</RootNamespace>
+    <AssemblyName>CupOfEthanolFNA</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Content\SpriteFonts\LargeFont.spritefont" />
+    <None Include="Content\SpriteFonts\MediumFont.spritefont" />
+    <None Include="Content\SpriteFonts\SmallFont.spritefont" />
+    <None Include="Content\SpriteFonts\TinyFont.spritefont" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FNA\FNA.csproj">
+      <Project>{35253ce1-c864-4cd3-8249-4d1319748e8f}</Project>
+      <Name>FNA</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AI\Entity.cs" />
+    <Compile Include="AI\Jobs\BirdAI.cs" />
+    <Compile Include="AI\Jobs\BlasterAI.cs" />
+    <Compile Include="AI\Jobs\CannonAI.cs" />
+    <Compile Include="AI\Jobs\ClancyAI.cs" />
+    <Compile Include="AI\Jobs\DogAI.cs" />
+    <Compile Include="AI\Jobs\DoorAI.cs" />
+    <Compile Include="AI\Jobs\GuinnessVanAI.cs" />
+    <Compile Include="AI\Jobs\IcicleAI.cs" />
+    <Compile Include="AI\Jobs\MaureenAI.cs" />
+    <Compile Include="AI\Jobs\PlatformAI.cs" />
+    <Compile Include="AI\Jobs\ProjectileAI.cs" />
+    <Compile Include="AI\Jobs\RainingEmberAI.cs" />
+    <Compile Include="AI\Jobs\RobotAI.cs" />
+    <Compile Include="AI\Jobs\ShadowAI.cs" />
+    <Compile Include="AI\Jobs\ShadowPlayerAI.cs" />
+    <Compile Include="AI\Jobs\SpawnerAI.cs" />
+    <Compile Include="AI\Jobs\StealthAI.cs" />
+    <Compile Include="AI\Jobs\TentacleAI.cs" />
+    <Compile Include="AI\Jobs\TrollerAI.cs" />
+    <Compile Include="AI\Jobs\VanishBlockAI.cs" />
+    <Compile Include="AI\Jobs\WheelbotAI.cs" />
+    <Compile Include="AI\Jobs\WolfAI.cs" />
+    <Compile Include="CharacterSelection.cs" />
+    <Compile Include="Debug.cs" />
+    <Compile Include="Editor\Editor.cs" />
+    <Compile Include="Editor\EditorPauseMenu.cs" />
+    <Compile Include="Editor\LevelSaver.cs" />
+    <Compile Include="Editor\Objectdata.cs" />
+    <Compile Include="Editor\PConsole.cs" />
+    <Compile Include="Editor\Plus_Minus.cs" />
+    <Compile Include="ErrorReporter.cs" />
+    <Compile Include="InGame\Checkpoint.cs" />
+    <Compile Include="InGame\Collectable.cs" />
+    <Compile Include="InGame\Decoration.cs" />
+    <Compile Include="InGame\GameObject.cs" />
+    <Compile Include="InGame\InGame.cs" />
+    <Compile Include="InGame\Level.cs" />
+    <Compile Include="InGame\LevelLoader.cs" />
+    <Compile Include="InGame\MessageBox.cs" />
+    <Compile Include="InGame\PauseMenu.cs" />
+    <Compile Include="InGame\PPlayer.cs" />
+    <Compile Include="InGame\RigidObject.cs" />
+    <Compile Include="InGame\SaveFile.cs" />
+    <Compile Include="InGame\SquareObject.cs" />
+    <Compile Include="Input\InputBox.cs" />
+    <Compile Include="Input\InputManager.cs" />
+    <Compile Include="Input\MouseClick.cs" />
+    <Compile Include="Input\PopupBox.cs" />
+    <Compile Include="MainMethod.cs" />
+    <Compile Include="Menu\Button.cs" />
+    <Compile Include="Menu\LevelButton.cs" />
+    <Compile Include="Menu\MainMenu.cs" />
+    <Compile Include="Menu\MenuNavigation.cs" />
+    <Compile Include="Menu\ScreenManager.cs" />
+    <Compile Include="Menu\TextSprite.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sounds.cs" />
+    <Compile Include="Textures.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\SavedData.xml" />
+    <Content Include="Content\Sounds\coaster_collect.wav" />
+    <Content Include="Content\Sounds\footstep_dirta.wav" />
+    <Content Include="Content\Sounds\footstep_dirtb.wav" />
+    <Content Include="Content\Sounds\footstep_dirtc.wav" />
+    <Content Include="Content\Sounds\lazer.wav" />
+    <Content Include="Content\Sounds\music_a.mp3" />
+    <Content Include="Content\Sounds\music_b.mp3" />
+    <Content Include="Content\Sounds\music_c.mp3" />
+    <Content Include="Content\Sounds\music_d.mp3" />
+    <Content Include="Content\Sounds\player_jump.wav" />
+    <Resource Include="Content\Textures\Backgrounds\SkyA.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Content\Textures\Backgrounds\SkyB.PNG" />
+    <Content Include="Content\Textures\Entities\Blaster.png" />
+    <Content Include="Content\Textures\Entities\Cannon.png" />
+    <Content Include="Content\Textures\Entities\Clancy.png" />
+    <Content Include="Content\Textures\Entities\ConcretePlatform.PNG" />
+    <Content Include="Content\Textures\Entities\deathbird.png" />
+    <Content Include="Content\Textures\Entities\dog.standing.png" />
+    <Content Include="Content\Textures\Entities\dog.walking.png" />
+    <Content Include="Content\Textures\Entities\Door.png" />
+    <Content Include="Content\Textures\Entities\Ember.png" />
+    <Content Include="Content\Textures\Entities\flamer.standing.png" />
+    <Content Include="Content\Textures\Entities\flamer.walking.png" />
+    <Content Include="Content\Textures\Entities\Icicle.png" />
+    <Content Include="Content\Textures\Entities\LazerBullet.png" />
+    <Content Include="Content\Textures\Entities\maureen.standing.png" />
+    <Content Include="Content\Textures\Entities\maureen.walking.png" />
+    <Content Include="Content\Textures\Entities\Platform.PNG" />
+    <Content Include="Content\Textures\Entities\player.jumping.png" />
+    <Content Include="Content\Textures\Entities\player.standing.png" />
+    <Content Include="Content\Textures\Entities\player.walking.png" />
+    <Content Include="Content\Textures\Entities\robot.png" />
+    <Content Include="Content\Textures\Entities\shadow.standing.png" />
+    <Content Include="Content\Textures\Entities\shadow.walking.png" />
+    <Content Include="Content\Textures\Entities\shadowplayer.jumping.png" />
+    <Content Include="Content\Textures\Entities\shadowplayer.standing.png" />
+    <Content Include="Content\Textures\Entities\shadowplayer.walking.png" />
+    <Content Include="Content\Textures\Entities\stealth.png" />
+    <Content Include="Content\Textures\Entities\stealth.walking.png" />
+    <Content Include="Content\Textures\Entities\tentacle.standing.png" />
+    <Content Include="Content\Textures\Entities\tentaclespawn.png" />
+    <Content Include="Content\Textures\Entities\troller.standing.png" />
+    <Content Include="Content\Textures\Entities\Vanish.png" />
+    <Content Include="Content\Textures\Entities\wheelbot.standing.png" />
+    <Content Include="Content\Textures\Entities\wheelbot.walking.png" />
+    <Content Include="Content\Textures\Entities\wolf.standing.png" />
+    <Content Include="Content\Textures\Entities\wolf.walking.png" />
+    <Content Include="Content\Textures\Menu\Button1.png" />
+    <Content Include="Content\Textures\Menu\Button2.png" />
+    <Content Include="Content\Textures\Menu\Button3.png" />
+    <Content Include="Content\Textures\Menu\Button4.PNG" />
+    <Content Include="Content\Textures\Menu\Button5.PNG" />
+    <Content Include="Content\Textures\Menu\Button_Resume.bmp" />
+    <Content Include="Content\Textures\Menu\Cursor.png" />
+    <Content Include="Content\Textures\Menu\EPauseMenuBackground.PNG" />
+    <Content Include="Content\Textures\Menu\PauseMenuBackground.PNG" />
+    <Content Include="Content\Textures\Objects\BlueKey.png" />
+    <Content Include="Content\Textures\Objects\chalice.png" />
+    <Content Include="Content\Textures\Objects\checkpoint.png" />
+    <Content Include="Content\Textures\Objects\Coaster.png" />
+    <Content Include="Content\Textures\Objects\GreenKey.png" />
+    <Content Include="Content\Textures\Objects\RedKey.png" />
+    <Content Include="Content\Textures\Objects\sign.png" />
+    <Content Include="Content\Textures\Objects\YellowKey.png" />
+    <Content Include="Content\Textures\Tiles\bouncer.png" />
+    <Content Include="Content\Textures\Tiles\grass.PNG" />
+    <Content Include="Content\Textures\Tiles\gravel.PNG" />
+    <Content Include="Content\Textures\Tiles\ice.PNG" />
+    <Content Include="Content\Textures\Tiles\lava.png" />
+    <Content Include="Content\Textures\Tiles\metal.PNG" />
+    <Content Include="Content\Textures\Tiles\sand.PNG" />
+    <Content Include="Content\Textures\Tiles\spikesDOWN.png" />
+    <Content Include="Content\Textures\Tiles\spikesLEFT.png" />
+    <Content Include="Content\Textures\Tiles\spikesRIGHT.png" />
+    <Content Include="Content\Textures\Tiles\spikesUP.png" />
+    <Content Include="Content\Textures\Tiles\Ugrass.PNG" />
+    <Content Include="Content\Textures\Tiles\Uice.png" />
+    <Content Include="Content\Textures\Tiles\Ulava.PNG" />
+    <Content Include="Content\Textures\Tiles\Uvgrass.PNG" />
+    <Content Include="Content\Textures\Tiles\vgrass.PNG" />
+    <Content Include="Libs\FAudio.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\libtheorafile.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\MojoShader.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\SDL2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\SDL2_image.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Levels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)Content" "$(ProjectDir)$(OutDir)Content" /Y /S /E /I</PostBuildEvent>
+  </PropertyGroup>
+</Project>
