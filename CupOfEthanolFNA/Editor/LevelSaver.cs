@@ -55,12 +55,14 @@
         {
             XmlNode root = doc.DocumentElement;
             XmlElement child = doc.CreateElement("Entities");
-            for (int i = 0; i < Entity.EntityList.Count; i++)
+			List<Entity> nonNullEntities = Entity.EntityList.FindAll(entity => entity != null);
+
+			for (int i = 0; i < nonNullEntities.Count; i++)
             {
-                if (Entity.EntityList[i] != null)
+                if (nonNullEntities[i] != null)
                 {
                     string dir = "t";
-                    if (Entity.EntityList[i].sqobject.Flipeffect == SpriteEffects.None)
+                    if (nonNullEntities[i].sqobject.Flipeffect == SpriteEffects.None)
                     {
                         dir = "f";
                     }
@@ -71,20 +73,20 @@
 
                     string text = child.InnerText;
                     text +=
-                        Entity.EntityList[i].Job + "~"
-                        + Entity.EntityList[i].sqobject.Position.X.ToString()
+						nonNullEntities[i].Job + "~"
+                        + nonNullEntities[i].sqobject.Position.X.ToString()
                         + "#"
-                        + Entity.EntityList[i].sqobject.Position.Y.ToString()
+                        + nonNullEntities[i].sqobject.Position.Y.ToString()
                         + "~"
                         + dir
                         + "~"
-                        + Entity.EntityList[i].StartCheckpoint
-                        + "~" + Entity.EntityList[i].EndCheckpoint;
+                        + nonNullEntities[i].StartCheckpoint
+                        + "~" + nonNullEntities[i].EndCheckpoint;
 
-                    if (Entity.EntityList[i].StartDelay > 0)
-                        text += "~" + Entity.EntityList[i].StartDelay;
+                    if (nonNullEntities[i].StartDelay > 0)
+                        text += "~" + nonNullEntities[i].StartDelay;
 
-                    if (i != Entity.EntityList.Count - 1)
+                    if (i != nonNullEntities.Count - 1)
                         text += "-";
                     child.InnerText = text;
                 }
