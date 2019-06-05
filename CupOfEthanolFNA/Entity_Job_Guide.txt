@@ -10,8 +10,7 @@ Dog2:	Same as "Dog1" but will collide with other enemies.
 		
 Dog3:	The enemy will not turn unless it hits an object.
 
-Dog4:	Same as "Dog3 but will collide with other enemies
-
+Dog4:	Same as "Dog3" but will collide with other enemies
 
 
 ---------------------------------------------------------------------------------

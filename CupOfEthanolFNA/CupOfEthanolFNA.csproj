@@ -49,6 +49,16 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Content\Levels\Main\10\thumbnail.xnb" />
+    <None Include="Content\Levels\Main\1\Thumbnail.xnb" />
+    <None Include="Content\Levels\Main\2\Thumbnail.xnb" />
+    <None Include="Content\Levels\Main\3\Thumbnail.xnb" />
+    <None Include="Content\Levels\Main\4\Thumbnail.xnb" />
+    <None Include="Content\Levels\Main\5\Thumbnail.xnb" />
+    <None Include="Content\Levels\Main\6\Thumbnail.xnb" />
+    <None Include="Content\Levels\Main\7\Thumbnail.xnb" />
+    <None Include="Content\Levels\Main\8\thumbnail.xnb" />
+    <None Include="Content\Levels\Main\9\thumbnail.xnb" />
     <None Include="Content\SpriteFonts\LargeFont.spritefont" />
     <None Include="Content\SpriteFonts\MediumFont.spritefont" />
     <None Include="Content\SpriteFonts\SmallFont.spritefont" />
@@ -124,7 +134,61 @@
     <Compile Include="Textures.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\SavedData.xml" />
+    <Content Include="Content\Levels\Main\10\LevelData.xml" />
+    <Content Include="Content\Levels\Main\11\LevelData.xml" />
+    <Content Include="Content\Levels\Main\12\LevelData.xml" />
+    <Content Include="Content\Levels\Main\13\LevelData.xml" />
+    <Content Include="Content\Levels\Main\14\LevelData.xml" />
+    <Content Include="Content\Levels\Main\15\LevelData.xml" />
+    <Content Include="Content\Levels\Main\16\LevelData.xml" />
+    <Content Include="Content\Levels\Main\17\LevelData.xml" />
+    <Content Include="Content\Levels\Main\18\LevelData.xml" />
+    <Content Include="Content\Levels\Main\19\LevelData.xml" />
+    <Content Include="Content\Levels\Main\1\LevelData.xml" />
+    <Content Include="Content\Levels\Main\1\Thumbnail.png" />
+    <Content Include="Content\Levels\Main\20\LevelData.xml" />
+    <Content Include="Content\Levels\Main\21\LevelData.xml" />
+    <Content Include="Content\Levels\Main\22\LevelData.xml" />
+    <Content Include="Content\Levels\Main\23\LevelData.xml" />
+    <Content Include="Content\Levels\Main\24\LevelData.xml" />
+    <Content Include="Content\Levels\Main\25\LevelData.xml" />
+    <Content Include="Content\Levels\Main\26\LevelData.xml" />
+    <Content Include="Content\Levels\Main\27\LevelData.xml" />
+    <Content Include="Content\Levels\Main\28\LevelData.xml" />
+    <Content Include="Content\Levels\Main\29\LevelData.xml" />
+    <Content Include="Content\Levels\Main\2\LevelData.xml" />
+    <Content Include="Content\Levels\Main\2\Thumbnail.png" />
+    <Content Include="Content\Levels\Main\30\LevelData.xml" />
+    <Content Include="Content\Levels\Main\31\LevelData.xml" />
+    <Content Include="Content\Levels\Main\32\LevelData.xml" />
+    <Content Include="Content\Levels\Main\33\LevelData.xml" />
+    <Content Include="Content\Levels\Main\34\LevelData.xml" />
+    <Content Include="Content\Levels\Main\35\LevelData.xml" />
+    <Content Include="Content\Levels\Main\36\LevelData.xml" />
+    <Content Include="Content\Levels\Main\37\LevelData.xml" />
+    <Content Include="Content\Levels\Main\38\LevelData.xml" />
+    <Content Include="Content\Levels\Main\39\LevelData.xml" />
+    <Content Include="Content\Levels\Main\3\LevelData.xml" />
+    <Content Include="Content\Levels\Main\40\LevelData.xml" />
+    <Content Include="Content\Levels\Main\41\LevelData.xml" />
+    <Content Include="Content\Levels\Main\42\LevelData.xml" />
+    <Content Include="Content\Levels\Main\43\LevelData.xml" />
+    <Content Include="Content\Levels\Main\44\LevelData.xml" />
+    <Content Include="Content\Levels\Main\45\LevelData.xml" />
+    <Content Include="Content\Levels\Main\46\LevelData.xml" />
+    <Content Include="Content\Levels\Main\47\LevelData.xml" />
+    <Content Include="Content\Levels\Main\48\LevelData.xml" />
+    <Content Include="Content\Levels\Main\49\LevelData.xml" />
+    <Content Include="Content\Levels\Main\4\LevelData.xml" />
+    <Content Include="Content\Levels\Main\50\LevelData.xml" />
+    <Content Include="Content\Levels\Main\5\LevelData.xml" />
+    <Content Include="Content\Levels\Main\6\LevelData.xml" />
+    <Content Include="Content\Levels\Main\7\LevelData.xml" />
+    <Content Include="Content\Levels\Main\8\LevelData.xml" />
+    <Content Include="Content\Levels\Main\9\LevelData.xml" />
+    <Content Include="Content\SavedData.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\Sounds\coaster_collect.wav" />
     <Content Include="Content\Sounds\footstep_dirta.wav" />
     <Content Include="Content\Sounds\footstep_dirtb.wav" />
@@ -207,25 +271,23 @@
     <Content Include="Content\Textures\Tiles\Ulava.PNG" />
     <Content Include="Content\Textures\Tiles\Uvgrass.PNG" />
     <Content Include="Content\Textures\Tiles\vgrass.PNG" />
-    <Content Include="Libs\FAudio.dll">
+    <Content Include="FAudio.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libs\libtheorafile.dll">
+    <Content Include="libtheorafile.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libs\MojoShader.dll">
+    <Content Include="MojoShader.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libs\SDL2.dll">
+    <Content Include="SDL2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libs\SDL2_image.dll">
+    <Content Include="SDL2_image.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Levels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="System.Xml" />
   </ItemGroup>
