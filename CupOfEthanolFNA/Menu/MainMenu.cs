@@ -51,17 +51,14 @@
             Button.ButtonList = new List<Button>();
             TextSprite.TextList = new List<TextSprite>();
             SaveFile.LoadSaveFiles();
-
-            string mode = SaveFile.SaveList[0].HardMode ? "Guinness Master" : "Guinness Disaster";
-            TextSprite ts = new TextSprite(mode, "Medium", new Vector2(255f, 78f), Color.White);
+			
+            TextSprite ts = new TextSprite("File 1", "Medium", new Vector2(255f, 78f), Color.White);
             Button.ButtonList.Add(new Button(ts, new Vector2(200f, 75f), 1));
-
-            mode = SaveFile.SaveList[1].HardMode ? "Guinness Master" : "Guinness Disaster";
-            ts = new TextSprite(mode, "Medium", new Vector2(255f, 178f), Color.White);
+			
+            ts = new TextSprite("File 2", "Medium", new Vector2(255f, 178f), Color.White);
             Button.ButtonList.Add(new Button(ts, new Vector2(200f, 175f), 1));
-
-            mode = SaveFile.SaveList[2].HardMode ? "Guinness Master" : "Guinness Disaster";
-            ts = new TextSprite(mode, "Medium", new Vector2(255f, 278f), Color.White);
+			
+            ts = new TextSprite("File 3", "Medium", new Vector2(255f, 278f), Color.White);
             Button.ButtonList.Add(new Button(ts, new Vector2(200f, 275f), 1));
 
             ts = new TextSprite("Main Menu", "Medium", new Vector2(225f, 503f), Color.White);
