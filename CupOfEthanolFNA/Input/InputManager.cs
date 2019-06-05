@@ -224,8 +224,6 @@
         {
             PPlayer.Player.sqobject.Flipeffect = SpriteEffects.FlipHorizontally;
 
-            if (PPlayer.walkingSound_wave == 0)
-                Sounds.Play(new int[] { 0, 1, 2 });
 
             if (!PPlayer.Player.OnGround)
             {
@@ -235,8 +233,11 @@
                 }
             }
             else
-            {
-                PPlayer.Player.Walking = true;
+			{
+				if (PPlayer.walkingSound_wave == 0)
+					Sounds.Play(new int[] { 0, 1, 2 });
+
+				PPlayer.Player.Walking = true;
 
                 PPlayer.walkingSound_wave++;
 
@@ -251,8 +252,6 @@
         {
             PPlayer.Player.sqobject.Flipeffect = SpriteEffects.None;
 
-            if (PPlayer.walkingSound_wave == 0)
-                Sounds.Play(new int[] { 0, 1, 2 });
 
             if (!PPlayer.Player.OnGround)
             {
@@ -262,8 +261,11 @@
                 }
             }
             else
-            {
-                PPlayer.Player.Walking = true;
+			{
+				if (PPlayer.walkingSound_wave == 0)
+					Sounds.Play(new int[] { 0, 1, 2 });
+
+				PPlayer.Player.Walking = true;
                 PPlayer.walkingSound_wave++;
 
                 if (PPlayer.Player.sqobject.Velocity.X < 3f)
