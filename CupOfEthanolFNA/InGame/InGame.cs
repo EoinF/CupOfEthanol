@@ -18,10 +18,7 @@
                 if (PPlayer.DeathCountdown != 0)
                 {
                     PPlayer.Player.Draw(spriteBatch, gameTime);
-                    if (PPlayer.Player.IsDying())
-                        SquareObject.DrawSquares(SquareObject.sqObjectArray, spriteBatch, 17, 16);
-                    else
-                        SquareObject.DrawSquares(SquareObject.sqObjectArray, spriteBatch, 17, 16);
+                    SquareObject.DrawSquares(SquareObject.sqObjectArray, spriteBatch, 17, 16);
                     
                     foreach (Entity entity in Entity.EntityList)
                     {
