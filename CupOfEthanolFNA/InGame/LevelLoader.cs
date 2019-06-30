@@ -536,7 +536,8 @@
                 PPlayer.Player.Setup();
                 for (int i = 0; i < Entity.EntityList.Count; i++)
                 {
-                    if (Entity.EntityList[i].sqobject.texturename == "LazerBullet")
+                    if (Entity.EntityList[i].sqobject.texturename == "LazerBullet" 
+						|| Entity.EntityList[i].sqobject.texturename == "L")
                     { 
                         Entity.EntityList.RemoveAt(i);
                         i--;    //This line combined with the else statement prevents it from trying to access a part of the 
