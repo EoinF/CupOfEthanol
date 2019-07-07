@@ -55,7 +55,6 @@
     <None Include="Content\Levels\Main\3\Thumbnail.xnb" />
     <None Include="Content\Levels\Main\4\Thumbnail.xnb" />
     <None Include="Content\Levels\Main\5\Thumbnail.xnb" />
-    <None Include="Content\Levels\Main\6\Thumbnail.xnb" />
     <None Include="Content\Levels\Main\7\Thumbnail.xnb" />
     <None Include="Content\Levels\Main\8\thumbnail.xnb" />
     <None Include="Content\Levels\Main\9\thumbnail.xnb" />
@@ -143,7 +142,6 @@
     <Content Include="Content\Levels\Main\16\LevelData.xml" />
     <Content Include="Content\Levels\Main\17\LevelData.xml" />
     <Content Include="Content\Levels\Main\18\LevelData.xml" />
-    <Content Include="Content\Levels\Main\18\Thumbnail.png" />
     <Content Include="Content\Levels\Main\19\LevelData.xml" />
     <Content Include="Content\Levels\Main\19\Thumbnail.png" />
     <Content Include="Content\Levels\Main\1\LevelData.xml" />
