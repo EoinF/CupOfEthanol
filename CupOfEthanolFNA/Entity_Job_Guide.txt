@@ -64,7 +64,7 @@ Troller4:	[Doesnt work yet!] Jump velocity is not random but intervals between
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\**  Wolf Jobs  **///////////////////////////////
 ---------------------------------------------------------------------------------
 
-Wolf1:	Same as "Dog1" but will lunge at the player when close.
+Wolf1:	Same as "Dog1"
 
 Wolf2:	Same as "Dog2" but will lunge at the player when close.
 
