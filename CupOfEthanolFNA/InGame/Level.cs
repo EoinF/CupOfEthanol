@@ -6,11 +6,13 @@
     using System;
 
     public static class Level
-    {
-        public const int maxLevels = 30;
+	{
+		// Note: Must be in multiples of 6 or crashes will occur
+		public const int maxLevels = 24;
+		public const int customLevels = 12;
 
 
-        public static string _backgroundTexture;
+		public static string _backgroundTexture;
         public static float AirResistance;
         public static List<Collectable> ChaliceList;
         public static int Current = -1;

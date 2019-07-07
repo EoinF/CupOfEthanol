@@ -125,7 +125,7 @@
             }
             else
             {
-                for (int i = 0; i < 15; i++)
+                for (int i = 0; i < Level.customLevels / 2; i++)
                 {
                     for (int j = 0; j < 2; j++)
                     {
