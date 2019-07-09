@@ -94,13 +94,11 @@
             if (!ScreenManager.Editing)
             {
                 SaveFile.LoadSaveFiles();
-                for (int i = 0; i < Level.maxLevels / 2; i++)
-                {
-                    int j = 0;
-
-                    while (j < 2)
-                    {
-                        int collected = 0;
+                for (int j = 0; j < Level.maxLevels / 3; j++)
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						int collected = 0;
                         for (int h = 0; h < SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[(i * 2) + j].Length; h++)
                             if (SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[(i * 2) + j][h])
                                 collected++;
@@ -118,18 +116,17 @@
                             status = "Unlocked";
                         }
 
-                        LevelButton.lvButtonList.Add(new LevelButton(new Vector2((float)((220 * (i - ((i / 3) * 3))) + 80), (float)((220 * j) + 0x69)), status, collected));
-                        j++;
+                        LevelButton.lvButtonList.Add(new LevelButton(new Vector2((float)((220 * (i % 3)) + 80), (float)((220 * (j % 2)) + 0x69)), status, collected));
                     }
                 }
             }
             else
             {
-                for (int i = 0; i < Level.customLevels / 2; i++)
+                for (int j = 0; j < Level.customLevels / 3; j++)
                 {
-                    for (int j = 0; j < 2; j++)
+                    for (int i = 0; i < 3; i++)
                     {
-                        LevelButton.lvButtonList.Add(new LevelButton(new Vector2((float) ((220 * (i - ((i / 3) * 3))) + 80), (float) ((220 * j) + 0x69)), "Unlocked"));
+                        LevelButton.lvButtonList.Add(new LevelButton(new Vector2((float) ((220 * (i %3 )) + 80), (float) ((220 * (j % 2)) + 0x69)), "Unlocked"));
                     }
                 }
             }
