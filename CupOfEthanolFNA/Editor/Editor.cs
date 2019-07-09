@@ -143,7 +143,16 @@
                 {
                     if (Entity.EntityList[i] != null)
                     {
-                        Entity.EntityList[i].sqobject.Colour = Color.White;
+						Color colour = Color.White;
+						if (Entity.EntityList[i].Job == "X1")
+							colour = Color.Red;
+						else if (Entity.EntityList[i].Job == "X2")
+							colour = Color.Blue;
+						else if (Entity.EntityList[i].Job == "X3")
+							colour = Color.Green;
+						else if (Entity.EntityList[i].Job == "X4")
+							colour = Color.Yellow;
+                        Entity.EntityList[i].sqobject.Colour = colour;
                         Entity.EntityList[i].Draw(spriteBatch, gameTime);
                     }
                 }
