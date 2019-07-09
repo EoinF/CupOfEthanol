@@ -936,11 +936,10 @@
             {
                 if (StartDelay <= 0)
                 {
-                    if (this.Lives == 0)
+                    if (this.Lives == 0 && this.DeathTimer < 0f)
                     {
                         this.sqobject.Velocity += new Vector2(0f, -1f);
                         this.DeathTimer = 80f;
-                        this.Lives--;
                     }
                     if (this.DeathTimer < 0f)
                     {
@@ -1021,7 +1020,7 @@
 
         public void SaveStatus()
         {
-            WasActive = Active;
+            WasActive = Active && DeathTimer <= 0f;
             PreviousLives = Lives;
             PreviousStartDelay = StartDelay;
         }
