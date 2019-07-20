@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Main>
+  <Settings>
+    <BackgroundTexture>SkyB</BackgroundTexture>
+    <Gravity>0.5</Gravity>
+    <AirResistance>0.4</AirResistance>
+  </Settings>
+  <Entities />
+  <Static>41#33-h~13#18-h~14#18-h~15#18-A~16#15-h~16#18-h~17#18-h~18#18-h~22#23-h~23#23-h~24#23-h~25#23-h~26#23-h~31#28-h~32#28-h~33#28-h~34#28-h~35#28-h~36#28-</Static>
+</Main>
