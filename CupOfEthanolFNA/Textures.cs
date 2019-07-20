@@ -10,7 +10,7 @@
     {
         private static Texture2D[] mainThumnails = new Texture2D[Level.maxLevels]; //i.e. thumnails for the main levels
 
-        private static List<Texture2D> customThumnails; //i.e. thumnails for user created levels
+        private static Texture2D[] customThumnails = new Texture2D[Level.customLevels]; //i.e. thumnails for user created levels
         private static string[] subThumnailsNames;
 
         #region MenuTextures
@@ -21,11 +21,12 @@
         private static Texture2D Button5;
         private static Texture2D Cursor;
         private static Texture2D EPause_Menu;
-        private static Texture2D Pause_Menu;
-        #endregion
+		private static Texture2D Pause_Menu;
+		private static Texture2D Default_Thumbnail;
+		#endregion
 
-        #region Items
-        private static Texture2D Chalice;
+		#region Items
+		private static Texture2D Chalice;
         private static Texture2D Checkpoint;
         private static Texture2D Coaster;
         private static Texture2D Sign;
@@ -710,8 +711,9 @@
 
         private static void LoadThumbnails(ContentManager Content)
         {
-            //Loading the main level thumnails
-            for (int i = 0; i < Level.maxLevels; i++)
+			Default_Thumbnail = Content.Load<Texture2D>("Textures/Menu/Default_Thumbnail");
+			//Loading the main level thumbnails
+			for (int i = 0; i < Level.maxLevels; i++)
             {
                 try
                 {
@@ -719,12 +721,22 @@
                 }
                 catch (Exception ex)
                 {
-                    mainThumnails[i] = Player;
+                    mainThumnails[i] = Default_Thumbnail;
                 }
             }
 
-            //TODO:Loading the custom level thumnails
-        }
+			for (int i = 0; i < Level.customLevels; i++)
+			{
+				try
+				{
+					customThumnails[i] = Content.Load<Texture2D>("Levels/Custom/" + (i + 1) + "/Thumbnail");
+				}
+				catch (Exception ex)
+				{
+					customThumnails[i] = Default_Thumbnail;
+				}
+			}
+		}
 
         public static string StaticTextureToLabelText(string text)
         {

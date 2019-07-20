@@ -322,9 +322,16 @@
 
             PPlayer.Player = new PPlayer("A", "Aw", "Aj", 1f);
             PPlayer.HadBlueKey = PPlayer.HadRedKey = PPlayer.HadYellowKey = PPlayer.HadGreenKey = false;
-            
-            XmlDocument doc = SaveFile.LoadDocument("Content/Levels/Main/" + Level.Current.ToString() + "/LevelData.xml");
 
+			XmlDocument doc;
+			if (ScreenManager.Custom || ScreenManager.Editing)
+			{
+				doc = SaveFile.LoadDocument("Content/Levels/Custom/" + Level.Current.ToString() + "/LevelData.xml");
+			}
+			else
+			{
+				doc = SaveFile.LoadDocument("Content/Levels/Main/" + Level.Current.ToString() + "/LevelData.xml");
+			}
             Entity.EntityList = new List<Entity>();
 
 
@@ -560,7 +567,18 @@
             }
         }
 
-        public static void StartEditorLevel(int Lvl)
+		public static void StartCustomLevel(int Lvl)
+		{
+			Level.Current = Lvl;
+			ScreenManager.NoMode();
+			ScreenManager.Custom = true;
+			ScreenManager.Ingame = true;
+			Button.ButtonList = null;
+			LevelButton.lvButtonList = null;
+			LoadNewLevel();
+		}
+
+		public static void StartEditorLevel(int Lvl)
         {
             Level.Current = Lvl;
             ScreenManager.NoMode();

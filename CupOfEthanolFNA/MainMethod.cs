@@ -71,8 +71,9 @@
             else
                 base.Window.Title = "Cup of Ethanol";
 
-            MainMenu.Activate();
-            SquareObject.sqObjectArray = new SquareObject[0, 0];
+			MainMenu.Activate();
+			ScreenManager.GameCompleteOn();
+			SquareObject.sqObjectArray = new SquareObject[0, 0];
             Collectable.collectableList = new List<Collectable>();
             Entity.EntityList = new List<Entity>();
             Checkpoint.checkpointList = new List<Checkpoint>();
@@ -108,10 +109,26 @@
                 PauseMenu.Pause();
             }
             if (LevelLoader.LevelComplete)
-            {
-                SaveFile.CompleteLevel();
-                LevelLoader.NextLevel();
-            }
+			{
+				SaveFile.CompleteLevel();
+				if (Level.Current == Level.maxLevels)
+				{
+					if (ScreenManager.Custom)
+					{
+						Level.Current = 1;
+						LevelLoader.NextLevel();
+					}
+					else
+					{
+						ScreenManager.GameCompleteOn();
+					}
+				}
+				else
+				{
+
+					LevelLoader.NextLevel();
+				}
+			}
 
             if (DebugMode)
                 debug.Update(gameTime);

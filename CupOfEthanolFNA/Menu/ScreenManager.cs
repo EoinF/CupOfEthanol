@@ -8,8 +8,9 @@
     public abstract class ScreenManager
     {
         public static bool Creating;
-        public static bool Editing;
-        public static bool GameClosing = false;
+		public static bool Editing;
+		public static bool Custom;
+		public static bool GameClosing = false;
         public static bool Ingame;
         public static bool Levelselect;
         public static bool Loading;
@@ -52,14 +53,14 @@
             GameClosing = true;
         }
 
-        public static void InstructionsOn()
-        {
-            Button.ButtonList = new List<Button>();
-            TextSprite.TextList = new List<TextSprite>();
-            TextSprite ts = new TextSprite("Main Menu", "Medium", new Vector2(225f, 503f), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(200f, 500f), 1));
-            TextSprite.TextList.Add(new TextSprite("' Instructions in game...", "Medium", new Vector2(20f, 40f), Color.White));
-        }
+        public static void LoadingCustomOn()
+		{
+			NoMode();
+			Mainmenu = true;
+			Levelselect = true;
+			Custom = true;
+			MainMenu.LevelSelectOn();
+		}
 
         /// <summary>
         /// Makes every screenmanager state false so a new one(or more than one) can be selected
@@ -73,7 +74,15 @@
             Creating = false;
             Levelselect = false;
             Editing = false;
+			Custom = false;
         }
-    }
+
+		public static void GameCompleteOn()
+		{
+			NoMode();
+			Mainmenu = true;
+			MainMenu.GameCompleteOn();
+		}
+	}
 }
 

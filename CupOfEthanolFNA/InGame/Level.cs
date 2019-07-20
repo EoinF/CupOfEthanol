@@ -8,8 +8,8 @@
     public static class Level
 	{
 		// Note: Must be in multiples of 6 or crashes will occur
-		public const int maxLevels = 24;
-		public const int customLevels = 12;
+		public const int maxLevels = 12;
+		public const int customLevels = 24; //12
 
 
 		public static string _backgroundTexture;

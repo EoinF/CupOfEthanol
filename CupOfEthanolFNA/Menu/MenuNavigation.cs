@@ -142,8 +142,13 @@
                 for (int i = (LevelButton.CurrentGroup * 6); i < 6 + (LevelButton.CurrentGroup * 6); i++)
                 {
                     if (MouseClick.Rect.Intersects(LevelButton.lvButtonList[i].Rect))
-                    {
-                        if (ScreenManager.Editing)
+					{
+						if (ScreenManager.Custom)
+						{
+							LevelLoader.StartCustomLevel(i + 1);
+							return true;
+						}
+						if (ScreenManager.Editing)
                         {
                             LevelLoader.StartEditorLevel(i + 1);
                             return true;
@@ -181,8 +186,8 @@
                                     ScreenManager.LoadingOn();
                                     return;
 
-                                case "Instructions":
-                                    ScreenManager.InstructionsOn();
+                                case "Play Custom":
+                                    ScreenManager.LoadingCustomOn();
                                     return;
 
                                 case "Editor":

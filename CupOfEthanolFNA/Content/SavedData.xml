@@ -3,7 +3,7 @@
   <File1>
     <Level>30</Level>
     <HardMode>True</HardMode>
-    <MainCoasters>t-f-f/t-f-t/f-f-f/f-f-t/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f</MainCoasters>
+    <MainCoasters>t-t-t/t-f-t/f-f-f/f-f-t/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f</MainCoasters>
     <!--True-->
     <SubCoasters>
     </SubCoasters>

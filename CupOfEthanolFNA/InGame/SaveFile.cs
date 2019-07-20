@@ -134,20 +134,20 @@
             return LevelSaver.PrepareNewLevelDocument("This level was created because the file was missing. ", filename);
         }
 
-        public static void LoadSaveFiles()
-        {
-            XmlDocument doc = LoadDocument("Content/SavedData.xml");
-            SaveList = new List<SaveFile>();
-            foreach (XmlNode node in doc.FirstChild.NextSibling)
-            {
-                if (node.Name.Contains("File"))
-                {
-                    SaveList.Add(new SaveFile(int.Parse(node.FirstChild.InnerText), bool.Parse(node.FirstChild.NextSibling.InnerText), GetMainCoasterData(node.FirstChild.NextSibling.NextSibling.InnerText)));
-                }
-            }
-        }
+		public static void LoadSaveFiles()
+		{
+			XmlDocument doc = LoadDocument("Content/SavedData.xml");
+			SaveList = new List<SaveFile>();
+			foreach (XmlNode node in doc.FirstChild.NextSibling)
+			{
+				if (node.Name.Contains("File"))
+				{
+					SaveList.Add(new SaveFile(int.Parse(node.FirstChild.InnerText), bool.Parse(node.FirstChild.NextSibling.InnerText), GetMainCoasterData(node.FirstChild.NextSibling.NextSibling.InnerText)));
+				}
+			}
+		}
 
-        private static List<bool[]> GetMainCoasterData(string text)
+		private static List<bool[]> GetMainCoasterData(string text)
         {
             List<bool[]> CoasterData = new List<bool[]>();
             string[] strarray = text.Split('/');
