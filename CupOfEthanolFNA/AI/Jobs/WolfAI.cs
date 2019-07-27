@@ -46,7 +46,8 @@ namespace LackingPlatforms
                         {
                             this.sqobject.Flipeffect = SpriteEffects.FlipHorizontally;
                         }
-                        this.sqobject.Velocity = new Vector2(this.sqobject.Velocity.X, -4f);
+						Sounds.Play("jump_evil");
+						this.sqobject.Velocity = new Vector2(this.sqobject.Velocity.X, -4f);
                     }
                     VariableD = 50;
                 }

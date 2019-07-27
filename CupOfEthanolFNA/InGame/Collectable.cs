@@ -40,6 +40,7 @@
                         MessageBox.GameMessage = new MessageBox(collect.Text);
                     if (collect.Type == 4)
                     {
+						Sounds.Play("collect_coaster");
                         collect.Position = new Vector2(-990999, -9999999);
                         int collected = 0;
                         for (int i = 0; i < SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[Level.Current - 1].Length; i++)
@@ -66,7 +67,8 @@
                             collect.Position = new Vector2(-990999, -9999999);
                             PPlayer.Player.HasRedKey = true;
                             collect.RecentlyCollected = true;
-                        }
+							Sounds.Play("collect_key");
+						}
                     }
                     if (collect.Type == 6)
                     {
@@ -75,7 +77,8 @@
                             collect.Position = new Vector2(-990999, -9999999);
                             PPlayer.Player.HasBlueKey = true;
                             collect.RecentlyCollected = true;
-                        }
+							Sounds.Play("collect_key");
+						}
                     }
                     if (collect.Type == 7)
                     {
@@ -84,7 +87,8 @@
                             collect.Position = new Vector2(-990999, -9999999);
                             PPlayer.Player.HasGreenKey = true;
                             collect.RecentlyCollected = true;
-                        }
+							Sounds.Play("collect_key");
+						}
                     }
                     if (collect.Type == 8)
                     {
@@ -93,7 +97,8 @@
                             collect.Position = new Vector2(-990999, -9999999);
                             PPlayer.Player.HasYellowKey = true;
                             collect.RecentlyCollected = true;
-                        }
+							Sounds.Play("collect_key");
+						}
                     }
 
                 }

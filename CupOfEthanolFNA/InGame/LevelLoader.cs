@@ -276,6 +276,7 @@
 
         public static void LoadLevelSettings(XmlDocument doc)
         {
+			string songName = "";
             try
             {
                 foreach (XmlNode node in doc.FirstChild.NextSibling.FirstChild)
@@ -283,29 +284,21 @@
                     string name = node.Name;
                     if (name != null)
                     {
-                        if (name != "BackgroundTexture")
-                        {
-                            if (name == "Gravity")
-                            {
-                                goto Label_0068;
-                            }
-                            if (name == "AirResistance")
-                            {
-                                goto Label_0084;
-                            }
-                        }
-                        else
-                        {
-                            Level._backgroundTexture = node.InnerText;
-                        }
+						switch (name) {
+							case "BackgroundTexture":
+								Level._backgroundTexture = node.InnerText;
+								break;
+							case "Gravity":
+								Level.Gravity = new Vector2(0f, float.Parse(node.InnerText));
+								break;
+							case "AirResistance":
+								Level.AirResistance = float.Parse(node.InnerText);
+								break;
+							case "SongName":
+								songName = node.InnerText;
+								break;
+						}
                     }
-                    goto Label_0096;
-                Label_0068:
-                    Level.Gravity = new Vector2(0f, float.Parse(node.InnerText));
-                    goto Label_0096;
-                Label_0084:
-                    Level.AirResistance = float.Parse(node.InnerText);
-                Label_0096:;
                 }
                 doc = null;
             }
@@ -314,19 +307,19 @@
                 ErrorReporter.LogException(new string[] { "Failed to load level settings", e.Message, "MethodName = " + e.TargetSite.Name, e.StackTrace });
                 throw e;
             }
-        }
+			
+			Sounds.PlayBGM(songName);
+		}
 
         public static void LoadNewLevel()
         {
-            Sounds.PlayBGM(MainMethod.rand.Next(0, Sounds.numberOfSongs - 1));
-
             PPlayer.Player = new PPlayer("A", "Aw", "Aj", 1f);
             PPlayer.HadBlueKey = PPlayer.HadRedKey = PPlayer.HadYellowKey = PPlayer.HadGreenKey = false;
 
 			XmlDocument doc;
 			if (ScreenManager.Custom || ScreenManager.Editing)
 			{
-				doc = SaveFile.LoadDocument("Content/Levels/Custom/" + Level.Current.ToString() + "/LevelData.xml");
+				doc = SaveFile.LoadDocument("Content/Levels/Main/" + Level.Current.ToString() + "/LevelData.xml");
 			}
 			else
 			{

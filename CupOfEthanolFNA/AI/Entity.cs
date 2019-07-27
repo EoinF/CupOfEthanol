@@ -51,6 +51,10 @@
 
         public Entity(string texture, string jumpAnimation, string walkAnimation, Vector2 position, int lives, float size, string job, SquareObject.Damage dmg, SquareObject.Bounce bnce, float speed, byte friction, string OppositeDir, bool staticTexture, int id, byte startCheckpoint, byte endCheckpoint)
         {
+			if (job == "Lazer")
+			{
+				Sounds.Play("lazer", position);
+			}
             StartPoint = position;
             _lives = lives;
             Job = job;

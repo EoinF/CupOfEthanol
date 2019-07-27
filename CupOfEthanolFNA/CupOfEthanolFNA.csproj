@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2A9D0DBC-8FD7-407A-BDA7-09C8DB86E6A2}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>CupOfEthanolFNA</RootNamespace>
     <AssemblyName>CupOfEthanolFNA</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -47,6 +47,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>client-logo2.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Content\Levels\Custom\2\Thumbnail.xnb" />
@@ -59,6 +65,12 @@
     <None Include="Content\Levels\Main\7\Thumbnail.xnb" />
     <None Include="Content\Levels\Main\8\thumbnail.xnb" />
     <None Include="Content\Levels\Main\9\thumbnail.xnb" />
+    <None Include="Content\Sounds\bensound-acousticbreeze.ogg" />
+    <None Include="Content\Sounds\bensound-adventure.ogg" />
+    <None Include="Content\Sounds\bensound-dance.ogg" />
+    <None Include="Content\Sounds\bensound-november.ogg" />
+    <None Include="Content\Sounds\bensound-pianomoment.ogg" />
+    <None Include="Content\Sounds\bensound-scifi.ogg" />
     <None Include="Content\SpriteFonts\LargeFont.spritefont" />
     <None Include="Content\SpriteFonts\MediumFont.spritefont" />
     <None Include="Content\SpriteFonts\SmallFont.spritefont" />
@@ -127,6 +139,7 @@
     <Compile Include="Menu\MainMenu.cs" />
     <Compile Include="Menu\MenuNavigation.cs" />
     <Compile Include="Menu\ScreenManager.cs" />
+    <Compile Include="Menu\FallingObject.cs" />
     <Compile Include="Menu\TextSprite.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,26 +147,34 @@
     <Compile Include="Textures.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="client-logo.ico" />
+    <Content Include="client-logo2.ico" />
     <Content Include="Content\Levels\Custom\3\LevelData.xml" />
-    <Content Include="Content\Levels\Main\12\LevelData.xml" />
     <Content Include="Content\Levels\Custom\1\LevelData.xml" />
     <Content Include="Content\Levels\Custom\2\LevelData.xml" />
     <Content Include="Content\Levels\Main\10\LevelData.xml" />
     <Content Include="Content\Levels\Main\11\LevelData.xml" />
+    <Content Include="Content\Levels\Main\11\Thumbnail.png" />
+    <Content Include="Content\Levels\Main\12\LevelData.xml" />
+    <Content Include="Content\Levels\Main\12\Thumbnail.png" />
     <Content Include="Content\Levels\Main\13\LevelData.xml" />
     <Content Include="Content\Levels\Main\14\LevelData.xml" />
     <Content Include="Content\Levels\Main\15\LevelData.xml" />
     <Content Include="Content\Levels\Main\16\LevelData.xml" />
     <Content Include="Content\Levels\Main\17\LevelData.xml" />
+    <Content Include="Content\Levels\Main\17\Thumbnail.png" />
     <Content Include="Content\Levels\Main\18\LevelData.xml" />
     <Content Include="Content\Levels\Main\19\LevelData.xml" />
     <Content Include="Content\Levels\Main\19\Thumbnail.png" />
     <Content Include="Content\Levels\Main\1\LevelData.xml" />
     <Content Include="Content\Levels\Main\1\Thumbnail.png" />
     <Content Include="Content\Levels\Main\20\LevelData.xml" />
+    <Content Include="Content\Levels\Main\20\Thumbnail.png" />
     <Content Include="Content\Levels\Main\21\LevelData.xml" />
     <Content Include="Content\Levels\Main\22\LevelData.xml" />
+    <Content Include="Content\Levels\Main\22\Thumbnail.png" />
     <Content Include="Content\Levels\Main\23\LevelData.xml" />
+    <Content Include="Content\Levels\Main\23\Thumbnail.png" />
     <Content Include="Content\Levels\Main\24\LevelData.xml" />
     <Content Include="Content\Levels\Main\2\LevelData.xml" />
     <Content Include="Content\Levels\Main\2\Thumbnail.png" />
@@ -168,19 +189,18 @@
     <Content Include="Content\SavedData.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Content\Sounds\coaster_collect.wav" />
-    <Content Include="Content\Sounds\footstep_dirta.wav" />
-    <Content Include="Content\Sounds\footstep_dirtb.wav" />
-    <Content Include="Content\Sounds\footstep_dirtc.wav" />
-    <Content Include="Content\Sounds\lazer.wav" />
-    <Content Include="Content\Sounds\music_a.mp3" />
-    <Content Include="Content\Sounds\music_b.mp3" />
-    <Content Include="Content\Sounds\music_c.mp3" />
-    <Content Include="Content\Sounds\music_d.mp3" />
-    <Content Include="Content\Sounds\player_jump.wav" />
     <Resource Include="Content\Textures\Backgrounds\SkyA.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Content\Sounds\collect_coaster.wav" />
+    <Content Include="Content\Sounds\collect_key.wav" />
+    <Content Include="Content\Sounds\footstep_dirta.wav" />
+    <Content Include="Content\Sounds\footstep_dirtb.wav" />
+    <Content Include="Content\Sounds\footstep_dirtc.wav" />
+    <Content Include="Content\Sounds\hurt_robot.wav" />
+    <Content Include="Content\Sounds\jump_evil.wav" />
+    <Content Include="Content\Sounds\lazer.wav" />
+    <Content Include="Content\Sounds\player_jump.wav" />
     <Content Include="Content\Textures\Backgrounds\SkyB.PNG" />
     <Content Include="Content\Textures\Entities\Blaster.png" />
     <Content Include="Content\Textures\Entities\Cannon.png" />

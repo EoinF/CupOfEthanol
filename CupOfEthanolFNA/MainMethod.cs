@@ -72,7 +72,6 @@
                 base.Window.Title = "Cup of Ethanol";
 
 			MainMenu.Activate();
-			ScreenManager.GameCompleteOn();
 			SquareObject.sqObjectArray = new SquareObject[0, 0];
             Collectable.collectableList = new List<Collectable>();
             Entity.EntityList = new List<Entity>();
@@ -93,6 +92,7 @@
             }
             if (base.IsActive)
             {
+				MainMenu.Update();
                 if (popupBox == null)
                 {
                     InGame.Update();
@@ -120,12 +120,12 @@
 					}
 					else
 					{
+						LevelLoader.LevelComplete = false;
 						ScreenManager.GameCompleteOn();
 					}
 				}
 				else
 				{
-
 					LevelLoader.NextLevel();
 				}
 			}

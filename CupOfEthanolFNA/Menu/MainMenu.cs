@@ -7,10 +7,52 @@
 
     public static class MainMenu
     {
+		static int pintTimer = 0;
+		static Random rand = new Random();
+		public static void Update()
+		{
+			if (ScreenManager.Mainmenu)
+			{
+				for (int i = 0; i < FallingObject.ObjectList.Count; i++)
+				{
+					FallingObject fallingObject = FallingObject.ObjectList[i];
+					fallingObject.Update();
+					if (fallingObject.Position.Y > 700)
+					{
+						FallingObject.ObjectList.RemoveAt(i);
+						i--;
+					}
+				}
+
+				if (pintTimer >= 200)
+				{
+					int x = 50 + rand.Next(700);
+					float velX = (float) rand.NextDouble();
+					float scale = 0.4f + (float) rand.NextDouble() * 0.6f;
+					FallingObject.ObjectList.Add(new FallingObject("Chalice", new Vector2(x, -10), new Vector2(0.01f, 0.78f), scale));
+					pintTimer = 0;
+				}
+				else
+				{
+					if (ScreenManager.GameComplete)
+					{
+						pintTimer += rand.Next(7);
+					}
+					pintTimer += rand.Next(2);
+				}
+			}
+		}
+
         public static void Activate()
         {
             Sounds.StopBGM();
             PPlayer.CurrentCheckpoint = -1;
+
+			if (!ScreenManager.Mainmenu)
+			{
+				FallingObject.ObjectList = new List<FallingObject>();
+			}
+
             ScreenManager.NoMode();
             ScreenManager.Mainmenu = true;
             Level.Offset = Vector2.Zero;
@@ -22,27 +64,45 @@
             Editor.MovingEntity = false;
             Editor.LabelList = null;
 
+			int currentY = 143;
             LevelButton.lvButtonList = new List<LevelButton>();
-            TextSprite ts = new TextSprite("New Game", "Medium", new Vector2(332f, 183f), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(308f, 180f), 1));
-            ts = new TextSprite("Continue", "Medium", new Vector2(343f, 253f), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(308f, 250f), 1));
-            ts = new TextSprite("Play Custom", "Medium", new Vector2(330f, 323f), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(308f, 320f), 1));
-            ts = new TextSprite("Editor", "Medium", new Vector2(365f, 393f), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(308f, 390f), 1));
-            ts = new TextSprite("Exit", "Medium", new Vector2(375f, 463f), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(308f, 460f), 1));
+            TextSprite ts = new TextSprite("New Game", "Medium", new Vector2(332f, currentY), Color.White);
+            Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
+			currentY += 70;
+			ts = new TextSprite("Continue", "Medium", new Vector2(343f, currentY), Color.White);
+            Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
+			currentY += 70;
+			ts = new TextSprite("Play Custom", "Medium", new Vector2(330f, currentY), Color.White);
+            Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
+			currentY += 70;
+			ts = new TextSprite("Editor", "Medium", new Vector2(365f, currentY), Color.White);
+			Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
+			currentY += 70;
+			ts = new TextSprite("Credits", "Medium", new Vector2(365f, currentY), Color.White);
+			Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
+			currentY += 70;
+			ts = new TextSprite("Exit", "Medium", new Vector2(375f, currentY), Color.White);
+            Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
         }
 
         public static void Draw(SpriteBatch spriteBatch)
         {
             if (ScreenManager.Mainmenu || ScreenManager.Levelselect)
             {
-                spriteBatch.Draw(Textures.GetTexture("Cursor"), new Vector2((float) InputManager.Mousestate[0].X, (float) InputManager.Mousestate[0].Y), null, Color.White, 0f, Vector2.Zero, 1f, 0, 1f);
+				if (ScreenManager.Credits)
+				{
+					spriteBatch.Draw(Textures.GetTexture("SkyB"), Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 2f, 0, 0.8f);
+				}
+				else
+				{
+					spriteBatch.Draw(Textures.GetTexture("SkyA"), Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 2f, 0, 0.8f);
+				}
+
+					spriteBatch.Draw(Textures.GetTexture("Cursor"), new Vector2((float) InputManager.Mousestate[0].X, (float) InputManager.Mousestate[0].Y), null, Color.White, 0f, Vector2.Zero, 1f, 0, 1f);
                 Button.DrawAll(spriteBatch);
                 LevelButton.DrawAll(spriteBatch);
                 TextSprite.DrawAll(spriteBatch);
+				FallingObject.DrawAll(spriteBatch);
             }
         }
 
@@ -74,6 +134,33 @@
 			TextSprite.TextList.Add(new TextSprite("72", "Medium", new Vector2(230f + extraOffset, 410f), Color.Yellow));
 			TextSprite.TextList.Add(new TextSprite("coasters!", "Medium", new Vector2(260f + extraOffset, 410f), Color.White));
 			TextSprite.TextList.Add(new TextSprite("Go back through old levels to find em all!", "Medium", new Vector2(50f, 440f), Color.White));
+		}
+
+
+		internal static void CreditsOn()
+		{
+			Button.ButtonList = new List<Button>();
+			TextSprite.TextList = new List<TextSprite>();
+			LevelButton.lvButtonList = new List<LevelButton>();
+
+			int currentX = 100;
+			TextSprite.TextList.Add(new TextSprite("Credits", "Large", new Vector2(currentX, 78f), Color.Yellow));
+
+			int currentY = 120;
+			int stepY = 40;
+			TextSprite.TextList.Add(new TextSprite("Programming: Eoin Flanagan", "Medium", new Vector2(currentX, currentY), Color.White));
+			currentY += stepY;
+			TextSprite.TextList.Add(new TextSprite("Art: Eoin Flanagan", "Medium", new Vector2(currentX, currentY), Color.White));
+			currentY += stepY;
+			TextSprite.TextList.Add(new TextSprite("Music: https://www.bensound.com", "Medium", new Vector2(currentX, currentY), Color.White));
+			currentY += stepY;
+			TextSprite.TextList.Add(new TextSprite("Sound Effects: Eoin Flanagan", "Medium", new Vector2(currentX, currentY), Color.White));
+			currentY += stepY;
+			TextSprite.TextList.Add(new TextSprite("Level Design: Eoin Flanagan", "Medium", new Vector2(currentX, currentY), Color.White));
+
+
+			TextSprite ts = new TextSprite("Main Menu", "Medium", new Vector2(225f, 503f), Color.White);
+			Button.ButtonList.Add(new Button(ts, new Vector2(100f, 500f), 1));
 		}
 
 		public static void FileSelectingOn()

@@ -210,7 +210,7 @@
             {
                 PPlayer.Player.JumpTimeout = 20;
                 PPlayer.walkingSound_wave = -2;
-                Sounds.Play(3);
+                Sounds.Play("player_jump");
                 PPlayer.Player.sqobject.Velocity += new Vector2(0f, -0.5f);
                 PPlayer.Player.sqobject.Position += new Vector2(0f, -3f);
             }
@@ -220,7 +220,9 @@
             }
         }
 
-        public static void PlayerLeft()
+		static readonly String[] footstepsDirtSounds = new String[] { "footstep_dirta", "footstep_dirtb", "footstep_dirtc" };
+
+		public static void PlayerLeft()
         {
             PPlayer.Player.sqobject.Flipeffect = SpriteEffects.FlipHorizontally;
 
@@ -235,7 +237,7 @@
             else
 			{
 				if (PPlayer.walkingSound_wave == 0)
-					Sounds.Play(new int[] { 0, 1, 2 });
+					Sounds.Play(footstepsDirtSounds);
 
 				PPlayer.Player.Walking = true;
 
@@ -263,7 +265,7 @@
             else
 			{
 				if (PPlayer.walkingSound_wave == 0)
-					Sounds.Play(new int[] { 0, 1, 2 });
+					Sounds.Play(footstepsDirtSounds);
 
 				PPlayer.Player.Walking = true;
                 PPlayer.walkingSound_wave++;

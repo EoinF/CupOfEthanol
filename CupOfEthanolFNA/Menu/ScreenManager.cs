@@ -11,11 +11,13 @@
 		public static bool Editing;
 		public static bool Custom;
 		public static bool GameClosing = false;
-        public static bool Ingame;
+		public static bool GameComplete;
+		public static bool Ingame;
         public static bool Levelselect;
         public static bool Loading;
         public static bool Mainmenu;
         public static bool Paused;
+		public static bool Credits;
 
         //protected ScreenManager()
         //{
@@ -62,12 +64,21 @@
 			MainMenu.LevelSelectOn();
 		}
 
-        /// <summary>
-        /// Makes every screenmanager state false so a new one(or more than one) can be selected
-        /// </summary>
-        public static void NoMode()
+		public static void CreditsOn()
+		{
+			NoMode();
+			Mainmenu = true;
+			Credits = true;
+			MainMenu.CreditsOn();
+		}
+
+		/// <summary>
+		/// Makes every screenmanager state false so a new one(or more than one) can be selected
+		/// </summary>
+		public static void NoMode()
         {
-            Paused = false;
+			GameComplete = false;
+			Paused = false;
             Ingame = false;
             Mainmenu = false;
             Loading = false;
@@ -75,12 +86,14 @@
             Levelselect = false;
             Editing = false;
 			Custom = false;
-        }
+			Credits = false;
+		}
 
 		public static void GameCompleteOn()
 		{
 			NoMode();
 			Mainmenu = true;
+			GameComplete = true;
 			MainMenu.GameCompleteOn();
 		}
 	}

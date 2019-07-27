@@ -190,11 +190,15 @@
                                     ScreenManager.LoadingCustomOn();
                                     return;
 
-                                case "Editor":
-                                    ScreenManager.EditingOn();
-                                    return;
+								case "Editor":
+									ScreenManager.EditingOn();
+									return;
 
-                                case "Exit":
+								case "Credits":
+									ScreenManager.CreditsOn();
+									return;
+
+								case "Exit":
                                     ScreenManager.ExitGame();
                                     return;
 
