@@ -276,7 +276,6 @@
 
         public static void LoadLevelSettings(XmlDocument doc)
         {
-			string songName = "";
             try
             {
                 foreach (XmlNode node in doc.FirstChild.NextSibling.FirstChild)
@@ -295,7 +294,7 @@
 								Level.AirResistance = float.Parse(node.InnerText);
 								break;
 							case "SongName":
-								songName = node.InnerText;
+								Level.SongName = node.InnerText;
 								break;
 						}
                     }
@@ -308,12 +307,13 @@
                 throw e;
             }
 			
-			Sounds.PlayBGM(songName);
+			Sounds.PlayBGM(Level.SongName);
 		}
 
         public static void LoadNewLevel()
         {
-            PPlayer.Player = new PPlayer("A", "Aw", "Aj", 1f);
+			Level.SongName = "";
+			PPlayer.Player = new PPlayer("A", "Aw", "Aj", 1f);
             PPlayer.HadBlueKey = PPlayer.HadRedKey = PPlayer.HadYellowKey = PPlayer.HadGreenKey = false;
 
 			XmlDocument doc;

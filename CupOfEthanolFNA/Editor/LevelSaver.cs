@@ -138,19 +138,28 @@
             XmlElement child = doc.CreateElement("Settings");
             root.AppendChild(child);
             root = root.FirstChild;
+
             child = doc.CreateElement("BackgroundTexture");
             XmlText text = doc.CreateTextNode(Level._backgroundTexture);
             root.AppendChild(child);
             child.AppendChild(text);
+
             child = doc.CreateElement("Gravity");
             text = doc.CreateTextNode(Level.Gravity.Y.ToString());
             root.AppendChild(child);
             child.AppendChild(text);
-            child = doc.CreateElement("AirResistance");
-            text = doc.CreateTextNode(Level.AirResistance.ToString());
-            root.AppendChild(child);
-            child.AppendChild(text);
-            return doc;
+
+			child = doc.CreateElement("AirResistance");
+			text = doc.CreateTextNode(Level.AirResistance.ToString());
+			root.AppendChild(child);
+			child.AppendChild(text);
+
+			child = doc.CreateElement("SongName");
+			text = doc.CreateTextNode(Level.SongName.ToString());
+			root.AppendChild(child);
+			child.AppendChild(text);
+
+			return doc;
         }
 
         private static XmlElement Save_SqObjects(XmlElement child)

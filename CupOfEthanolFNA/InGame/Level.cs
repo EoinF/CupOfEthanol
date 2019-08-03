@@ -18,6 +18,7 @@
         public static int Current = -1;
         public static Vector2 Gravity;
         public static Vector2 Offset = Vector2.Zero;
+		public static String SongName;
         public static bool IsMain = true;
 
         public static void DrawBackground(SpriteBatch spriteBatch)
