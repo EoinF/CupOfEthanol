@@ -30,7 +30,11 @@ namespace LackingPlatforms
 
         private void Platform2()
         {
-            //this.sqobject.Velocity = new Vector2(0, Math.Sign(sqobject.Velocity.Y));
+			//this.sqobject.Velocity = new Vector2(0, Math.Sign(sqobject.Velocity.Y));
+			if (this.sqobject.Flipeffect == SpriteEffects.FlipHorizontally)
+			{
+				this.sqobject.Flipeffect = SpriteEffects.FlipVertically;
+			}
 
             if (this.sqobject.Flipeffect == SpriteEffects.FlipVertically)
             {

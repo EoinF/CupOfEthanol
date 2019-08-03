@@ -67,10 +67,15 @@
 
         #endregion
 
-        public bool CollideBottom(SquareObject sq)
+        public bool CollideBottom(SquareObject sq, bool isLazer = false)
         {
             int counter = 0;
-            HitFeet = true;
+			if (isLazer)
+			{
+				return false;
+			}
+			HitFeet = true;
+			
 
             if (this.Velocity.Y >= sq.Velocity.Y || sq.bounce.Top > 0)
                 Velocity = new Vector2(Velocity.X, Math.Abs(Velocity.Y / 8f) - (0.1f * sq.bounce.Top));
@@ -101,9 +106,14 @@
             return false;
         }
 
-        public bool CollideLeft(SquareObject sq)
-        {
-            HitLeft = true;
+        public bool CollideLeft(SquareObject sq, bool isLazer = false)
+		{
+			if (isLazer)
+			{
+				return false;
+			}
+			HitLeft = true;
+			
             Velocity = new Vector2(Math.Abs(Velocity.X / 5f) + (0.1f * sq.bounce.Right), Velocity.Y / (1.03f + (0.0015f * sq.frictionforce)));
             
             
@@ -121,10 +131,15 @@
             return false;
         }
 
-        public bool CollideRight(SquareObject sq)
+        public bool CollideRight(SquareObject sq, bool isLazer = false)
         {
             int counter = 0;
-            HitRight = true;
+			if (isLazer)
+			{
+				return false;
+			}
+			HitRight = true;
+			
             Velocity = new Vector2(-Math.Abs(Velocity.X / 5f) - (0.1f * sq.bounce.Left), Velocity.Y / (1.03f + (0.0015f * sq.frictionforce)));
             
             
@@ -146,10 +161,15 @@
             return false;
         }
 
-        public bool CollideTop(SquareObject sq)
+        public bool CollideTop(SquareObject sq, bool isLazer = false)
         {
             int counter = 0;
-            HitHead = true;
+			if (isLazer)
+			{
+				return false;
+			}
+			HitHead = true;
+			
 
             Velocity = new Vector2(Velocity.X, Math.Abs(Velocity.Y / 8f) + (0.1f * sq.bounce.Bottom));
             

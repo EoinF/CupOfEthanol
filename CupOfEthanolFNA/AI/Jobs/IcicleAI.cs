@@ -11,7 +11,7 @@ namespace LackingPlatforms
     {
         private void Icicle(int period, int distance)
         {
-            if (Math.Abs(PPlayer.Player.sqobject.Position.X - this.sqobject.Position.X) < (120 * period)
+            if (Math.Abs(PPlayer.Player.sqobject.Position.X - this.sqobject.Position.X) < (120 * distance)
                 && VariableB < 1
                 && VariableD < 1)
                 VariableB = 50;

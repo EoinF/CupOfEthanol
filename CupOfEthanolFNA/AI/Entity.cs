@@ -153,7 +153,8 @@
 
             DeathTimer = -1;
             StartDelay = startDelay;
-            JumpTimeout = -1;
+			PreviousStartDelay = StartDelay;
+			JumpTimeout = -1;
             MaxID = 1;
             VariableA = 0f;
             VariableB = 0f;
@@ -397,15 +398,17 @@
                     {
                         if (EntityList[i].DeathTimer < 0)
                         {
-                            if (this.TopSquareCollision(EntityList[i].sqobject))
-                                EntityList[i].sqobject.CollideBottom(this.sqobject);
-                            if (this.BottomSquareCollision(EntityList[i].sqobject))
-                                EntityList[i].sqobject.CollideTop(this.sqobject);
+							bool isLazer = this.Job == "Lazer" && EntityList[i].Job != "Lazer";
+							bool isOtherLazer = this.Job != "Lazer" && EntityList[i].Job == "Lazer";
+                            if (this.TopSquareCollision(EntityList[i].sqobject, isOtherLazer))
+                                EntityList[i].sqobject.CollideBottom(this.sqobject, isLazer);
+                            if (this.BottomSquareCollision(EntityList[i].sqobject, isOtherLazer))
+                                EntityList[i].sqobject.CollideTop(this.sqobject, isLazer);
 
-                            if (this.LeftSquareCollision(EntityList[i].sqobject))
-                                EntityList[i].sqobject.CollideRight(this.sqobject);
-                            if (this.RightSquareCollision(EntityList[i].sqobject))
-                                EntityList[i].sqobject.CollideLeft(this.sqobject);
+                            if (this.LeftSquareCollision(EntityList[i].sqobject, isOtherLazer))
+                                EntityList[i].sqobject.CollideRight(this.sqobject, isLazer);
+                            if (this.RightSquareCollision(EntityList[i].sqobject, isOtherLazer))
+                                EntityList[i].sqobject.CollideLeft(this.sqobject, isLazer);
                         }
                     }
                 }
@@ -857,34 +860,34 @@
             return new Vector2(Ux, -(float)(Math.Sqrt((double)(((8f * g * y) / Ux) / 2.0f))));
         }
 
-        private bool LeftSquareCollision(SquareObject squareobject)
+        private bool LeftSquareCollision(SquareObject squareobject, bool isLazer = false)
         {
             if (this.sqobject.LeftEdge.Intersects(squareobject.RightEdge) && !sqobject.HitLeft)
             {
-                this.sqobject.CollideLeft(squareobject);
+                this.sqobject.CollideLeft(squareobject, isLazer);
                 this.VariableB = 180f;
                 return true;
             }
             return false;
         }
 
-        private bool RightSquareCollision(SquareObject squareobject)
+        private bool RightSquareCollision(SquareObject squareobject, bool isLazer = false)
         {
             if (sqobject.rect.Intersects(squareobject.LeftEdge) && !sqobject.HitRight)
             {
-                sqobject.CollideRight(squareobject);
+                sqobject.CollideRight(squareobject, isLazer);
                 VariableB = 180f;
                 return true;
             }
             return false;
         }
 
-        private bool TopSquareCollision(SquareObject squareobject)
+        private bool TopSquareCollision(SquareObject squareobject, bool isLazer = false)
         {
                 if (this.sqobject.TopEdge.Intersects(squareobject.BottomEdge))
                 {
                     this.VariableA = 180f;
-                    this.sqobject.CollideTop(squareobject);
+                    this.sqobject.CollideTop(squareobject, isLazer);
                     return true;
                 }
             
@@ -892,7 +895,7 @@
             
         }
 
-        private bool BottomSquareCollision(SquareObject squareobject)
+        private bool BottomSquareCollision(SquareObject squareobject, bool isLazer = false)
         {
 
             if (sqobject.BottomEdge.Intersects(squareobject.TopEdge))
@@ -901,7 +904,7 @@
                 {
                     this.Walking = true;
                     this.OnGround = true;
-                    this.sqobject.CollideBottom(squareobject);
+                    this.sqobject.CollideBottom(squareobject, isLazer);
                     this.VariableA = 180f;
                     return true;
                 }
@@ -1026,7 +1029,6 @@
         {
             WasActive = Active && DeathTimer <= 0f;
             PreviousLives = Lives;
-            PreviousStartDelay = StartDelay;
         }
 
         public void CheckpointReached()
