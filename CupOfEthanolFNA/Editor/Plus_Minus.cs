@@ -103,7 +103,7 @@
             {
                 if (ScreenManager.Paused)
                 {
-                    if (Editor.Mouse_Static)
+                    if (Editor.Mouse_Static || Editor.Mouse_Items)
                     {
                         k = Convert.ToInt16(EditorPauseMenu.LabelList[3].Text) - 1;
                         if (k < 1)
@@ -360,12 +360,12 @@
             {
                 if (ScreenManager.Paused)
                 {
-                    if (Editor.Mouse_Static)
+                    if (Editor.Mouse_Static || Editor.Mouse_Items)
                     {
                         k = Convert.ToInt16(EditorPauseMenu.LabelList[3].Text) + 1;
-                        if (k > 5)
+                        if (k > 10)
                         {
-                            k = 5;
+                            k = 10;
                         }
                         EditorPauseMenu.LabelList[3].Text = k.ToString();
                     }

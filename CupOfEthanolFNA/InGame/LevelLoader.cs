@@ -203,7 +203,7 @@
                                 break;
 
                             case "N": //Wheelbot
-                                Entity.EntityList.Add(new Entity("N", "", "Nw", od.Position, 5, 1f, od.Texturename, new SquareObject.Damage(0, 1, 1, 1), new SquareObject.Bounce(40, 20, 20, 5), 30f, 255, od.Direction, false, 0, od.StartCheckpoint, od.EndCheckpoint, Color.White, od.StartDelay));
+                                Entity.EntityList.Add(new Entity("N", "", "Nw", od.Position, 5, 1f, od.Texturename, new SquareObject.Damage(0, 1, 1, 1), new SquareObject.Bounce(70, 20, 20, 5), 30f, 255, od.Direction, false, 0, od.StartCheckpoint, od.EndCheckpoint, Color.White, od.StartDelay));
                                 break;
 
                             case "O": //Robot

@@ -452,7 +452,8 @@
         public static void Update_Items()
         {
             string item = EditorPauseMenu.LabelList[0].Text;
-            if (item != null)
+			BrushSize = int.Parse(EditorPauseMenu.LabelList[3].Text);
+			if (item != null)
             {
                 if (item != "Player")
                 {

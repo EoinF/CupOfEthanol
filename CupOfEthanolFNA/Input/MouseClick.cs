@@ -72,7 +72,7 @@
                     if (Editor.Mouse_Items)
                     {
                         LeftClick_Items();
-                        if ((Editor.CurrentBlock != null) && (InputManager.Mousestate[1].LeftButton == ButtonState.Released))
+                        if (Editor.CurrentBlock != null)
                         {
                             LeftClick_Static();
                         }
@@ -108,7 +108,7 @@
 
         private static void LeftClick_Items()
         {
-            if (InputManager.Mousestate[1].LeftButton == ButtonState.Released)
+            //if (InputManager.Mousestate[1].LeftButton == ButtonState.Released)
             {
                 int x = (int) ((InputManager.Mousestate[0].X - Level.Offset.X) / 25f);
                 int y = (int) ((InputManager.Mousestate[0].Y - Level.Offset.Y) / 25f);

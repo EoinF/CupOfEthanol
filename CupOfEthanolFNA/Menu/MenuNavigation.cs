@@ -46,10 +46,9 @@
             EditorPauseMenu.LabelList[0].Text = "Player";
             EditorPauseMenu.LabelList[1].Text = "";
             EditorPauseMenu.LabelList[2].Text = "";
-            EditorPauseMenu.LabelList[3].Text = "";
+            EditorPauseMenu.LabelList[3].Text = "1";
             EditorPauseMenu.LabelList[5].Text = "";
             EditorPauseMenu.LabelList[6].Text = "";
-            Editor.BrushSize = 1;
             Editor.Update_Items();
         }
 

@@ -109,7 +109,7 @@
             }
             LabelList.Add(new TextSprite(tex, "Medium", new Vector2(275f, 450f), Color.Yellow)); //2
             tex = "";
-            if (Editor.Mouse_Static)
+            if (Editor.Mouse_Static || Editor.Mouse_Items)
             {
                 tex = Editor.BrushSize.ToString();
             }
