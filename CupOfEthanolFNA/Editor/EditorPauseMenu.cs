@@ -54,8 +54,9 @@
             Button.ButtonList.Add(new Button(new TextSprite("Static", "Small", new Vector2(60f, 190f), Color.Red), new Vector2(60f, 190f), 4));
             Button.ButtonList.Add(new Button(new TextSprite("Items", "Small", new Vector2(60f, 260f), Color.Red), new Vector2(60f, 260f), 4));
             Button.ButtonList.Add(new Button(new TextSprite("Main Menu", "Small", new Vector2(180f, 75f), Color.Red), new Vector2(180f, 75f), 3));
-            Button.ButtonList.Add(new Button(new TextSprite("Save", "Small", new Vector2(225f, 150f), Color.Red), new Vector2(225f, 150f), 4));
-            Button.ButtonList.Add(new Button(new TextSprite("DelAllBlocks", "Small", new Vector2(420f, 75f), Color.Red), new Vector2(420f, 75f), 3));
+			Button.ButtonList.Add(new Button(new TextSprite("Save", "Small", new Vector2(225f, 150f), Color.Red), new Vector2(225f, 150f), 4));
+			Button.ButtonList.Add(new Button(new TextSprite("Save & Test", "Small", new Vector2(180f, 225f), Color.Red), new Vector2(180f, 225f), 3));
+			Button.ButtonList.Add(new Button(new TextSprite("DelAllBlocks", "Small", new Vector2(420f, 75f), Color.Red), new Vector2(420f, 75f), 3));
             Button.ButtonList.Add(new Button(new TextSprite("DelAllEntities", "Small", new Vector2(420f, 150f), Color.Red), new Vector2(420f, 150f), 3));
             Button.ButtonList.Add(new Button(new TextSprite("Cycle Entities", "Small", new Vector2(430f, 240f), Color.Red), new Vector2(420f, 230f), 3));
         }

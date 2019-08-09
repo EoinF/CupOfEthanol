@@ -225,11 +225,21 @@
                                     BClick_Items();
                                     return;
 
-                                case "Save":
-                                    LevelSaver.SaveMap();
-                                    return;
+								case "Save":
+									LevelSaver.SaveMap();
+									return;
 
-                                case "+":
+								case "Save & Test":
+									LevelSaver.SaveMap();
+									LevelLoader.StartCustomLevel(Level.Current);
+									ScreenManager.Testing = true;
+									return;
+
+								case "Back to Editor":
+									LevelLoader.StartEditorLevel(Level.Current);
+									return;
+
+								case "+":
                                     Plus_Minus.Plus(i);
                                     return;
 

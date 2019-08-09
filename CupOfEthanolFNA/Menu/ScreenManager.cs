@@ -6,8 +6,9 @@
     using System.Collections.Generic;
 
     public abstract class ScreenManager
-    {
-        public static bool Creating;
+	{
+		public static bool Creating;
+		public static bool Testing;
 		public static bool Editing;
 		public static bool Custom;
 		public static bool GameClosing = false;
@@ -87,6 +88,7 @@
             Editing = false;
 			Custom = false;
 			Credits = false;
+			Testing = false;
 		}
 
 		public static void GameCompleteOn()

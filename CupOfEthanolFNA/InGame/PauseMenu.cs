@@ -36,8 +36,15 @@
         {
             Button.ButtonList = new List<Button>();
             Button.ButtonList.Add(new Button(new TextSprite("Resume", "Small", Vector2.Zero, Color.Red), new Vector2(295f, 160f), 3));
-            Button.ButtonList.Add(new Button(new TextSprite("Main Menu", "Small", Vector2.Zero, Color.Red), new Vector2(295f, 230f), 3));
-        }
+			if (ScreenManager.Testing)
+			{
+				Button.ButtonList.Add(new Button(new TextSprite("Back to Editor", "Small", Vector2.Zero, Color.Red), new Vector2(295f, 230f), 3));
+			}
+			else
+			{
+				Button.ButtonList.Add(new Button(new TextSprite("Main Menu", "Small", Vector2.Zero, Color.Red), new Vector2(295f, 230f), 3));
+			}
+		}
 
         private static void Load_Labels()
         {
@@ -58,8 +65,9 @@
             for (int i = 0; i < Entity.EntityList.Count; i++)
             {
                 Entity.EntityList[i].Walking = false;
-            }
-            MessageBox.GameMessage = null;
+			}
+			TextSprite.TextList = new List<TextSprite>();
+			MessageBox.GameMessage = null;
             PPlayer.Player.Walking = false;
             ScreenManager.Paused = true;
         }
@@ -70,8 +78,8 @@
             Label = null;
             TextSprite.TextList = null;
             Button.ButtonList = null;
-            ScreenManager.NoMode();
-            ScreenManager.Ingame = true;
+			ScreenManager.Paused = false;
+			ScreenManager.Ingame = true;
         }
     }
 }
