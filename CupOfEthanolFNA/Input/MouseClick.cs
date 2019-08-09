@@ -114,11 +114,39 @@
                 int y = (int) ((InputManager.Mousestate[0].Y - Level.Offset.Y) / 25f);
                 if ((((x >= 0) && (x <= (SquareObject.sqObjectArray.GetLength(0) - 1))) && (y >= 0)) && (y <= (SquareObject.sqObjectArray.GetLength(1) - 1)))
                 {
-                    if (Editor.CurrentCollectable != null)
-                    {
-                        Collectable.collectableList.Add(new Collectable(Editor.CurrentCollectable.texturename, new Vector2((float) (x * 0x19), (float) (y * 0x19)), Editor.CurrentCollectable.Size, Editor.CurrentCollectable.Type, 0.6f));
-                    }
-                    if (Editor.CurrentBlock != null)
+					bool isCollectablePlacable = true;
+					bool hasExistingCollectableTextureName = false;
+					bool hasExistingSign = false;
+					if (SquareObject.sqObjectArray[x, y] != null && Editor.CurrentCollectable != null) {
+						if (SquareObject.sqObjectArray[x, y].texturename != Editor.CurrentCollectable.texturename)
+						{
+							hasExistingCollectableTextureName = true;
+						}
+						if (Editor.CurrentCollectable.Type != 2 || !SquareObject.sqObjectArray[x, y].texturename.StartsWith("{"))
+						{
+							hasExistingSign = true;
+						}
+						isCollectablePlacable = !hasExistingCollectableTextureName && !hasExistingSign;
+					}
+
+					if (Editor.CurrentCollectable != null && isCollectablePlacable)
+					{
+						for (int i = 0; i < Collectable.collectableList.Count; i++)
+						{
+							Collectable collectable = Collectable.collectableList[i];
+							// Prevent stacking by checking if collectable type already exists on that tile
+							if (collectable.Type == Editor.CurrentCollectable.Type &&
+								Math.Abs(collectable.StartPosition.X - (x * 25)) < 25 &&
+								Math.Abs(collectable.StartPosition.Y - (y * 25)) < 25)
+							{
+								Collectable.collectableList.RemoveAt(i);
+								Collectable.collectableList.Add(new Collectable(Editor.CurrentCollectable.texturename, new Vector2((x * 25), (y * 25)), Editor.CurrentCollectable.Size, Editor.CurrentCollectable.Type, 0.6f));
+								return;
+							}
+						}
+						Collectable.collectableList.Add(new Collectable(Editor.CurrentCollectable.texturename, new Vector2((x * 25), (y * 25)), Editor.CurrentCollectable.Size, Editor.CurrentCollectable.Type, 0.6f));
+					}
+					if (Editor.CurrentBlock != null)
                     {
                         if (Editor.CurrentBlock.texturename == "A")
                         {

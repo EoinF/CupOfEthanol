@@ -160,6 +160,7 @@
     <Content Include="Content\Levels\Main\13\LevelData.xml" />
     <Content Include="Content\Levels\Main\14\LevelData.xml" />
     <Content Include="Content\Levels\Main\15\LevelData.xml" />
+    <Content Include="Content\Levels\Main\15\Thumbnail.png" />
     <Content Include="Content\Levels\Main\16\LevelData.xml" />
     <Content Include="Content\Levels\Main\17\LevelData.xml" />
     <Content Include="Content\Levels\Main\17\Thumbnail.png" />

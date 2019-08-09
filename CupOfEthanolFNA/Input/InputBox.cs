@@ -187,8 +187,11 @@
 
         public static void Draw(SpriteBatch spriteBatch)
         {
-            MessageBox.GameMessage.Draw(spriteBatch);
-        }
+			if (MessageBox.GameMessage != null)
+			{
+				MessageBox.GameMessage.Draw(spriteBatch);
+			}
+		}
 
         public static void InputToText(ref string CurrentText)
         {

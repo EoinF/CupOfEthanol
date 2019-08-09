@@ -308,7 +308,9 @@
         {
             if ((((((x >= 0) && (x <= (SquareObject.sqObjectArray.GetLength(0) - 1))) && (y >= 0)) && (y <= (SquareObject.sqObjectArray.GetLength(1) - 1))) && (!mouse_Static || (CurrentBlock != null))) && ((SquareObject.sqObjectArray[x, y] == null) || (SquareObject.sqObjectArray[x, y].texturename != "A")))
             {
-                if (sq.texturename == "Checkpoint")
+                if (sq.texturename == "Checkpoint" &&
+					(SquareObject.sqObjectArray[x, y] == null ||
+					SquareObject.sqObjectArray[x, y].texturename != "Checkpoint"))
                 {
                     if (Checkpoint.checkpointList.Count == 0)
                     {
