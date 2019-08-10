@@ -84,16 +84,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\ButtonPedestalEntity.cs" />
     <Compile Include="AI\Entity.cs" />
     <Compile Include="AI\Jobs\BirdAI.cs" />
     <Compile Include="AI\Jobs\BlasterAI.cs" />
     <Compile Include="AI\Jobs\CannonAI.cs" />
-    <Compile Include="AI\Jobs\ClancyAI.cs" />
+    <Compile Include="AI\Jobs\ComputerAI.cs" />
     <Compile Include="AI\Jobs\DogAI.cs" />
     <Compile Include="AI\Jobs\DoorAI.cs" />
     <Compile Include="AI\Jobs\GuinnessVanAI.cs" />
     <Compile Include="AI\Jobs\IcicleAI.cs" />
-    <Compile Include="AI\Jobs\MaureenAI.cs" />
+    <Compile Include="AI\Jobs\ButtonPedastalAI.cs" />
     <Compile Include="AI\Jobs\PlatformAI.cs" />
     <Compile Include="AI\Jobs\ProjectileAI.cs" />
     <Compile Include="AI\Jobs\RainingEmberAI.cs" />
@@ -147,6 +148,8 @@
     <Compile Include="Textures.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Textures\Entities\ButtonPedastal.jumping.png" />
+    <Content Include="Content\Textures\Entities\ButtonPedastal.walking.png" />
     <Content Include="client-logo.ico" />
     <Content Include="client-logo2.ico" />
     <Content Include="Content\Levels\Custom\3\LevelData.xml" />
@@ -204,8 +207,10 @@
     <Content Include="Content\Sounds\player_jump.wav" />
     <Content Include="Content\Textures\Backgrounds\SkyB.PNG" />
     <Content Include="Content\Textures\Entities\Blaster.png" />
+    <Content Include="Content\Textures\Entities\ButtonPedastal.standing.png" />
     <Content Include="Content\Textures\Entities\Cannon.png" />
-    <Content Include="Content\Textures\Entities\Clancy.png" />
+    <Content Include="Content\Textures\Entities\computer.standing.png" />
+    <Content Include="Content\Textures\Entities\computer.walking.png" />
     <Content Include="Content\Textures\Entities\ConcretePlatform.PNG" />
     <Content Include="Content\Textures\Entities\deathbird.png" />
     <Content Include="Content\Textures\Entities\dog.standing.png" />
@@ -216,8 +221,6 @@
     <Content Include="Content\Textures\Entities\flamer.walking.png" />
     <Content Include="Content\Textures\Entities\Icicle.png" />
     <Content Include="Content\Textures\Entities\LazerBullet.png" />
-    <Content Include="Content\Textures\Entities\maureen.standing.png" />
-    <Content Include="Content\Textures\Entities\maureen.walking.png" />
     <Content Include="Content\Textures\Entities\Platform.PNG" />
     <Content Include="Content\Textures\Entities\player.jumping.png" />
     <Content Include="Content\Textures\Entities\player.standing.png" />

@@ -12,7 +12,7 @@
 
         private static string[] Entities = new string[] { 
             "Dog", "Bird", "Flamer", "Troller", "Wolf", "Stealth", "Tentacle", "Platform", "ConcretePlatform", "Cannon", 
-            "Wheelbot", "Robot", "Shadow", "Shadowplayer", "Clancy", "VanishBlock", "RainingEmber", "Icicle", "Maureen",
+            "Wheelbot", "Robot", "Shadow", "Shadowplayer", "Computer", "VanishBlock", "RainingEmber", "Icicle", "ButtonPedastal",
             "GuinnessVan", "Blaster", "Door"
          };
         private static string[] Items = new string[] { "Player", "Coaster", "Checkpoint", "Sign", "Chalice", "RedKey", "BlueKey", "GreenKey", "YellowKey" };
@@ -271,8 +271,10 @@
                             || Entity.EntityList[Editor.SelectedEntity].Job.StartsWith("N")
                             || Entity.EntityList[Editor.SelectedEntity].Job.StartsWith("O")
                             || Entity.EntityList[Editor.SelectedEntity].Job.StartsWith("W")
-                            || Entity.EntityList[Editor.SelectedEntity].Job.StartsWith("T"))
-                        {
+							|| Entity.EntityList[Editor.SelectedEntity].Job.StartsWith("T")
+							|| Entity.EntityList[Editor.SelectedEntity].Job.StartsWith("Q")
+							|| Entity.EntityList[Editor.SelectedEntity].Job.StartsWith("U"))
+						{
                             if (k < 9)
                             {
                                 k++;
@@ -301,8 +303,10 @@
                             || EditorPauseMenu.LabelList[0].Text == "Robot"
                             || EditorPauseMenu.LabelList[0].Text == "Wheelbot"
                             || EditorPauseMenu.LabelList[0].Text == "Blaster"
-                            || EditorPauseMenu.LabelList[0].Text == "Icicle")
-                        {
+                            || EditorPauseMenu.LabelList[0].Text == "Icicle"
+							|| EditorPauseMenu.LabelList[0].Text == "Computer"
+							|| EditorPauseMenu.LabelList[0].Text == "ButtonPedastal")
+						{
                             if (k < 9)
                             {
                                 k++;

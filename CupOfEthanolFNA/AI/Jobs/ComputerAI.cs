@@ -9,8 +9,10 @@ namespace LackingPlatforms
 {
     public partial class Entity
     {
-        private void Maureen()
-        {
+        private void Computer(int Job)
+		{
+			this.sqobject.Velocity = new Vector2(0f, 0f);
+			Walking = true;
         }
     }
 }

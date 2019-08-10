@@ -70,8 +70,12 @@
         private static Texture2D Blaster;
         private static Texture2D Cannon;
         private static Texture2D ConcretePlatform;
-        private static Texture2D Clancy;
-        private static Texture2D Dog;
+        private static Texture2D Computer;
+		private static Texture2D Computer_Walk;
+		private static Texture2D ButtonPedastal;
+		private static Texture2D ButtonPedastal_Walk;
+		private static Texture2D ButtonPedastal_Jump;
+		private static Texture2D Dog;
         private static Texture2D Dog_Walk;
         private static Texture2D Door;
         private static Texture2D Flamer;
@@ -79,7 +83,6 @@
         private static Texture2D GuinnessVan;
         private static Texture2D Icicle;
         private static Texture2D LazerBullet;
-        private static Texture2D Maureen;
         private static Texture2D Platform;
         private static Texture2D Player;
         private static Texture2D Player_Jump;
@@ -159,7 +162,7 @@
                     return "Shadow";
 
                 case "Q":
-                    return "Clancy";
+                    return "Computer";
 
                 case "R":
                     return "VanishBlock";
@@ -171,7 +174,7 @@
                     return "Icicle";
 
                 case "U":
-                    return "Maureen";
+                    return "ButtonPedastal";
 
                 case "V":
                     return "GuinnessVan";
@@ -292,10 +295,13 @@
                 case "Pw":
                     return Shadow_Walk;
 
-                case "Q":
-                    return Clancy;
+				case "Q":
+					return Computer;
 
-                case "R":
+				case "Qw":
+					return Computer_Walk;
+
+				case "R":
                     return VanishBlock;
 
                 case "S":
@@ -304,10 +310,14 @@
                 case "T":
                     return Icicle;
 
-                case "U":
-                    return Maureen;
+				case "U":
+					return ButtonPedastal;
+				case "Uw":
+					return ButtonPedastal_Walk;
+				case "Uj":
+					return ButtonPedastal_Jump;
 
-                case "V":
+				case "V":
                     return GuinnessVan;
                     
                 case "W":
@@ -490,7 +500,7 @@
                 case "Shadow":
                     return "P";
 
-                case "Clancy":
+                case "Computer":
                     return "Q";
 
                 case "VanishBlock":
@@ -502,7 +512,7 @@
                 case "Icicle":
                     return "T";
 
-                case "Maureen":
+                case "ButtonPedastal":
                     return "U";
 
                 case "GuinnessVan":
@@ -655,11 +665,14 @@
                 Shadow = Content.Load<Texture2D>("Textures/Entities/shadow.standing");
                 Shadow_Walk = Content.Load<Texture2D>("Textures/Entities/shadow.walking");
                 LazerBullet = Content.Load<Texture2D>("Textures/Entities/LazerBullet");
-                Clancy = Content.Load<Texture2D>("Textures/Entities/Vanish");
-                VanishBlock = Content.Load<Texture2D>("Textures/Entities/Vanish");
+				Computer = Content.Load<Texture2D>("Textures/Entities/computer.standing");
+				Computer_Walk = Content.Load<Texture2D>("Textures/Entities/computer.walking");
+				ButtonPedastal = Content.Load<Texture2D>("Textures/Entities/ButtonPedastal.standing");
+				ButtonPedastal_Walk = Content.Load<Texture2D>("Textures/Entities/ButtonPedastal.walking");
+				ButtonPedastal_Jump = Content.Load<Texture2D>("Textures/Entities/ButtonPedastal.jumping");
+				VanishBlock = Content.Load<Texture2D>("Textures/Entities/Vanish");
                 RainingEmber = Content.Load<Texture2D>("Textures/Entities/Ember");
                 Icicle = Content.Load<Texture2D>("Textures/Entities/Icicle");
-                Maureen = Content.Load<Texture2D>("Textures/Entities/Vanish");
                 GuinnessVan = Content.Load<Texture2D>("Textures/Entities/Vanish");
                 Blaster = Content.Load<Texture2D>("Textures/Entities/Vanish");
                 Door = Content.Load<Texture2D>("Textures/Entities/Door");

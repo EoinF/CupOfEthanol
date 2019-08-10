@@ -218,8 +218,8 @@
                                 Entity.EntityList.Add(new Entity("B", "Bj", "Bw", od.Position, 5, 1f, od.Texturename, new SquareObject.Damage(1, 1, 1, 1), new SquareObject.Bounce(0, 0, 0, 0), 50f, 255, od.Direction, false, 0, od.StartCheckpoint, od.EndCheckpoint, Color.White, od.StartDelay));
                                 break;
 
-                            case "Q": //Clancy
-                                Entity.EntityList.Add(new Entity("Q", "Qj", "Qw", od.Position, 10, 1f, od.Texturename, new SquareObject.Damage(0, 1, 1, 1), new SquareObject.Bounce(0, 0, 0, 0), 50f, 255, od.Direction, false, 0, od.StartCheckpoint, od.EndCheckpoint, Color.White, od.StartDelay));
+                            case "Q": // Computer
+                                Entity.EntityList.Add(new Entity("Q", "", "Qw", od.Position, -1, 1f, od.Texturename, new SquareObject.Damage(0, 0, 0, 0), new SquareObject.Bounce(0, 5, 5, 10), 50f, 120, od.Direction, false, 0, od.StartCheckpoint, od.EndCheckpoint, Color.White, od.StartDelay));
                                 break;
 
                             case "R": //Vanish Block
@@ -234,8 +234,8 @@
                                 Entity.EntityList.Add(new Entity("T", "", "", od.Position, -1, 1f, od.Texturename, new SquareObject.Damage(0, 1, 0, 0), new SquareObject.Bounce(30, 0, 0, 20), 50f, 255, od.Direction, true, 0, od.StartCheckpoint, od.EndCheckpoint, Color.White, od.StartDelay));
                                 break;
 
-                            case "U": //Maureen
-                                Entity.EntityList.Add(new Entity("U", "Uj", "Uw", od.Position, -1, 1f, od.Texturename, new SquareObject.Damage(1, 1, 1, 1), new SquareObject.Bounce(0, 0, 0, 0), 50f, 255, od.Direction, false, 0, od.StartCheckpoint, od.EndCheckpoint, Color.White, od.StartDelay));
+                            case "U": // ButtonPedastal
+                                Entity.EntityList.Add(new ButtonPedestalEntity("U", "Uj", "Uw", od.Position, -1, 1f, od.Texturename, new SquareObject.Damage(0, 0, 0, 0), new SquareObject.Bounce(50, 5, 5, 5), 50f, 150, od.Direction, false, 0, od.StartCheckpoint, od.EndCheckpoint, Color.White, od.StartDelay));
                                 break;
 
                             case "V": //GuinnessVan

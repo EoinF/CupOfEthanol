@@ -42,15 +42,23 @@
         public float VariableF;
         public bool Walking;
 
-        public int Lives
+		public Rectangle TopEdgePlus;
+
+		public int Lives
         {
             get { return _lives; }
             set { _lives = value; }
         }
 
 
-        public Entity(string texture, string jumpAnimation, string walkAnimation, Vector2 position, int lives, float size, string job, SquareObject.Damage dmg, SquareObject.Bounce bnce, float speed, byte friction, string OppositeDir, bool staticTexture, int id, byte startCheckpoint, byte endCheckpoint)
+        public Entity(string texture, string jumpAnimation, string walkAnimation, Vector2 position, int lives, float size, 
+			string job, SquareObject.Damage dmg, SquareObject.Bounce bnce, float speed, byte friction, string OppositeDir, 
+			bool staticTexture, int id, byte startCheckpoint, byte endCheckpoint, Color? colour = null, int startDelay = 0)
         {
+			if (colour == null)
+			{
+				colour = Color.White;
+			}
 			if (job == "Lazer")
 			{
 				Sounds.Play("lazer", position);
@@ -58,7 +66,7 @@
             StartPoint = position;
             _lives = lives;
             Job = job;
-            sqobject = new SquareObject(texture, position, dmg, bnce, 0.9f, size, friction, Color.White);
+            sqobject = new SquareObject(texture, position, dmg, bnce, 0.9f, size, friction, (Color)colour);
             Speed = speed;
             _walkAnim = walkAnimation;
             _jumpAnim = jumpAnimation;
@@ -71,90 +79,8 @@
             Active = true;
 
             DeathTimer = -1;
-            StartDelay = 0;
-            JumpTimeout = -1;
-            MaxID = 1;
-            VariableA = 0f;
-            VariableB = 0f;
-            VariableC = 0f;
-            VariableD = 0f;
-            VariableE = -1;
-            VariableF = 0;
-            OnGround = false;
-            Walking = false;
-            timer = -1;
-            currentFrame = 0;
-
-            SaveStatus();
-            OriginalColour = sqobject.Colour;
-            OriginalFlipEffect = this.sqobject.Flipeffect;
-
-            StartCheckpoint = startCheckpoint;
-            EndCheckpoint = endCheckpoint;
-        }
-
-        public Entity(string texture, string jumpAnimation, string walkAnimation, Vector2 position, int lives, float size, string job, SquareObject.Damage dmg, SquareObject.Bounce bnce, float speed, byte friction, string OppositeDir, bool staticTexture, int id, byte startCheckpoint, byte endCheckpoint, Color colour)
-        {
-            StartPoint = position;
-            _lives = lives;
-            Job = job;
-            sqobject = new SquareObject(texture, position, dmg, bnce, 0.9f, size, friction, colour);
-            Speed = speed;
-            _walkAnim = walkAnimation;
-            _jumpAnim = jumpAnimation;
-            if (OppositeDir == "t")
-            {
-                this.sqobject.Flipeffect = SpriteEffects.FlipHorizontally;
-            }
-            StaticTexture = staticTexture;
-            ID = id;
-            Active = true;
-
-            DeathTimer = -1;
-            StartDelay = 0;
-            JumpTimeout = -1;
-            MaxID = 1;
-            VariableA = 0f;
-            VariableB = 0f;
-            VariableC = 0f;
-            VariableD = 0f;
-            VariableE = -1;
-            VariableF = 0;
-            OnGround = false;
-            Walking = false;
-            timer = -1;
-            currentFrame = 0;
-
-            SaveStatus();
-            OriginalColour = sqobject.Colour;
-            OriginalFlipEffect = this.sqobject.Flipeffect;
-
-            StartCheckpoint = startCheckpoint;
-            EndCheckpoint = endCheckpoint;
-        }
-
-
-        public Entity(string texture, string jumpAnimation, string walkAnimation, Vector2 position, int lives, float size, string job, SquareObject.Damage dmg, SquareObject.Bounce bnce, float speed, byte friction, string OppositeDir, bool staticTexture, int id, byte startCheckpoint, byte endCheckpoint, Color colour, int startDelay)
-        {
-            StartPoint = position;
-            _lives = lives;
-            Job = job;
-            sqobject = new SquareObject(texture, position, dmg, bnce, 0.9f, size, friction, colour);
-            Speed = speed;
-            _walkAnim = walkAnimation;
-            _jumpAnim = jumpAnimation;
-            if (OppositeDir == "t")
-            {
-                this.sqobject.Flipeffect = SpriteEffects.FlipHorizontally;
-            }
-            StaticTexture = staticTexture;
-            ID = id;
-            Active = true;
-
-            DeathTimer = -1;
             StartDelay = startDelay;
-			PreviousStartDelay = StartDelay;
-			JumpTimeout = -1;
+            JumpTimeout = -1;
             MaxID = 1;
             VariableA = 0f;
             VariableB = 0f;
@@ -173,8 +99,9 @@
 
             StartCheckpoint = startCheckpoint;
             EndCheckpoint = endCheckpoint;
-        }
 
+			TopEdgePlus = new Rectangle(this.sqobject.TopEdge.X, this.sqobject.TopEdge.Y - 20, this.sqobject.TopEdge.Width, this.sqobject.TopEdge.Height + 20);
+		}
 
         private bool BlockExists_Below(int HorizontalBlocks, float Verticalmargin)
         {
@@ -481,7 +408,7 @@
 
         }
 
-        public void Draw(SpriteBatch spriteBatch, GameTime gametime)
+        public virtual void Draw(SpriteBatch spriteBatch, GameTime gametime)
         {
             if (this.StaticTexture)
             {
@@ -714,19 +641,16 @@
                             return;
 
                         case "Q1":
-                            this.Clancy1();
+                            this.Computer(1);
                             return;
-
                         case "Q2":
-                            this.Clancy2();
+                            this.Computer(2);
                             return;
-
                         case "Q3":
-                            this.Clancy3();
+                            this.Computer(3);
                             return;
-
                         case "Q4":
-                            this.Clancy4();
+                            this.Computer(4);
                             return;
 
                         case "R1":
@@ -789,11 +713,20 @@
                             this.Icicle(3, 4);
                             return;
 
-                        case "U":
-                            this.Maureen();
-                            return;
+						case "U1":
+							this.ButtonPedastal(1);
+							return;
+						case "U2":
+							this.ButtonPedastal(2);
+							return;
+						case "U3":
+							this.ButtonPedastal(3);
+							return;
+						case "U4":
+							this.ButtonPedastal(4);
+							return;
 
-                        case "V":
+						case "V":
                             this.GuinnessVan();
                             return;
 
@@ -1001,7 +934,7 @@
             }
         }
 
-        public void ResetStatus()
+        public virtual void ResetStatus()
         {
             Active = WasActive;
             Lives = PreviousLives;
@@ -1017,7 +950,10 @@
             if (this.Job.StartsWith("M") || this.Job.StartsWith("N") || this.Job.StartsWith("O"))
                 VariableD = 300;
             VariableE = -1;
-        }
+
+			this.currentFrame = 0;
+			this.timer = 0;
+		}
 
         public bool WasActive;
         public int PreviousLives;
@@ -1025,7 +961,7 @@
         public SpriteEffects OriginalFlipEffect;
         public int PreviousStartDelay;
 
-        public void SaveStatus()
+        public virtual void SaveStatus()
         {
             WasActive = Active && DeathTimer <= 0f;
             PreviousLives = Lives;
