@@ -240,10 +240,10 @@
 									return;
 
 								case "+":
-                                    Plus_Minus.Plus(i);
-                                    return;
+									Plus_Minus.Plus(i);
+									return;
 
-                                case "-":
+								case "-":
                                     Plus_Minus.Minus(i);
                                     return;
 

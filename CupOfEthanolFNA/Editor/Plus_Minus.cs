@@ -165,7 +165,7 @@
                 else
                 {
                     k = int.Parse(Editor.LabelList[4].Text);
-                    k -= 10;
+                    k -= 30;
                     if (k < 0)
                         k = 0;
                     Editor.LabelList[4].Text = k.ToString();
@@ -431,7 +431,7 @@
                 else
                 {
                     k = int.Parse(Editor.LabelList[4].Text);
-                    k += 10;
+                    k += 30;
                     Editor.LabelList[4].Text = k.ToString();
                     Entity.EntityList[Editor.SelectedEntity].StartDelay = k;
                 }
