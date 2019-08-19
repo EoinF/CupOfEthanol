@@ -33,7 +33,7 @@
         {
             for (int i = CurrentGroup * 6; (i < ((CurrentGroup + 1) * 6)) && (i < lvButtonList.Count); i++)
             {
-				Texture2D thumbnail = ScreenManager.Custom || ScreenManager.Editing ? Textures.GetThumbnail(i) : Textures.GetThumbnail(i);
+				Texture2D thumbnail = ScreenManager.Custom || ScreenManager.Editing ? Textures.GetCustomThumbnail(i) : Textures.GetThumbnail(i);
                 spriteBatch.Draw(thumbnail, lvButtonList[i].Position + Level.Offset + ImageOffset, null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.895f);
                 spriteBatch.Draw(Textures.GetTexture("Button2"), lvButtonList[i].Position + Level.Offset, null, lvButtonList[i].Colour, 0f, Vector2.Zero, 1f, 0, 0.89f);
                 spriteBatch.DrawString(Textures.GetFont("Medium"), (i + 1).ToString(), (lvButtonList[i].Position + new Vector2(22f, 18f)) + Level.Offset, Color.Black, 0f, Vector2.Zero, 1f, 0, 0.9f);

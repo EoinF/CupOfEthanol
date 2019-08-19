@@ -26,7 +26,7 @@
         public static bool CheckCommands()
         {
             CurrentText = CurrentText.ToLower();
-            int i;
+            int i, j;
 
             string[] SplitText = CurrentText.Substring(0, CurrentText.Length - 2).Split(' ');
             switch (SplitText[0])
@@ -55,37 +55,23 @@
                         LevelLoader.LoadEditorLevel();
                     }
                     return true;
-            }
-            try
-            {
-                if (SplitText[1] == ">>")
-                {
-                    for (int k = 0; k < BlockList.Length; k++)
-                    {
-                        if (SplitText[0] == BlockList[k])
-                        {
-                            for (int l = 0; l < BlockList.Length; l++)
-                            {
-                                if (SplitText[2] == BlockList[l])
-                                    ; //TBC: When the game is actually done...
-                            }
-                        }
-                    }
-                }
-            }
-            catch { }
+				case "/moveall":
+					if (int.TryParse(SplitText[1], out i) && int.TryParse(SplitText[2], out j))
+					{
+						Level.MoveAllObjects(i, j);
+					}
+					return true;
+			}
 
             return false;
         }
-
-
 
         public static void Update()
         {
             BlinkCooldown--;
             if (BlinkCooldown < -40)
                 BlinkCooldown = 40;
-            InputBox.InputToText(ref CurrentText);
+            InputBox.InputToText(ref CurrentText, false);
             InputBox.CheckSpKeys(ref CurrentText);
         }
 

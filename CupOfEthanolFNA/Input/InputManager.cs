@@ -149,26 +149,26 @@
             {
                 PlayerRight();
             }
-            if (JustPressed(Keys.P))
-            {
-                LevelLoader.LevelComplete = true;
-            }
-            if (JustPressed(Keys.C))
-            {
-                int checkpoint = PPlayer.CurrentCheckpoint;
-                if (checkpoint < Checkpoint.checkpointList.Count - 1)
-                    checkpoint++;
-                else
-                    checkpoint = 0;
-                for (int i = 0; i < Checkpoint.checkpointList.Count; i++)
-                {
-                    if (Checkpoint.checkpointList[i].ID == checkpoint)
-                        PPlayer.Player.sqobject.Position = Checkpoint.checkpointList[i].collectable.Position - (PPlayer.Player.sqobject.Texture.Height * Vector2.UnitY);
-            }
-                }
-        }
+			//if (JustPressed(Keys.P))
+			//{
+			//	LevelLoader.LevelComplete = true;
+			//}
+			//        if (JustPressed(Keys.C))
+			//        {
+			//            int checkpoint = PPlayer.CurrentCheckpoint;
+			//            if (checkpoint < Checkpoint.checkpointList.Count - 1)
+			//                checkpoint++;
+			//            else
+			//                checkpoint = 0;
+			//            for (int i = 0; i < Checkpoint.checkpointList.Count; i++)
+			//            {
+			//                if (Checkpoint.checkpointList[i].ID == checkpoint)
+			//                    PPlayer.Player.sqobject.Position = Checkpoint.checkpointList[i].collectable.Position - (PPlayer.Player.sqobject.Texture.Height * Vector2.UnitY);
+			//}
+			//        }
+		}
 
-        public static bool JustPressed(Keys key)
+		public static bool JustPressed(Keys key)
         {
             return (Keystate[0].IsKeyDown(key) && Keystate[1].IsKeyUp(key));
         }

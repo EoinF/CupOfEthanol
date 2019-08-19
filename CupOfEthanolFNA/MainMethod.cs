@@ -18,7 +18,7 @@
         public static Color InstanceColour;
         public static Random rand;
         public static Debug debug;
-
+		private bool isAppStarting;
 
         public MainMethod(string[] args)
         {
@@ -49,7 +49,7 @@
         protected override void LoadContent()
         {
             this.spriteBatch = new SpriteBatch(this.device);
-            Textures.LoadTextures(Content);
+            Textures.LoadTextures(Content, this.device);
             Sounds.LoadSounds(Content);
         }
 
@@ -71,12 +71,12 @@
             else
                 base.Window.Title = "Cup of Ethanol";
 
-			MainMenu.Activate();
 			SquareObject.sqObjectArray = new SquareObject[0, 0];
             Collectable.collectableList = new List<Collectable>();
             Entity.EntityList = new List<Entity>();
             Checkpoint.checkpointList = new List<Checkpoint>();
             InputManager.Mousestate = new MouseState[5];
+			this.isAppStarting = true;
             base.Initialize();
         }
 
@@ -85,8 +85,13 @@
         }
 
         protected override void Update(GameTime gameTime)
-        {
-            if (ScreenManager.GameClosing)
+		{
+			if (this.isAppStarting)
+			{
+				MainMenu.Activate();
+				this.isAppStarting = false;
+			}
+			if (ScreenManager.GameClosing)
             {
                 base.Exit();
             }
@@ -115,7 +120,7 @@
 				{
 					if (ScreenManager.Custom)
 					{
-						Level.Current = 1;
+						Level.Current = 0;
 						LevelLoader.NextLevel();
 					}
 					else

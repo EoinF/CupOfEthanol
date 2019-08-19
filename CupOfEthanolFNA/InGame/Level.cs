@@ -40,6 +40,41 @@
                 return Textures.GetTexture(_backgroundTexture);
             }
         }
+
+		public static void MoveAllObjects(int deltaX, int deltaY)
+		{
+			Vector2 positionDelta = new Vector2(25 * deltaX, 25 * deltaY);
+			SquareObject[,] sq = new SquareObject[2000, 2000];
+			for (int i = Math.Max(0,-deltaX); i < Math.Min(2000, SquareObject.sqObjectArray.GetLength(0) - deltaX); i++)
+			{
+				for (int j = Math.Max(0, -deltaY); j < Math.Min(2000, SquareObject.sqObjectArray.GetLength(1) - deltaY); j++) {
+					sq[i + deltaX, j + deltaY] = SquareObject.sqObjectArray[i, j];
+					if (sq[i + deltaX, j + deltaY] != null)
+					{
+						sq[i + deltaX, j + deltaY].Position = sq[i + deltaX, j + deltaY].Position + positionDelta;
+					}
+				}
+			}
+			SquareObject.sqObjectArray = sq;
+
+			foreach (Checkpoint checkpoint in Checkpoint.checkpointList)
+			{
+				checkpoint.collectable.Position = checkpoint.collectable.Position + positionDelta;
+			}
+
+			foreach (Collectable chalice in ChaliceList)
+			{
+				chalice.Position = chalice.Position + positionDelta;
+			}
+			foreach (Collectable collectable in Collectable.collectableList)
+			{
+				collectable.Position = collectable.Position + positionDelta;
+			}
+			foreach (Entity entity in Entity.EntityList)
+			{
+				entity.sqobject.Position = entity.sqobject.Position + positionDelta;
+			}
+		}
     }
 }
 

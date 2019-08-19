@@ -8,6 +8,7 @@
     using Microsoft.Xna.Framework.Graphics;
     internal class LevelSaver
     {
+		public static string CustomLevelsPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/CupOfEthanol/Levels/Custom/";
         public static XmlDocument PrepareNewLevelDocument(string errormsg, string filename)
         {
             XmlDocument doc = new XmlDocument();
@@ -34,7 +35,7 @@
                 }
                 else
                 {
-                    text = col.texturename;
+					break;
                 }
                 string var3 = child.InnerText;
                 string[] stringlist = new string[8];
@@ -192,7 +193,7 @@
 
         public static void SaveMap()
         {
-            Save_StaticObjects(Save_Objects(SaveFile.LoadDocument("Content/Levels/Main/" + Level.Current.ToString() + "/LevelData.xml"))).Save("Content/Levels/Main/" + Level.Current.ToString() + "/LevelData.xml");
+            Save_StaticObjects(Save_Objects(SaveFile.LoadDocument(CustomLevelsPath + Level.Current.ToString() + "/LevelData.xml"))).Save(CustomLevelsPath + Level.Current.ToString() + "/LevelData.xml");
             MessageBox.StatusMessage = new MessageBox("Save Successful!", new Vector2(217, 190), 120);
         }
     }

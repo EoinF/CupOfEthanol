@@ -44,9 +44,13 @@
 		}
 
         public static void Activate()
-        {
-            Sounds.StopBGM();
-            PPlayer.CurrentCheckpoint = -1;
+		{
+			if (!ScreenManager.Mainmenu)
+			{
+				Sounds.PlayBGM("bensound-pianomoment");
+			}
+
+			PPlayer.CurrentCheckpoint = -1;
 
 			if (!ScreenManager.Mainmenu)
 			{
@@ -180,13 +184,13 @@
 
             ts = new TextSprite("Main Menu", "Medium", new Vector2(225f, 503f), Color.White);
             Button.ButtonList.Add(new Button(ts, new Vector2(200f, 500f), 1));
-            TextSprite.TextList.Add(new TextSprite("Levels Completed: " + SaveFile.SaveList[0].LevelsCompleted + "/" + Level.maxLevels, "Medium", new Vector2(475f, 70f), Color.White));
-            TextSprite.TextList.Add(new TextSprite("Levels Completed: " + SaveFile.SaveList[1].LevelsCompleted + "/" + Level.maxLevels, "Medium", new Vector2(475f, 170f), Color.Aqua));
-            TextSprite.TextList.Add(new TextSprite("Levels Completed: " + SaveFile.SaveList[2].LevelsCompleted + "/" + Level.maxLevels, "Medium", new Vector2(475f, 270f), Color.LightSalmon));
+            TextSprite.TextList.Add(new TextSprite("Levels Completed: " + SaveFile.SaveList[0].LevelsCompleted + "/" + Level.maxLevels, "Medium", new Vector2(475f, 70f), Color.Black));
+            TextSprite.TextList.Add(new TextSprite("Levels Completed: " + SaveFile.SaveList[1].LevelsCompleted + "/" + Level.maxLevels, "Medium", new Vector2(475f, 170f), Color.Purple));
+            TextSprite.TextList.Add(new TextSprite("Levels Completed: " + SaveFile.SaveList[2].LevelsCompleted + "/" + Level.maxLevels, "Medium", new Vector2(475f, 270f), Color.Black));
 
-            TextSprite.TextList.Add(new TextSprite("Coasters Collected: " + SaveFile.SaveList[0].TotalMainCoasters() + "/" + Level.maxLevels * 3, "Medium", new Vector2(475f, 95f), Color.White));
-            TextSprite.TextList.Add(new TextSprite("Coasters Collected: " + SaveFile.SaveList[1].TotalMainCoasters() + "/" + Level.maxLevels * 3, "Medium", new Vector2(475f, 195f), Color.Aqua));
-            TextSprite.TextList.Add(new TextSprite("Coasters Collected: " + SaveFile.SaveList[2].TotalMainCoasters() + "/" + Level.maxLevels * 3, "Medium", new Vector2(475f, 295f), Color.LightSalmon));
+            TextSprite.TextList.Add(new TextSprite("Coasters Collected: " + SaveFile.SaveList[0].TotalMainCoasters() + "/" + Level.maxLevels * 3, "Medium", new Vector2(475f, 95f), Color.Black));
+            TextSprite.TextList.Add(new TextSprite("Coasters Collected: " + SaveFile.SaveList[1].TotalMainCoasters() + "/" + Level.maxLevels * 3, "Medium", new Vector2(475f, 195f), Color.Purple));
+            TextSprite.TextList.Add(new TextSprite("Coasters Collected: " + SaveFile.SaveList[2].TotalMainCoasters() + "/" + Level.maxLevels * 3, "Medium", new Vector2(475f, 295f), Color.Black));
         }
 
         public static void LevelSelectOn()
@@ -216,19 +220,19 @@
 					for (int i = 0; i < 3; i++)
 					{
 						int collected = 0;
-                        for (int h = 0; h < SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[(i * 2) + j].Length; h++)
-                            if (SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[(i * 2) + j][h])
+                        for (int h = 0; h < SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[(j * 3) + i].Length; h++)
+                            if (SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[(j * 3) + i][h])
                                 collected++;
 
                         string status = "Locked";
-                        if (SaveFile.SaveList[SaveFile.Selectedfile].LevelsCompleted > ((i * 2) + j))
+                        if (SaveFile.SaveList[SaveFile.Selectedfile].LevelsCompleted > ((j * 3) + i))
                         {
                             if (collected == 3)
                                 status = "Complete";
                             else
                                 status = "Unlocked";
                         }
-                        if (SaveFile.SaveList[SaveFile.Selectedfile].LevelsCompleted == ((i * 2) + j))
+                        if (SaveFile.SaveList[SaveFile.Selectedfile].LevelsCompleted == ((j * 3) + i))
                         {
                             status = "Unlocked";
                         }

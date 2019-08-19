@@ -160,21 +160,67 @@
                                     }
                                 }
                         }
-                        //if (Editor.CurrentBlock.texturename == "Chalice")
-                        //{
-                        //    for (i = 0; i < SquareObject.sqObjectArray.GetLength(0); i++)
-                        //    {
-                        //        for (j = 0; j < SquareObject.sqObjectArray.GetLength(1); j++)
-                        //        {
-                        //            if ((SquareObject.sqObjectArray[i, j] != null) && (SquareObject.sqObjectArray[i, j].texturename == "Chalice"))
-                        //            {
-                        //                SquareObject.sqObjectArray[i, j] = null;
-                        //                return;
-                        //            }
-                        //        }
-                        //    }
-                        //}
-                    }
+						int? collectableType = null;
+						if (Editor.CurrentBlock.texturename == "Checkpoint")
+						{
+							collectableType = 3;
+						} else if (Editor.CurrentBlock.texturename == "Sign")
+						{
+							collectableType = 2;
+						} else if (Editor.CurrentBlock.texturename == "Coaster")
+						{
+							collectableType = 4;
+						}
+						else if (Editor.CurrentBlock.texturename == "RedKey")
+						{
+							collectableType = 5;
+						}
+						else if (Editor.CurrentBlock.texturename == "BlueKey")
+						{
+							collectableType = 6;
+						}
+						else if (Editor.CurrentBlock.texturename == "GreenKey")
+						{
+							collectableType = 7;
+						}
+						else if (Editor.CurrentBlock.texturename == "YellowKey")
+						{
+							collectableType = 8;
+						}
+
+						if (collectableType != null)
+						{
+							for (int i = 0; i < Collectable.collectableList.Count; i++)
+							{
+								Collectable collectable = Collectable.collectableList[i];
+								// Prevent stacking by checking if collectable already exists on that tile
+								if (Math.Abs(collectable.StartPosition.X - (x * 25)) < 25 &&
+									Math.Abs(collectable.StartPosition.Y - (y * 25)) < 25)
+								{
+									Collectable.collectableList.RemoveAt(i);
+
+									Collectable.collectableList.Add(new Collectable(Editor.CurrentBlock.texturename, new Vector2((x * 25), y * 25), Editor.CurrentBlock.Size, collectableType.Value, 0.6f));
+									return;
+								}
+							}
+							Collectable.collectableList.Add(new Collectable(Editor.CurrentBlock.texturename, new Vector2((x * 25), (y * 25)), Editor.CurrentBlock.Size, collectableType.Value, 0.6f));
+						}
+
+						//if (Editor.CurrentBlock.texturename == "Chalice")
+						//{
+						//    for (i = 0; i < SquareObject.sqObjectArray.GetLength(0); i++)
+						//    {
+						//        for (j = 0; j < SquareObject.sqObjectArray.GetLength(1); j++)
+						//        {
+						//            if ((SquareObject.sqObjectArray[i, j] != null) && (SquareObject.sqObjectArray[i, j].texturename == "Chalice"))
+						//            {
+						//                SquareObject.sqObjectArray[i, j] = null;
+						//                return;
+						//            }
+						//        }
+						//    }
+						//}
+					}
                 }
             }
         }

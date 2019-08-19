@@ -15,6 +15,8 @@
         public static List<SaveFile> SaveList;
         public static int Selectedfile;
 
+		private static string SaveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/CupOfEthanol/";
+
         #region Pre-Made CoasterList
         public static List<bool[]> NewCoasterList = new List<bool[]>(){
             new bool[]{false, false, false},
@@ -115,7 +117,7 @@
             return saves.ToString();
         }
 
-        public static XmlDocument LoadDocument(string filename)
+        public static XmlDocument LoadDocument(string filename, bool useFallback = true)
         {
             XmlDocument doc = new XmlDocument();
             if (File.Exists(filename))
@@ -127,16 +129,23 @@
                 xr.Close();
                 return doc;
             }
-            if (filename.Contains("SaveData"))
-            {
-                doc = PrepareNewSaveDocument(filename);
-            }
-            return LevelSaver.PrepareNewLevelDocument("This level was created because the file was missing. ", filename);
+			if (filename.Contains("SavedData"))
+			{
+				throw new Exception("Failed to load saved data");
+			}
+			return LevelSaver.PrepareNewLevelDocument("This level was created because the file was missing. ", filename);
         }
 
 		public static void LoadSaveFiles()
 		{
-			XmlDocument doc = LoadDocument("Content/SavedData.xml");
+			string pathName = SaveDirectory + "/SavedData.xml";
+			if (!File.Exists(pathName))
+			{
+				Directory.CreateDirectory(SaveDirectory);
+				File.Copy(@"Content/SavedData.xml", pathName);
+			}
+			XmlDocument doc = LoadDocument(pathName);
+			
 			SaveList = new List<SaveFile>();
 			foreach (XmlNode node in doc.FirstChild.NextSibling)
 			{
@@ -201,15 +210,17 @@
             writer.Formatting = Formatting.Indented;
             writer.WriteProcessingInstruction("xml", "version='1.0' encoding='UTF-8'");
             writer.WriteStartElement("Main");
+			SaveGame();
             writer.Close();
             doc.Load(filename);
-            doc.FirstChild.NextSibling.InnerXml = "<File1><Level>0</Level><Name>Anonymous</Name><MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels--><SubCoasters></SubCoasters></File1><File2><Level>0</Level><Name>Unnamed File</Name><MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels--><SubCoasters></SubCoasters></File2><File3><Level>0</Level><Name>WhyAmIHere</Name><MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels--><SubCoasters></SubCoasters></File3>";
+            doc.FirstChild.NextSibling.InnerXml = 
+				"<File1><Level>0</Level><Name>Anonymous</Name><MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels--><SubCoasters></SubCoasters></File1><File2><Level>0</Level><Name>Unnamed File</Name><MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels--><SubCoasters></SubCoasters></File2><File3><Level>0</Level><Name>WhyAmIHere</Name><MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels--><SubCoasters></SubCoasters></File3>";
             return doc;
         }
 
         public static void SaveGame()
         {
-            XmlDocument doc = LoadDocument("Content/SavedData.xml");
+            XmlDocument doc = LoadDocument(SaveDirectory + "SavedData.xml");
             int i = 0;
             foreach (XmlNode node in doc.FirstChild.NextSibling)
             {
@@ -225,7 +236,7 @@
                     break;
                 }
             }
-            doc.Save("Content/SavedData.xml");
+            doc.Save(SaveDirectory + "SavedData.xml");
         }
     }
 }

@@ -657,7 +657,7 @@
 
         public static void DrawKey(SpriteBatch spriteBatch, Vector2 Position, string Texture)
         {
-            spriteBatch.Draw(Textures.GetTexture(Texture), Position, null, Color.WhiteSmoke, 0, Vector2.Zero, 0.3f, SpriteEffects.None, 0.95f);
+            spriteBatch.Draw(Textures.GetTexture(Texture), Position, null, Color.WhiteSmoke, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0.95f);
 
         }
 

@@ -12,8 +12,7 @@
 
         private static string[] Entities = new string[] { 
             "Dog", "Bird", "Flamer", "Troller", "Wolf", "Stealth", "Tentacle", "Platform", "ConcretePlatform", "Cannon", 
-            "Wheelbot", "Robot", "Shadow", "Shadowplayer", "Computer", "VanishBlock", "RainingEmber", "Icicle", "ButtonPedastal",
-            "GuinnessVan", "Blaster", "Door"
+            "Wheelbot", "Robot", "Shadow", "Computer", "Icicle", "ButtonPedastal", "Door"
          };
         private static string[] Items = new string[] { "Player", "Coaster", "Checkpoint", "Sign", "Chalice", "RedKey", "BlueKey", "GreenKey", "YellowKey" };
 

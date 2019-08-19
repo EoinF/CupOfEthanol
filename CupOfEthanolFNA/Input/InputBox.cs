@@ -11,7 +11,7 @@
         public static int InputTimeout = 0;
 
 
-        private static bool CheckSpCharacters(Keys key, ref string CurrentText)
+        private static bool CheckSpCharacters(Keys key, ref string CurrentText, bool isRestrictedCharacters)
         {
             switch (key)
             {
@@ -144,7 +144,18 @@
                         CurrentText += "?";
                     return true;
 
-                case Keys.OemTilde:
+				case Keys.OemMinus:
+					if (!isRestrictedCharacters)
+					{
+						if (!IsHoldingShift())
+							CurrentText += "-";
+						else
+							CurrentText += "_";
+						return true;
+					}
+					break;
+
+				case Keys.OemTilde:
                     if (!IsHoldingShift())
                     {
                         CurrentText += "'";
@@ -193,7 +204,7 @@
 			}
 		}
 
-        public static void InputToText(ref string CurrentText)
+        public static void InputToText(ref string CurrentText, bool isRestrictedCharacters = true)
         {
             Keys[] keyarray = InputManager.Keystate[0].GetPressedKeys();
             for (int i = 0; i < keyarray.Length; i++)
@@ -201,7 +212,7 @@
                 if (IsHeld(keyarray[i]) || InputManager.JustPressed(keyarray[i]))
                 {
                     CurrentText = CurrentText.Remove(CurrentText.Length - 1, 1);
-                    if (!CheckSpCharacters(keyarray[i], ref CurrentText))
+                    if (!CheckSpCharacters(keyarray[i], ref CurrentText, isRestrictedCharacters))
                     {
                         string t = keyarray[i].ToString();
                         if (t.Length < 2)

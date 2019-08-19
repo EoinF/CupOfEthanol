@@ -684,14 +684,14 @@
             }
         }
 
-        public static void LoadTextures(ContentManager Content)
+        public static void LoadTextures(ContentManager Content, GraphicsDevice graphicsDevice)
         {
             LoadBackgrounds(Content);
             LoadFonts(Content);
             LoadMiscellaneous(Content);
             LoadSprites(Content);
             LoadTiles(Content);
-            LoadThumbnails(Content);
+            LoadThumbnails(Content, graphicsDevice);
         }
 
         private static void LoadTiles(ContentManager Content)
@@ -722,7 +722,7 @@
             }
         }
 
-        private static void LoadThumbnails(ContentManager Content)
+        private static void LoadThumbnails(ContentManager Content, GraphicsDevice graphicsDevice)
         {
 			Default_Thumbnail = Content.Load<Texture2D>("Textures/Menu/Default_Thumbnail");
 			//Loading the main level thumbnails
@@ -742,7 +742,14 @@
 			{
 				try
 				{
-					customThumnails[i] = Content.Load<Texture2D>("Levels/Custom/" + (i + 1) + "/Thumbnail");
+					string directoryName = LevelSaver.CustomLevelsPath + (i + 1);
+					string pathName = directoryName + "/Thumbnail.png";
+					if (!File.Exists(pathName))
+					{
+						Directory.CreateDirectory(directoryName);
+						File.Copy(@"Content/Levels/Custom/" + (i + 1) + "/Thumbnail.png", pathName);
+					}
+					customThumnails[i] = Texture2D.FromStream(graphicsDevice, File.OpenRead(pathName));
 				}
 				catch (Exception ex)
 				{

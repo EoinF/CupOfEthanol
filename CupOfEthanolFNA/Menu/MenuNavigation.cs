@@ -231,6 +231,7 @@
 
 								case "Save & Test":
 									LevelSaver.SaveMap();
+									SaveFile.LoadSaveFiles();
 									LevelLoader.StartCustomLevel(Level.Current);
 									ScreenManager.Testing = true;
 									return;

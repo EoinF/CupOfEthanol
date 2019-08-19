@@ -4,7 +4,8 @@
     using Microsoft.Xna.Framework.Graphics;
     using System;
     using System.Collections.Generic;
-    using System.Xml;
+	using System.IO;
+	using System.Xml;
 
     internal class LevelLoader
     {
@@ -319,7 +320,17 @@
 			XmlDocument doc;
 			if (ScreenManager.Custom || ScreenManager.Editing)
 			{
-				doc = SaveFile.LoadDocument("Content/Levels/Main/" + Level.Current.ToString() + "/LevelData.xml");
+				string directoryName = LevelSaver.CustomLevelsPath + Level.Current.ToString();
+				string pathName = directoryName + "/LevelData.xml";
+				if (!File.Exists(pathName))
+				{
+					Directory.CreateDirectory(directoryName);
+					if (File.Exists(@"Content/Levels/Custom/" + Level.Current.ToString() + "/LevelData.xml"))
+					{
+						File.Copy(@"Content/Levels/Custom/" + Level.Current.ToString() + "/LevelData.xml", pathName);
+					}
+				}
+				doc = SaveFile.LoadDocument(pathName);
 			}
 			else
 			{
@@ -372,7 +383,7 @@
                     SquareObject[,] sq = new SquareObject[((int)datalist[0].Position.X) + 1, ((int)datalist[0].Position.Y) + 1];
                     if (ScreenManager.Editing)
                     {
-                        sq = new SquareObject[0x7d0, 0x7d0];
+                        sq = new SquareObject[2000, 2000];
                     }
                     Collectable.collectableList = new List<Collectable>();
                     Checkpoint.checkpointList = new List<Checkpoint>();
