@@ -13,7 +13,7 @@ namespace LackingPlatforms
         private void Door1()
         {
             this.sqobject.Velocity = Vector2.Zero;
-            if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 20)
+            if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 30)
                 if (PPlayer.Player.HasRedKey)
                 {
                     if (InputManager.JustPressed(Keys.Space))
@@ -26,7 +26,7 @@ namespace LackingPlatforms
         private void Door2()
         {
             this.sqobject.Velocity = Vector2.Zero;
-            if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 20)
+            if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 30)
                 if (PPlayer.Player.HasBlueKey)
                 {
                     if (InputManager.JustPressed(Keys.Space))
@@ -39,7 +39,7 @@ namespace LackingPlatforms
         private void Door3()
         {
             this.sqobject.Velocity = Vector2.Zero;
-            if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 20)
+            if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 30)
                 if (PPlayer.Player.HasGreenKey)
                 {
                     if (InputManager.JustPressed(Keys.Space))
@@ -52,7 +52,7 @@ namespace LackingPlatforms
         private void Door4()
         {
             this.sqobject.Velocity = Vector2.Zero;
-            if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 20)
+            if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 30)
                 if (PPlayer.Player.HasYellowKey)
                 {
                     if (InputManager.JustPressed(Keys.Space))

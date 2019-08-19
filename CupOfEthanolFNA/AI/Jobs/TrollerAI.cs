@@ -11,7 +11,18 @@ namespace LackingPlatforms
     {
         private void Troller1()
         {
-            float rnd = rand.Next(1, 3);
+
+			this.OnGround = false;
+			this.CheckColissions_Precise(true, false);
+
+			if (sqobject.HitLeft)
+				this.sqobject.Flipeffect = SpriteEffects.None;
+			if (sqobject.HitRight)
+				this.sqobject.Flipeffect = SpriteEffects.FlipHorizontally;
+
+			this.Walking = false;
+
+			float rnd = rand.Next(1, 3);
             this.VariableC -= rnd;
             rnd = rand.Next(0, 40);
             if (this.sqobject.Flipeffect == SpriteEffects.None)
@@ -27,15 +38,11 @@ namespace LackingPlatforms
                 this.sqobject.Velocity = new Vector2(-1f, -(this.Speed / 15f) - (rnd / 15f));
                 this.VariableC = 130f;
             }
-            this.OnGround = false;
-            this.CheckColissions_Precise(true, false);
 
-            if (sqobject.HitLeft)
-                this.sqobject.Flipeffect = SpriteEffects.None;
-            if (sqobject.HitRight)
-                this.sqobject.Flipeffect = SpriteEffects.FlipHorizontally;
-
-            this.Walking = false;
+			if (!this.OnGround)
+			{
+				this.sqobject.Velocity = new Vector2(this.sqobject.Velocity.X, this.sqobject.Velocity.Y / (1.01f));
+			}
         }
 
         private void Troller2()

@@ -80,6 +80,7 @@
 
             DeathTimer = -1;
             StartDelay = startDelay;
+			PreviousStartDelay = startDelay;
             JumpTimeout = -1;
             MaxID = 1;
             VariableA = 0f;
@@ -649,11 +650,26 @@
                         case "Q3":
                             this.Computer(3);
                             return;
-                        case "Q4":
-                            this.Computer(4);
-                            return;
+						case "Q4":
+							this.Computer(4);
+							return;
+						case "Q5":
+							this.Computer(5);
+							return;
+						case "Q6":
+							this.Computer(6);
+							return;
+						case "Q7":
+							this.Computer(7);
+							return;
+						case "Q8":
+							this.Computer(8);
+							return;
+						case "Q9":
+							this.Computer(9);
+							return;
 
-                        case "R1":
+						case "R1":
                             this.VanishBlock1();
                             return;
 
@@ -724,6 +740,21 @@
 							return;
 						case "U4":
 							this.ButtonPedastal(4);
+							return;
+						case "U5":
+							this.ButtonPedastal(5);
+							return;
+						case "U6":
+							this.ButtonPedastal(6);
+							return;
+						case "U7":
+							this.ButtonPedastal(7);
+							return;
+						case "U8":
+							this.ButtonPedastal(8);
+							return;
+						case "U9":
+							this.ButtonPedastal(9);
 							return;
 
 						case "V":
@@ -947,7 +978,9 @@
             VariableB = 0;
             VariableC = 0;
             VariableD = 0;
-            if (this.Job.StartsWith("M") || this.Job.StartsWith("N") || this.Job.StartsWith("O"))
+			this.DeathTimer = -1;
+
+			if (this.Job.StartsWith("M") || this.Job.StartsWith("N") || this.Job.StartsWith("O"))
                 VariableD = 300;
             VariableE = -1;
 
