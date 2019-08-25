@@ -600,6 +600,21 @@
             Button.ButtonList = null;
             LevelButton.lvButtonList = null;
             TextSprite.TextList = null;
+			switch (Lvl)
+			{
+				case 1:
+					SteamIntegration.Achievements.AdventureStarted();
+					break;
+				case 7:
+					SteamIntegration.Achievements.IceClimbStarted();
+					break;
+				case 13:
+					SteamIntegration.Achievements.EthanolTempleStarted();
+					break;
+				case 19:
+					SteamIntegration.Achievements.MinistryInfiltrationStarted();
+					break;
+			}
             LoadNewLevel();
         }
     }

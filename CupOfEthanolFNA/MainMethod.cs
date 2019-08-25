@@ -5,6 +5,7 @@
     using Microsoft.Xna.Framework.Graphics;
     using System;
     using System.Collections.Generic;
+	using Steamworks;
 
     public class MainMethod : Game
     {
@@ -55,8 +56,9 @@
 
 
         protected override void Initialize()
-        {
-            this.device = this.graphics.GraphicsDevice;
+		{
+			SteamIntegration.Init();
+			this.device = this.graphics.GraphicsDevice;
             this.graphics.IsFullScreen = false;
             this.graphics.PreferredBackBufferWidth = 800;
             this.graphics.PreferredBackBufferHeight = 600;
@@ -125,6 +127,7 @@
 					}
 					else
 					{
+						SteamIntegration.Achievements.GameComplete();
 						LevelLoader.LevelComplete = false;
 						ScreenManager.GameCompleteOn();
 					}
