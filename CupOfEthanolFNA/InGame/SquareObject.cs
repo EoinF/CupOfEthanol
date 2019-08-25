@@ -35,7 +35,7 @@
             this.bounce = bnce;
         }
 
-        public SquareObject(string texture, Vector2 position, float layer, float size, byte friction) : base(texture, position, layer, size, friction)
+        public SquareObject(string texture, Vector2 position, float layer, float size, int friction) : base(texture, position, layer, size, friction)
         {
             this.damage = new Damage(0, 0, 0, 0);
             this.bounce = new Bounce(0, 0, 0, 0);
@@ -47,19 +47,19 @@
             this.bounce = bnce;
         }
 
-        public SquareObject(string texture, Vector2 position, float layer, float size, byte friction, Color colour) : base(texture, position, layer, size, friction, colour)
+        public SquareObject(string texture, Vector2 position, float layer, float size, int friction, Color colour) : base(texture, position, layer, size, friction, colour)
         {
             this.damage = new Damage(0, 0, 0, 0);
             this.bounce = new Bounce(0, 0, 0, 0);
         }
 
-        public SquareObject(string texture, Vector2 position, Damage dmg, Bounce bnce, float layer, float size, byte friction) : base(texture, position, layer, size, friction)
+        public SquareObject(string texture, Vector2 position, Damage dmg, Bounce bnce, float layer, float size, int friction) : base(texture, position, layer, size, friction)
         {
             this.damage = dmg;
             this.bounce = bnce;
         }
 
-        public SquareObject(string texture, Vector2 position, Damage dmg, Bounce bnce, float layer, float size, byte friction, Color colour) : base(texture, position, layer, size, friction, colour)
+        public SquareObject(string texture, Vector2 position, Damage dmg, Bounce bnce, float layer, float size, int friction, Color colour) : base(texture, position, layer, size, friction, colour)
         {
             this.damage = dmg;
             this.bounce = bnce;

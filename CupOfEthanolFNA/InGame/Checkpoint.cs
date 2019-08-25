@@ -7,9 +7,9 @@
     {
         public static List<Checkpoint> checkpointList;
         public Collectable collectable;
-        public byte ID;
+        public int ID;
 
-        public Checkpoint(Collectable collect, byte id)
+        public Checkpoint(Collectable collect, int id)
         {
             this.collectable = collect;
             ID = id;

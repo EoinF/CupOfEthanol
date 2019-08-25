@@ -52,7 +52,7 @@
 
 
         public Entity(string texture, string jumpAnimation, string walkAnimation, Vector2 position, int lives, float size, 
-			string job, SquareObject.Damage dmg, SquareObject.Bounce bnce, float speed, byte friction, string OppositeDir, 
+			string job, SquareObject.Damage dmg, SquareObject.Bounce bnce, float speed, int friction, string OppositeDir, 
 			bool staticTexture, int id, byte startCheckpoint, byte endCheckpoint, Color? colour = null, int startDelay = 0)
         {
 			if (colour == null)

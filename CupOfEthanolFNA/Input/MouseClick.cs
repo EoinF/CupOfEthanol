@@ -161,13 +161,12 @@
                                 }
                         }
 						int? collectableType = null;
-						if (Editor.CurrentBlock.texturename == "Checkpoint")
-						{
-							collectableType = 3;
-						} else if (Editor.CurrentBlock.texturename == "Sign")
+						
+						if (Editor.CurrentBlock.texturename == "Sign")
 						{
 							collectableType = 2;
-						} else if (Editor.CurrentBlock.texturename == "Coaster")
+						}
+						else if (Editor.CurrentBlock.texturename == "Coaster")
 						{
 							collectableType = 4;
 						}
@@ -198,12 +197,9 @@
 									Math.Abs(collectable.StartPosition.Y - (y * 25)) < 25)
 								{
 									Collectable.collectableList.RemoveAt(i);
-
-									Collectable.collectableList.Add(new Collectable(Editor.CurrentBlock.texturename, new Vector2((x * 25), y * 25), Editor.CurrentBlock.Size, collectableType.Value, 0.6f));
 									return;
 								}
 							}
-							Collectable.collectableList.Add(new Collectable(Editor.CurrentBlock.texturename, new Vector2((x * 25), (y * 25)), Editor.CurrentBlock.Size, collectableType.Value, 0.6f));
 						}
 
 						//if (Editor.CurrentBlock.texturename == "Chalice")

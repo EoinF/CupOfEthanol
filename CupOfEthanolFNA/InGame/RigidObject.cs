@@ -7,7 +7,7 @@
     public class RigidObject : GameObject
     {
         private Vector2 _velocity;
-        public byte frictionforce;
+        public int frictionforce;
 
         public RigidObject(string texture, Vector2 position, float layer) : base(texture, position, layer)
         {
@@ -19,13 +19,13 @@
             this._velocity = new Vector2();
         }
 
-        public RigidObject(string texture, Vector2 position, float layer, float size, byte frictionForce) : base(texture, position, layer, size)
+        public RigidObject(string texture, Vector2 position, float layer, float size, int frictionForce) : base(texture, position, layer, size)
         {
             this._velocity = new Vector2();
             this.frictionforce = frictionForce;
         }
 
-        public RigidObject(string texture, Vector2 position, float layer, float size, byte frictionForce, Color colour) : base(texture, position, layer, size, colour)
+        public RigidObject(string texture, Vector2 position, float layer, float size, int frictionForce, Color colour) : base(texture, position, layer, size, colour)
         {
             this._velocity = new Vector2();
             this.frictionforce = frictionForce;

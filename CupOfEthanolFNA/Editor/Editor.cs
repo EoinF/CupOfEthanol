@@ -308,34 +308,29 @@
         {
             if ((((((x >= 0) && (x <= (SquareObject.sqObjectArray.GetLength(0) - 1))) && (y >= 0)) && (y <= (SquareObject.sqObjectArray.GetLength(1) - 1))) && (!mouse_Static || (CurrentBlock != null))) && ((SquareObject.sqObjectArray[x, y] == null) || (SquareObject.sqObjectArray[x, y].texturename != "A")))
             {
-                if (sq.texturename == "Checkpoint" &&
-					(SquareObject.sqObjectArray[x, y] == null ||
-					SquareObject.sqObjectArray[x, y].texturename != "Checkpoint"))
+                if (sq.texturename == "Checkpoint")
                 {
-                    if (Checkpoint.checkpointList.Count == 0)
+					if (SquareObject.sqObjectArray[x, y] != null &&
+					SquareObject.sqObjectArray[x, y].texturename == "Checkpoint")
+					{
+						return;
+					}
+
+					for (int id = 1; id < 99999; id++)
                     {
-                        Checkpoint.checkpointList.Add(new Checkpoint(new Collectable("Checkpoint", new Vector2(x * 0x19, y * 0x19), 0, 1, 0), 1));
-                        SquareObject.sqObjectArray[x, y] = new SquareObject("Checkpoint", new Vector2(x * 0x19, y * 0x19), 0.039f, 0.5f, 1);
-                        return;
-                    }
-                    else
-                    {
-                        for (byte id = 1; id != 255; id++)
+                        bool flag = false;
+                        foreach (Checkpoint check in Checkpoint.checkpointList)
                         {
-                            bool flag = false;
-                            foreach (Checkpoint check in Checkpoint.checkpointList)
+                            if (id == check.ID)
                             {
-                                if (id == check.ID)
-                                {
-                                    flag = true;
-                                }
+                                flag = true;
                             }
-                            if (!flag)
-                            {
-                                Checkpoint.checkpointList.Add(new Checkpoint(new Collectable("Checkpoint", new Vector2(x * 0x19, y * 0x19), 0, 1, 0), id));
-                                SquareObject.sqObjectArray[x, y] = new SquareObject("Checkpoint", new Vector2(x * 0x19, y * 0x19), 0.039f, 0.5f, id);
-                                return;
-                            }
+                        }
+                        if (!flag)
+                        {
+                            Checkpoint.checkpointList.Add(new Checkpoint(new Collectable("Checkpoint", new Vector2(x * 0x19, y * 0x19), 0, 1, 0), id));
+                            SquareObject.sqObjectArray[x, y] = new SquareObject("Checkpoint", new Vector2(x * 0x19, y * 0x19), 0.039f, 0.5f, id);
+                            return;
                         }
                     }
                 }
@@ -404,9 +399,19 @@
 
                     return true;
                 }
-                if (SelectedBlock != null)
-                {
-                    PlaceBlock(SelectedBlock, x, y);
+				if (SelectedBlock != null)
+				{
+					if (SelectedBlock.texturename == "A")
+					{
+						foreach (Checkpoint checkpoint in Checkpoint.checkpointList)
+						{
+							if (checkpoint.ID == 0)
+							{
+								checkpoint.collectable.Position = new Vector2(x * 25f, y * 25f);
+							}
+						}
+					}
+					PlaceBlock(SelectedBlock, x, y);
                     SelectedBlock = null;
                     return true;
                 }
