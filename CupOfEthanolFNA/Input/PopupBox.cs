@@ -28,8 +28,8 @@
                 this.MessageList[i] = new TextSprite(message[i], "Small", new Vector2(PositionX, (float)(140 + (30 * i))), Color.Red);
             }
             this.ButtonList = new List<Button>();
-            this.ButtonList.Add(new Button(new TextSprite("Yes", "Small", new Vector2(200f, 250f), Color.Red), new Vector2(263f, 255f), 4, 0.999f));
-            this.ButtonList.Add(new Button(new TextSprite("No", "Small", new Vector2(445f, 250f), Color.Red), new Vector2(415f, 255f), 4, 0.999f));
+            this.ButtonList.Add(new Button(new TextSprite("Yes", "Small", new Vector2(200f, 250f), Color.Red), new Vector2(263f, 255f), 4, 0.9998f));
+            this.ButtonList.Add(new Button(new TextSprite("No", "Small", new Vector2(445f, 250f), Color.Red), new Vector2(415f, 255f), 4, 0.9998f));
             this.QuittingEditor = quitting;
             this.ErasingBlocks = erasingBlocks;
             this.ErasingEntities = erasingEntities;
@@ -37,10 +37,10 @@
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Textures.GetTexture("Pause_Menu"), new Vector2(200f, 100f), null, Color.Yellow, 0f, Vector2.Zero, 1f, 0, 0.991f);
+            spriteBatch.Draw(Textures.GetTexture("Pause_Menu"), new Vector2(200f, 100f), null, Color.Yellow, 0f, Vector2.Zero, 1f, 0, 0.9996f);
             for (int h = 0; h < this.MessageList.Length; h++)
             {
-                spriteBatch.DrawString(this.MessageList[h].Spritefont, this.MessageList[h].Text, this.MessageList[h].Position, this.MessageList[h].Colour, 0f, Vector2.Zero, 1f, 0, 0.999f);
+                spriteBatch.DrawString(this.MessageList[h].Spritefont, this.MessageList[h].Text, this.MessageList[h].Position, this.MessageList[h].Colour, 0f, Vector2.Zero, 1f, 0, 0.9998f);
             }
             for (int i = 0; i < this.ButtonList.Count; i++)
             {

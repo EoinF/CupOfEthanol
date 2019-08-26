@@ -22,6 +22,7 @@
         private static Texture2D Cursor;
         private static Texture2D EPause_Menu;
 		private static Texture2D Pause_Menu;
+		private static Texture2D JobDescriptionBackground;
 		private static Texture2D Default_Thumbnail;
 		#endregion
 
@@ -375,7 +376,10 @@
                 case "Pause_Menu":
                     return Pause_Menu;
 
-                case "a":
+				case "JobDescriptionBackground":
+					return JobDescriptionBackground;
+
+				case "a":
                     return Grs;
 
                 case "b":
@@ -626,7 +630,8 @@
                 Button5 = Content.Load<Texture2D>("Textures/Menu/Button5");
                 EPause_Menu = Content.Load<Texture2D>("Textures/Menu/EPauseMenuBackground");
                 Pause_Menu = Content.Load<Texture2D>("Textures/Menu/PauseMenuBackground");
-            }
+				JobDescriptionBackground = Content.Load<Texture2D>("Textures/Menu/JobDescriptionBackground");
+			}
             catch (Exception e)
             {
                 ErrorReporter.LogException(new string[] { "Failed to load Menu backgrounds and buttons and special game item textures. The texture files may be missing or named incorrectly", e.Message, "MethodName = " + e.TargetSite.Name, e.StackTrace });

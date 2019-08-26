@@ -9,9 +9,9 @@ namespace LackingPlatforms
 {
     public partial class Entity
     {
-        private void Shadow1()
+        private void Shadow1(float baseSpeed = 50f)
         {
-            this.Speed = 50f;
+            this.Speed = baseSpeed;
             if (!this.OnGround)
             {
                 this.Speed = 20f;
@@ -78,48 +78,7 @@ namespace LackingPlatforms
 
         private void Shadow2()
         {
-            OnGround = false;
-            Walking = false;
-            Dog1();
-            Speed = 70f;
-            if (!OnGround)
-            {
-                Speed = 20f;
-            }
-            sqobject.Colour = Color.White;
-            float d = Math.Abs(Vector2.Distance(sqobject.Position, PPlayer.Player.sqobject.Position));
-            if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 500f)
-            {
-                float alpha = 1f - (25f * ((float)Math.Sqrt(((double)d) / ((double)(250000f - (d * d))))));
-                sqobject.Colour = new Color(1, 1, 1, alpha);
-            }
-            if (sqobject.Flipeffect == SpriteEffects.None)
-            {
-                if ((BlockExists_Right(0, 30f, 0.01f) && !BlockExists_Right(-1, 30f, 0.01f)) && OnGround)
-                {
-                    this.JumpTimeout = 11;
-                }
-                if ((!this.BlockExists_Right(1, 0, 0.01f) && !this.BlockExists_Right(2, 0, 0.01f)) && this.OnGround)
-                {
-                    this.sqobject.Flipeffect = SpriteEffects.FlipHorizontally;
-                }
-            }
-            else
-            {
-                if ((this.BlockExists_Left(0, 30f, 0.01f) && !this.BlockExists_Left(-1, 30f, 0.01f)) && this.OnGround)
-                {
-                    this.JumpTimeout = 11;
-                }
-                if ((!this.BlockExists_Left(1, 0, 0.01f) && !this.BlockExists_Left(2, 0, 0.01f)) && this.OnGround)
-                {
-                    this.sqobject.Flipeffect = SpriteEffects.None;
-                }
-            }
-            if (this.JumpTimeout > 0)
-            {
-                this.sqobject.Velocity += new Vector2(0f, -0.65f + (0.04f / (((float)this.JumpTimeout) / 20f)));
-                this.JumpTimeout--;
-            }
+			Shadow1(100);
         }
 
         private void Shadow3()

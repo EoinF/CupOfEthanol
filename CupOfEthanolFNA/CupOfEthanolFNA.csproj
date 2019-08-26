@@ -109,6 +109,7 @@
     <Compile Include="Debug.cs" />
     <Compile Include="Editor\Editor.cs" />
     <Compile Include="Editor\EditorPauseMenu.cs" />
+    <Compile Include="Editor\JobDescription.cs" />
     <Compile Include="Editor\LevelSaver.cs" />
     <Compile Include="Editor\Objectdata.cs" />
     <Compile Include="Editor\PConsole.cs" />
@@ -197,6 +198,9 @@
     <Content Include="Content\Levels\Main\9\LevelData.xml" />
     <Content Include="Content\SavedData.xml">
       <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Textures\Menu\JobDescriptionBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Steamworks.NET.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

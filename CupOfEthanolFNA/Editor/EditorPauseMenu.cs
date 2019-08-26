@@ -26,7 +26,9 @@
             Load_Labels();
             Load_Buttons();
             Load_TextSprites();
-            if (Editor.CurrentEntity != null)
+			JobDescription.Init();
+
+			if (Editor.CurrentEntity != null)
             {
                 Editor.CurrentEntity.sqobject.Position = new Vector2(80f, 420f);
             }
@@ -48,8 +50,9 @@
             Button.ButtonList.Add(new Button(new TextSprite("+", "Small", new Vector2(530f, 500f), Color.Red), new Vector2(530f, 500f), 5));
             Button.ButtonList.Add(new Button(new TextSprite("-", "Small", new Vector2(550f, 500f), Color.Red), new Vector2(550f, 500f), 5));
             Button.ButtonList.Add(new Button(new TextSprite("+", "Small", new Vector2(530f, 500f), Color.Red), new Vector2(620f, 500f), 5));
-            Button.ButtonList.Add(new Button(new TextSprite("-", "Small", new Vector2(550f, 500f), Color.Red), new Vector2(640f, 500f), 5));
-            Button.ButtonList.Add(new Button(new TextSprite("Move", "Small", new Vector2(60f, 50f), Color.Red), new Vector2(60f, 50f), 4));
+			Button.ButtonList.Add(new Button(new TextSprite("-", "Small", new Vector2(550f, 500f), Color.Red), new Vector2(640f, 500f), 5));
+
+			Button.ButtonList.Add(new Button(new TextSprite("Move", "Small", new Vector2(60f, 50f), Color.Red), new Vector2(60f, 50f), 4));
             Button.ButtonList.Add(new Button(new TextSprite("Entity", "Small", new Vector2(60f, 120f), Color.Red), new Vector2(60f, 120f), 4));
             Button.ButtonList.Add(new Button(new TextSprite("Static", "Small", new Vector2(60f, 190f), Color.Red), new Vector2(60f, 190f), 4));
             Button.ButtonList.Add(new Button(new TextSprite("Items", "Small", new Vector2(60f, 260f), Color.Red), new Vector2(60f, 260f), 4));
@@ -222,6 +225,10 @@
             {
                 Editor.CurrentCollectable.DrawFixed(spriteBatch);
             }
+			
+			JobDescription.Draw(spriteBatch, LabelList[0].Text, LabelList[1].Text);
+			
+			
             spriteBatch.Draw(Textures.GetTexture("EPause_Menu"), new Vector2(20f, 15f), null, new Color(1f, 1f, 1f, 0.7f), 0f, Vector2.Zero, 1f, 0, 0.9f);
         }
 

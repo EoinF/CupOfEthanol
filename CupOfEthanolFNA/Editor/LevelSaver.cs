@@ -8,6 +8,8 @@
     using Microsoft.Xna.Framework.Graphics;
     internal class LevelSaver
     {
+		// TODO: Replace usage of '-' as a separator so negative positions can be saved in a level.
+
 		public static string CustomLevelsPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/CupOfEthanol/Levels/Custom/";
         public static XmlDocument PrepareNewLevelDocument(string errormsg, string filename)
         {
