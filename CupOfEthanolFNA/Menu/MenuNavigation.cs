@@ -56,7 +56,7 @@
         {
             if ((ScreenManager.Ingame || ScreenManager.Editing) && !ScreenManager.Levelselect)
             {
-                MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "You will lose all unsaved progress!" }, true, false, false);
+                MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "You will lose all unsaved progress!" }, PopupType.QUIT);
             }
             else
             {
@@ -117,19 +117,23 @@
                 {
                     choice = true;
                 }
-                if (MainMethod.popupBox.QuittingEditor)
+                if (MainMethod.popupBox.type == PopupType.QUIT)
                 {
                     MainMethod.popupBox.QuitGame(choice);
                 }
-                if (MainMethod.popupBox.ErasingBlocks)
+                if (MainMethod.popupBox.type == PopupType.ERASE_BLOCKS)
                 {
                     MainMethod.popupBox.EraseBlocks(choice);
-                }
-                if (MainMethod.popupBox.ErasingEntities)
-                {
-                    MainMethod.popupBox.EraseEntities(choice);
-                }
-                return true;
+				}
+				if (MainMethod.popupBox.type == PopupType.ERASE_ENTITIES)
+				{
+					MainMethod.popupBox.EraseEntities(choice);
+				}
+				if (MainMethod.popupBox.type == PopupType.START_NEW_GAME)
+				{
+					MainMethod.popupBox.NewGame(choice);
+				}
+				return true;
             }
             return false;
         }
@@ -178,12 +182,27 @@
                             switch (Button.ButtonList[i].Text.Text)
                             {
                                 case "New Game":
-                                    ScreenManager.CreatingOn();
-                                    return;
+									ScreenManager.NewGame();
+									return;
 
                                 case "Continue":
-                                    ScreenManager.LoadingOn();
-                                    return;
+									ScreenManager.NoMode();
+									ScreenManager.Mainmenu = true;
+									ScreenManager.Levelselect = true;
+									MainMenu.LevelSelectOn();
+									return;
+
+								case "Stats":
+									ScreenManager.StatsOn();
+									return;
+
+								case "Erase Save Data":
+									MainMethod.popupBox = new PopupBox(new string[] {
+										"Really delete all saved data?",
+										"This will bring you back to level 1",
+										"All of your custom levels will NOT be deleted"
+									}, PopupType.START_NEW_GAME);
+									return;
 
                                 case "Play Custom":
                                     ScreenManager.LoadingCustomOn();
@@ -249,11 +268,11 @@
                                     return;
 
                                 case "DelAllBlocks":
-                                    MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This will delete all the blocks", "in this level permanently." }, false, true, false);
+                                    MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This will delete all the blocks", "in this level permanently." }, PopupType.ERASE_BLOCKS);
                                     return;
 
                                 case "DelAllEntities":
-                                    MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This will delete all the entities", "in this level permanently." }, false, false, true);
+                                    MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This will delete all the entities", "in this level permanently." }, PopupType.ERASE_ENTITIES);
                                     return;
 
                                 case "Cycle Entities":
@@ -267,36 +286,6 @@
                                 case "Previous":
                                     LevelButton.PreviousGroup();
                                     return;
-                            }
-                        }
-                    }
-                }
-                if ((Button.ButtonList != null) && (Button.ButtonList.Count > 0))
-                {
-                    for (i = 0; (i < 3) && (i < Button.ButtonList.Count); i++)
-                    {
-                        if (MouseClick.Rect.Intersects(Button.ButtonList[i].Rect))
-                        {
-                            if (ScreenManager.Creating)
-                            {
-                                //TODO: Name selection for save files
-                                SaveFile.Selectedfile = i;
-                                SaveFile.SaveList[i] = new SaveFile(0, true, SaveFile.NewCoasterList);
-                                SaveFile.SaveGame();
-                                ScreenManager.NoMode();
-                                ScreenManager.Mainmenu = true;
-                                ScreenManager.Levelselect = true;
-                                MainMenu.LevelSelectOn();
-                                return;
-                            }
-                            if (ScreenManager.Loading)
-                            {
-                                SaveFile.Selectedfile = i;
-                                ScreenManager.NoMode();
-                                ScreenManager.Mainmenu = true;
-                                ScreenManager.Levelselect = true;
-                                MainMenu.LevelSelectOn();
-                                return;
                             }
                         }
                     }

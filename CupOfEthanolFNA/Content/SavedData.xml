@@ -1,27 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Main>
-  <File1>
     <Level>0</Level>
-    <HardMode>True</HardMode>
 	<MainCoasters>f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f</MainCoasters>
-	<!--True-->
-    <SubCoasters>
-    </SubCoasters>
-  </File1>
-  <File2>
-    <Level>0</Level>
-    <HardMode>True</HardMode>
-    <MainCoasters>f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f</MainCoasters>
-    <!--True-->
-    <SubCoasters>
-    </SubCoasters>
-  </File2>
-  <File3>
-    <Level>0</Level>
-    <HardMode>False</HardMode>
-    <MainCoasters>f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f/f-f-f</MainCoasters>
-    <!--False-->
-    <SubCoasters>
-    </SubCoasters>
-  </File3>
 </Main>

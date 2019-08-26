@@ -10,10 +10,8 @@
     {
         public int LevelsCompleted;
         public List<bool[]> MainCoastersCollected;
-        public bool HardMode;
 
-        public static List<SaveFile> SaveList;
-        public static int Selectedfile;
+        public static SaveFile SaveData;
 
 		private static string SaveDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/CupOfEthanol/";
 
@@ -52,11 +50,10 @@
         };
         #endregion
 
-        public SaveFile(int levelsCompleted,bool HardMode, List<bool[]> mainCoasters)
+        public SaveFile(int levelsCompleted, List<bool[]> mainCoasters)
         {
             this.LevelsCompleted = levelsCompleted;
             this.MainCoastersCollected = mainCoasters;
-            this.HardMode = HardMode;
         }
 
 
@@ -77,8 +74,8 @@
         {
             if (Level.IsMain)
             {
-                if (SaveList[Selectedfile].LevelsCompleted < Level.Current)
-                    SaveList[Selectedfile].LevelsCompleted++;
+                if (SaveData.LevelsCompleted < Level.Current)
+					SaveData.LevelsCompleted++;
             }
             SaveGame();
         }
@@ -111,10 +108,13 @@
             return intarray;
         }
 
-        public static string GetPercentage(int FileID)
+        public static string GetPercentage()
         {
-            int saves = (SaveList[FileID].LevelsCompleted * 100) / 30;
-            return saves.ToString();
+			float LevelsWeightPct = 50;
+			float CoastersWeightPct = 50;
+			float percent = SaveData.LevelsCompleted * LevelsWeightPct / Level.maxLevels;
+			percent += SaveData.TotalMainCoasters() * CoastersWeightPct / (Level.maxLevels * 3f);
+			return percent.ToString("0.00");
         }
 
         public static XmlDocument LoadDocument(string filename, bool useFallback = true)
@@ -136,24 +136,28 @@
 			return LevelSaver.PrepareNewLevelDocument("This level was created because the file was missing. ", filename);
         }
 
+		public static bool SaveFileExists()
+		{
+			string pathName = SaveDirectory + "/SavedData.xml";
+			return File.Exists(pathName);
+		}
+
+		public static void CreateSaveFile()
+		{
+			string pathName = SaveDirectory + "/SavedData.xml";
+			Directory.CreateDirectory(SaveDirectory);
+			File.Copy(@"Content/SavedData.xml", pathName, true);
+			LoadSaveFiles();
+		}
+
 		public static void LoadSaveFiles()
 		{
 			string pathName = SaveDirectory + "/SavedData.xml";
-			if (!File.Exists(pathName))
-			{
-				Directory.CreateDirectory(SaveDirectory);
-				File.Copy(@"Content/SavedData.xml", pathName);
-			}
 			XmlDocument doc = LoadDocument(pathName);
 			
-			SaveList = new List<SaveFile>();
-			foreach (XmlNode node in doc.FirstChild.NextSibling)
-			{
-				if (node.Name.Contains("File"))
-				{
-					SaveList.Add(new SaveFile(int.Parse(node.FirstChild.InnerText), bool.Parse(node.FirstChild.NextSibling.InnerText), GetMainCoasterData(node.FirstChild.NextSibling.NextSibling.InnerText)));
-				}
-			}
+			XmlNode node = doc.FirstChild.NextSibling.FirstChild;
+			
+			SaveData = new SaveFile(int.Parse(node.InnerText), GetMainCoasterData(node.NextSibling.InnerText));
 		}
 
 		private static List<bool[]> GetMainCoasterData(string text)
@@ -202,40 +206,13 @@
             return DataString;
         }
 
-
-        private static XmlDocument PrepareNewSaveDocument(string filename)
-        {
-            XmlDocument doc = new XmlDocument();
-            XmlTextWriter writer = new XmlTextWriter(filename, Encoding.UTF8);
-            writer.Formatting = Formatting.Indented;
-            writer.WriteProcessingInstruction("xml", "version='1.0' encoding='UTF-8'");
-            writer.WriteStartElement("Main");
-			SaveGame();
-            writer.Close();
-            doc.Load(filename);
-            doc.FirstChild.NextSibling.InnerXml = 
-				"<File1><Level>0</Level><Name>Anonymous</Name><MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels--><SubCoasters></SubCoasters></File1><File2><Level>0</Level><Name>Unnamed File</Name><MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels--><SubCoasters></SubCoasters></File2><File3><Level>0</Level><Name>WhyAmIHere</Name><MainCoasters>--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--</MainCoasters> <!-- 30 /'s   =>   30 levels--><SubCoasters></SubCoasters></File3>";
-            return doc;
-        }
-
         public static void SaveGame()
         {
             XmlDocument doc = LoadDocument(SaveDirectory + "SavedData.xml");
-            int i = 0;
-            foreach (XmlNode node in doc.FirstChild.NextSibling)
-            {
-                if (node.Name.Contains("File"))
-                {
-                    node.FirstChild.InnerText = SaveList[i].LevelsCompleted.ToString(); 
-                    node.FirstChild.NextSibling.NextSibling.NextSibling.InnerText = SaveList[i].HardMode.ToString();
-                    node.FirstChild.NextSibling.NextSibling.InnerText = MainCoasterDataToString(SaveList[i].MainCoastersCollected);
-                }
-                i++;
-                if (i > 2)
-                {
-                    break;
-                }
-            }
+			XmlNode node = doc.FirstChild.NextSibling.FirstChild;
+            node.InnerText = SaveData.LevelsCompleted.ToString(); 
+            node.NextSibling.InnerText = MainCoasterDataToString(SaveData.MainCoastersCollected);
+
             doc.Save(SaveDirectory + "SavedData.xml");
         }
     }

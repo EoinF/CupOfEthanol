@@ -20,28 +20,6 @@
         public static bool Paused;
 		public static bool Credits;
 
-        //protected ScreenManager()
-        //{
-        //}
-
-        public static void CreatingOn()
-        {
-            NoMode();
-            Mainmenu = true;
-            Creating = true;
-            Level.Offset = Vector2.Zero;
-            MainMenu.FileSelectingOn();
-        }
-
-        public static void LoadingOn()
-        {
-            NoMode();
-            Mainmenu = true;
-            Loading = true;
-            Level.Offset = Vector2.Zero;
-            MainMenu.FileSelectingOn();
-        }
-
         public static void EditingOn()
         {
             NoMode();
@@ -71,6 +49,22 @@
 			Mainmenu = true;
 			Credits = true;
 			MainMenu.CreditsOn();
+		}
+
+		public static void StatsOn()
+		{
+			NoMode();
+			Mainmenu = true;
+			MainMenu.StatsOn();
+		}
+
+		public static void NewGame()
+		{
+			SaveFile.CreateSaveFile();
+			NoMode();
+			Mainmenu = true;
+			Levelselect = true;
+			MainMenu.LevelSelectOn();
 		}
 
 		/// <summary>

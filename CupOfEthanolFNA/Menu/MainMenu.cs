@@ -70,16 +70,23 @@
 
 			int currentY = 143;
             LevelButton.lvButtonList = new List<LevelButton>();
-            TextSprite ts = new TextSprite("New Game", "Medium", new Vector2(332f, currentY), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
-			currentY += 70;
-			ts = new TextSprite("Continue", "Medium", new Vector2(343f, currentY), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
+
+			string newOrContinueText = "New Game";
+			if (SaveFile.SaveFileExists())
+			{
+				newOrContinueText = "Continue";
+			}
+
+			TextSprite ts = new TextSprite(newOrContinueText, "Medium", new Vector2(332f, currentY), Color.White);
+			Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
 			currentY += 70;
 			ts = new TextSprite("Play Custom", "Medium", new Vector2(330f, currentY), Color.White);
             Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
 			currentY += 70;
 			ts = new TextSprite("Editor", "Medium", new Vector2(365f, currentY), Color.White);
+			Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
+			currentY += 70;
+			ts = new TextSprite("Stats", "Medium", new Vector2(332f, currentY), Color.White);
 			Button.ButtonList.Add(new Button(ts, new Vector2(308f, currentY - 3), 1));
 			currentY += 70;
 			ts = new TextSprite("Credits", "Medium", new Vector2(365f, currentY), Color.White);
@@ -125,7 +132,7 @@
 			TextSprite ts = new TextSprite("Main Menu", "Medium", new Vector2(225f, 503f), Color.White);
 			Button.ButtonList.Add(new Button(ts, new Vector2(100f, 500f), 1));
 
-			String coastersCollected = SaveFile.SaveList[SaveFile.Selectedfile].TotalMainCoasters().ToString();
+			string coastersCollected = SaveFile.SaveData.TotalMainCoasters().ToString();
 
 			float extraOffset = 0;
 			if (coastersCollected.Length == 2)
@@ -140,6 +147,28 @@
 			TextSprite.TextList.Add(new TextSprite("Go back through old levels to find em all!", "Medium", new Vector2(50f, 440f), Color.White));
 		}
 
+		internal static void StatsOn()
+		{
+			Button.ButtonList = new List<Button>();
+			TextSprite.TextList = new List<TextSprite>();
+			LevelButton.lvButtonList = new List<LevelButton>();
+
+			if (SaveFile.SaveFileExists())
+			{
+				SaveFile.LoadSaveFiles();
+
+				TextSprite.TextList.Add(new TextSprite("Game Completion: " + SaveFile.GetPercentage() + "%", "Medium", new Vector2(175f, 70f), Color.Black));
+
+				TextSprite.TextList.Add(new TextSprite("Levels Completed: " + SaveFile.SaveData.LevelsCompleted + "/" + Level.maxLevels, "Medium", new Vector2(175f, 110f), Color.Black));
+				TextSprite.TextList.Add(new TextSprite("Coasters Collected: " + SaveFile.SaveData.TotalMainCoasters() + "/" + Level.maxLevels * 3, "Medium", new Vector2(175f, 150f), Color.Black));
+			}
+			else
+			{
+				TextSprite.TextList.Add(new TextSprite("Start a new game to see stats", "Medium", new Vector2(275f, 70f), Color.Black));
+			}
+			TextSprite ts = new TextSprite("Main Menu", "Medium", new Vector2(225f, 503f), Color.White);
+			Button.ButtonList.Add(new Button(ts, new Vector2(100f, 500f), 1));
+		}
 
 		internal static void CreditsOn()
 		{
@@ -167,32 +196,6 @@
 			Button.ButtonList.Add(new Button(ts, new Vector2(100f, 500f), 1));
 		}
 
-		public static void FileSelectingOn()
-        {
-            Button.ButtonList = new List<Button>();
-            TextSprite.TextList = new List<TextSprite>();
-            SaveFile.LoadSaveFiles();
-			
-            TextSprite ts = new TextSprite("File 1", "Medium", new Vector2(255f, 78f), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(200f, 75f), 1));
-			
-            ts = new TextSprite("File 2", "Medium", new Vector2(255f, 178f), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(200f, 175f), 1));
-			
-            ts = new TextSprite("File 3", "Medium", new Vector2(255f, 278f), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(200f, 275f), 1));
-
-            ts = new TextSprite("Main Menu", "Medium", new Vector2(225f, 503f), Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(200f, 500f), 1));
-            TextSprite.TextList.Add(new TextSprite("Levels Completed: " + SaveFile.SaveList[0].LevelsCompleted + "/" + Level.maxLevels, "Medium", new Vector2(475f, 70f), Color.Black));
-            TextSprite.TextList.Add(new TextSprite("Levels Completed: " + SaveFile.SaveList[1].LevelsCompleted + "/" + Level.maxLevels, "Medium", new Vector2(475f, 170f), Color.Purple));
-            TextSprite.TextList.Add(new TextSprite("Levels Completed: " + SaveFile.SaveList[2].LevelsCompleted + "/" + Level.maxLevels, "Medium", new Vector2(475f, 270f), Color.Black));
-
-            TextSprite.TextList.Add(new TextSprite("Coasters Collected: " + SaveFile.SaveList[0].TotalMainCoasters() + "/" + Level.maxLevels * 3, "Medium", new Vector2(475f, 95f), Color.Black));
-            TextSprite.TextList.Add(new TextSprite("Coasters Collected: " + SaveFile.SaveList[1].TotalMainCoasters() + "/" + Level.maxLevels * 3, "Medium", new Vector2(475f, 195f), Color.Purple));
-            TextSprite.TextList.Add(new TextSprite("Coasters Collected: " + SaveFile.SaveList[2].TotalMainCoasters() + "/" + Level.maxLevels * 3, "Medium", new Vector2(475f, 295f), Color.Black));
-        }
-
         public static void LevelSelectOn()
         {
             //int i;
@@ -202,16 +205,23 @@
             Button.ButtonList = new List<Button>();
             LevelButton.lvButtonList = new List<LevelButton>();
 
-            TextSprite ts = new TextSprite("Main Menu", "Medium", Color.White);
+			
+			TextSprite ts = new TextSprite("Main Menu", "Medium", Color.White);
             Button.ButtonList.Add(new Button(ts, new Vector2(525f, 25f), 1));
 
-            ts = new TextSprite("Next", "Medium", Color.White);
-            Button.ButtonList.Add(new Button(ts, new Vector2(565f, 550f), 1));
+			ts = new TextSprite("Next", "Medium", Color.White);
+			Button.ButtonList.Add(new Button(ts, new Vector2(565f, 550f), 1));
 
-            ts = new TextSprite("Previous", "Medium", Color.White);
+			ts = new TextSprite("Previous", "Medium", Color.White);
             Button.ButtonList.Add(new Button(ts, new Vector2(40f, 550f), 1));
 
-            Button.ButtonList[2].Active = false;
+			if (!ScreenManager.Custom && !ScreenManager.Editing)
+			{
+				ts = new TextSprite("Erase Save Data", "Medium", Color.White);
+				Button.ButtonList.Add(new Button(ts, new Vector2(40f, 25f), 1));
+			}
+
+			Button.ButtonList[2].Active = false;
             if (!ScreenManager.Editing && !ScreenManager.Custom)
             {
                 SaveFile.LoadSaveFiles();
@@ -220,19 +230,19 @@
 					for (int i = 0; i < 3; i++)
 					{
 						int collected = 0;
-                        for (int h = 0; h < SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[(j * 3) + i].Length; h++)
-                            if (SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[(j * 3) + i][h])
+                        for (int h = 0; h < SaveFile.SaveData.MainCoastersCollected[(j * 3) + i].Length; h++)
+                            if (SaveFile.SaveData.MainCoastersCollected[(j * 3) + i][h])
                                 collected++;
 
                         string status = "Locked";
-                        if (SaveFile.SaveList[SaveFile.Selectedfile].LevelsCompleted > ((j * 3) + i))
+                        if (SaveFile.SaveData.LevelsCompleted > ((j * 3) + i))
                         {
                             if (collected == 3)
                                 status = "Complete";
                             else
                                 status = "Unlocked";
                         }
-                        if (SaveFile.SaveList[SaveFile.Selectedfile].LevelsCompleted == ((j * 3) + i))
+                        if (SaveFile.SaveData.LevelsCompleted == ((j * 3) + i))
                         {
                             status = "Unlocked";
                         }

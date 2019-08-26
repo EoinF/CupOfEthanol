@@ -5,20 +5,24 @@
     using System;
     using System.Collections.Generic;
 
-    public class PopupBox
-    {
-        public List<Button> ButtonList;
+	public enum PopupType
+	{
+		QUIT,
+		ERASE_BLOCKS,
+		ERASE_ENTITIES,
+		START_NEW_GAME
+	}
 
-        public bool ErasingBlocks = false;
-        public bool ErasingEntities = false;
-        public bool IsFinished = false;
-        public bool QuittingGame = false;
-        public bool RestartingLevel = false;
-        public bool QuittingEditor = false;
+	public class PopupBox
+	{
+		public List<Button> ButtonList;
+		public bool IsFinished = false;
+		public PopupType type;
 
-        private TextSprite[] MessageList;
+		private TextSprite[] MessageList;
 
-        public PopupBox(string[] message, bool quitting, bool erasingBlocks, bool erasingEntities)
+
+        public PopupBox(string[] message, PopupType type)
         {
             this.MessageList = new TextSprite[message.Length];
             //this.MessageList[0] = new TextSprite(message[0], "Small", new Vector2(300f, 110f), Color.Red);
@@ -30,9 +34,7 @@
             this.ButtonList = new List<Button>();
             this.ButtonList.Add(new Button(new TextSprite("Yes", "Small", new Vector2(200f, 250f), Color.Red), new Vector2(263f, 255f), 4, 0.9998f));
             this.ButtonList.Add(new Button(new TextSprite("No", "Small", new Vector2(445f, 250f), Color.Red), new Vector2(415f, 255f), 4, 0.9998f));
-            this.QuittingEditor = quitting;
-            this.ErasingBlocks = erasingBlocks;
-            this.ErasingEntities = erasingEntities;
+            this.type = type;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -57,16 +59,24 @@
             }
         }
 
-        public void EraseEntities(bool Choice)
-        {
-            this.IsFinished = true;
-            if (Choice)
-            {
-                Entity.EntityList = new List<Entity>();
-            }
-        }
+		public void EraseEntities(bool Choice)
+		{
+			this.IsFinished = true;
+			if (Choice)
+			{
+				Entity.EntityList = new List<Entity>();
+			}
+		}
+		public void NewGame(bool Choice)
+		{
+			this.IsFinished = true;
+			if (Choice)
+			{
+				ScreenManager.NewGame();
+			}
+		}
 
-        public void QuitGame(bool Choice)
+		public void QuitGame(bool Choice)
         {
             this.IsFinished = true;
             if (Choice)

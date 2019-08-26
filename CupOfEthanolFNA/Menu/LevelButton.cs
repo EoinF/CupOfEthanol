@@ -34,11 +34,14 @@
             for (int i = CurrentGroup * 6; (i < ((CurrentGroup + 1) * 6)) && (i < lvButtonList.Count); i++)
             {
 				Texture2D thumbnail = ScreenManager.Custom || ScreenManager.Editing ? Textures.GetCustomThumbnail(i) : Textures.GetThumbnail(i);
-                spriteBatch.Draw(thumbnail, lvButtonList[i].Position + Level.Offset + ImageOffset, null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.895f);
+                spriteBatch.Draw(thumbnail, lvButtonList[i].Position + Level.Offset + ImageOffset, null, lvButtonList[i].ThumbnailColour, 0, Vector2.Zero, 1, SpriteEffects.None, 0.895f);
                 spriteBatch.Draw(Textures.GetTexture("Button2"), lvButtonList[i].Position + Level.Offset, null, lvButtonList[i].Colour, 0f, Vector2.Zero, 1f, 0, 0.89f);
                 spriteBatch.DrawString(Textures.GetFont("Medium"), (i + 1).ToString(), (lvButtonList[i].Position + new Vector2(22f, 18f)) + Level.Offset, Color.Black, 0f, Vector2.Zero, 1f, 0, 0.9f);
-                if (lvButtonList[i].CoastersCollected != -1)
-                    spriteBatch.DrawString(Textures.GetFont("Medium"), "Coasters: " + lvButtonList[i].CoastersCollected.ToString() + "/3", (lvButtonList[i].Position + new Vector2(28f, 148f)) + Level.Offset, lvButtonList[i].Colour, 0f, Vector2.Zero, 1f, 0, 0.9f);
+
+				if (lvButtonList[i].Status == "Locked")
+					spriteBatch.DrawString(Textures.GetFont("Medium"), "Locked", (lvButtonList[i].Position + new Vector2(28f, 148f)) + Level.Offset, Color.LightGray, 0f, Vector2.Zero, 1f, 0, 0.9f);
+				else if (lvButtonList[i].CoastersCollected != -1)
+					spriteBatch.DrawString(Textures.GetFont("Medium"), "Coasters: " + lvButtonList[i].CoastersCollected.ToString() + "/3", (lvButtonList[i].Position + new Vector2(28f, 148f)) + Level.Offset, Color.Wheat, 0f, Vector2.Zero, 1f, 0, 0.9f);
             }
         }
 
@@ -76,7 +79,38 @@
             }
         }
 
-        public Color Colour
+		private static Color LightGreen = new Color(170, 255, 170, 255);
+		private static Color LightestGreen = new Color(200, 255, 200, 255);
+
+		public Color ThumbnailColour
+		{
+			get
+			{
+				if (MouseClick.Rect.Intersects(this.Rect))
+				{
+					switch (this.Status)
+					{
+						case "Complete":
+							return LightestGreen;
+
+						case "Unlocked":
+							return Color.White;
+					}
+					return Color.DarkGray;
+				}
+				switch (this.Status)
+				{
+					case "Complete":
+						return LightGreen;
+
+					case "Unlocked":
+						return Color.WhiteSmoke;
+				}
+				return Color.SlateGray;
+			}
+		}
+
+		public Color Colour
         {
             get
             {

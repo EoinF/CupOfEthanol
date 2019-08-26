@@ -43,16 +43,16 @@
 						Sounds.Play("collect_coaster");
                         collect.Position = new Vector2(-990999, -9999999);
                         int collected = 0;
-                        for (int i = 0; i < SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[Level.Current - 1].Length; i++)
+                        for (int i = 0; i < SaveFile.SaveData.MainCoastersCollected[Level.Current - 1].Length; i++)
                         {
-                            if (!SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[Level.Current - 1][i])
+                            if (!SaveFile.SaveData.MainCoastersCollected[Level.Current - 1][i])
                                 collected++;
                         }
 
-                        if (!SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[Level.Current - 1][q])
+                        if (!SaveFile.SaveData.MainCoastersCollected[Level.Current - 1][q])
                         {
                             collected--;
-                            SaveFile.SaveList[SaveFile.Selectedfile].MainCoastersCollected[Level.Current - 1][q] = true;
+                            SaveFile.SaveData.MainCoastersCollected[Level.Current - 1][q] = true;
 
                             MessageBox.GameMessage = new MessageBox("New Coaster Collected!££" + collected.ToString() + " remaining...", new Vector2(50,50), 180);
                             SaveFile.SaveGame();
