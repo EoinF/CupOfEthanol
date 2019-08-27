@@ -63,7 +63,7 @@ namespace LackingPlatforms
 			{
 				Unlock("COASTERS_COLLECTED_72");
 			}
-			public static void LEVEL_CREATED()
+			public static void LevelCreated()
 			{
 				Unlock("LEVEL_CREATED");
 			}

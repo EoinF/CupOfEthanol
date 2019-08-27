@@ -195,7 +195,8 @@
 
         public static void SaveMap()
         {
-            Save_StaticObjects(Save_Objects(SaveFile.LoadDocument(CustomLevelsPath + Level.Current.ToString() + "/LevelData.xml"))).Save(CustomLevelsPath + Level.Current.ToString() + "/LevelData.xml");
+			SteamIntegration.Achievements.LevelCreated();
+			Save_StaticObjects(Save_Objects(SaveFile.LoadDocument(CustomLevelsPath + Level.Current.ToString() + "/LevelData.xml"))).Save(CustomLevelsPath + Level.Current.ToString() + "/LevelData.xml");
             MessageBox.StatusMessage = new MessageBox("Save Successful!", new Vector2(217, 190), 120);
         }
     }

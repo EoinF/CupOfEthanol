@@ -54,7 +54,22 @@
                             collected--;
                             SaveFile.SaveData.MainCoastersCollected[Level.Current - 1][q] = true;
 
-                            MessageBox.GameMessage = new MessageBox("New Coaster Collected!££" + collected.ToString() + " remaining...", new Vector2(50,50), 180);
+							switch (SaveFile.SaveData.TotalMainCoasters()) {
+								case 10:
+									SteamIntegration.Achievements.CoastersCollected10();
+									break;
+								case 25:
+									SteamIntegration.Achievements.CoastersCollected25();
+									break;
+								case 40:
+									SteamIntegration.Achievements.CoastersCollected40();
+									break;
+								case 72:
+									SteamIntegration.Achievements.CoastersCollected72();
+									break;
+							}
+
+							MessageBox.GameMessage = new MessageBox("New Coaster Collected!££" + collected.ToString() + " remaining...", new Vector2(50,50), 180);
                             SaveFile.SaveGame();
                         }
                         else
