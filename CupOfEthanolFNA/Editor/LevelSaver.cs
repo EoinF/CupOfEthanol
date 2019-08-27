@@ -20,7 +20,7 @@
             writer.WriteStartElement("Main");
             writer.Close();
             doc.Load(filename);
-            doc.DocumentElement.InnerXml = "<Settings><BackgroundTexture>SkyA</BackgroundTexture><Gravity>1</Gravity><AirResistance>0.1</AirResistance></Settings><Entities></Entities><Static>28#21-f~14#12-a~14#15-f~15#11-a~15#15-b~15#16-f~16#6-f~16#10-A~16#13-a~16#15-b~16#16-f~17#10-a~17#15-b~17#16-f~18#10-a~18#15-b~18#16-f~19#10-a~19#15-b~19#16-f~20#10-a~20#15-b~20#16-f~21#6-f~21#10-a~21#15-b~21#16-f~22#11-a~22#15-b~22#16-f~23#12-a~23#15-" + errormsg + "~22#14</Static>";
+            doc.DocumentElement.InnerXml = "<Settings><BackgroundTexture>SkyA</BackgroundTexture><Gravity>1</Gravity><AirResistance>0.1</AirResistance></Settings><Entities></Entities><Static>28#21`f~14#12`a~14#15`f~15#11`a~15#15`b~15#16`f~16#6`f~16#10`A~16#13`a~16#15`b~16#16`f~17#10`a~17#15`b~17#16`f~18#10`a~18#15`b~18#16`f~19#10`a~19#15`b~19#16`f~20#10`a~20#15`b~20#16`f~21#6`f~21#10`a~21#15`b~21#16`f~22#11`a~22#15`b~22#16`f~23#12`a~23#15`" + errormsg + "~22#14</Static>";
             doc.Save(filename);
             doc.Load(filename);
             return doc;
@@ -48,7 +48,7 @@
                 stringlist[4] = ((int)((col.Position.X + 12.5f) / 25f)).ToString();
                 stringlist[5] = "#";
                 stringlist[6] = ((int)((col.Position.Y + 12.5f) / 25f)).ToString();
-                stringlist[7] = "-";
+                stringlist[7] = "`";
                 child.InnerText = string.Concat(stringlist);
             }
             return child;
@@ -90,7 +90,7 @@
                         text += "~" + nonNullEntities[i].StartDelay;
 
                     if (i != nonNullEntities.Count - 1)
-                        text += "-";
+                        text += "`";
                     child.InnerText = text;
                 }
             }
@@ -122,7 +122,7 @@
                 }
             }
             string text = child.InnerText;
-            string[] textlist = new string[] { text, (x + 5).ToString(), "#", (y + 5).ToString(), "-" };
+            string[] textlist = new string[] { text, (x + 5).ToString(), "#", (y + 5).ToString(), "`" };
             child.InnerText = string.Concat(textlist);
             return child;
         }
@@ -176,9 +176,9 @@
                     {
                         string text = child.InnerText;
                         if (sq[x, y].texturename == "Checkpoint")
-                            child.InnerText = text + sq[x, y].texturename + sq[x,y].frictionforce + "~" + x.ToString() + "#" + y.ToString() + "-";
+                            child.InnerText = text + sq[x, y].texturename + sq[x,y].frictionforce + "~" + x.ToString() + "#" + y.ToString() + "`";
                         else
-                            child.InnerText = text + sq[x, y].texturename + "~" + x.ToString() + "#" + y.ToString() + "-";
+                            child.InnerText = text + sq[x, y].texturename + "~" + x.ToString() + "#" + y.ToString() + "`";
                     }
                 }
             }

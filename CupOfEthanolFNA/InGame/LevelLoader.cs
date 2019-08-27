@@ -21,7 +21,7 @@
         private static Objectdata[] GetEntityObjectData(XmlNode node)
         {
                 List<string[]> info = new List<string[]>();
-                string[] singobj = node.InnerText.Split('-');
+                string[] singobj = node.InnerText.Split('`');
 
                 if (singobj[singobj.Length - 1] == "")
                     Array.ConstrainedCopy(singobj, 0, singobj, 0, singobj.Length - 1);
@@ -62,7 +62,7 @@
         private static Objectdata[] GetStaticObjectData(XmlNode node)
         {
                 List<string[]> coordsNtexture = new List<string[]>();
-                string[] singobj = node.InnerText.Split(new char[] { '-' });
+                string[] singobj = node.InnerText.Split(new char[] { '`' });
                 coordsNtexture.Add(new string[] { "", singobj[0].Split('#')[0], singobj[0].Split('#')[1] });
                 Objectdata[] objectlist = new Objectdata[singobj.Length + 1];
             try
