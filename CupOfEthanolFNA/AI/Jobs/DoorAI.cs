@@ -10,13 +10,17 @@ namespace LackingPlatforms
 {
     public partial class Entity
     {
+		private static bool IsPressingUnlock()
+		{
+			return InputManager.JustPressed(Keys.Space) || InputManager.JustPressed(Buttons.X);
+		}
         private void Door1()
         {
             this.sqobject.Velocity = Vector2.Zero;
             if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 30)
                 if (PPlayer.Player.HasRedKey)
                 {
-                    if (InputManager.JustPressed(Keys.Space))
+                    if (IsPressingUnlock())
                     {
                         PPlayer.Player.HasRedKey = false;
                         Lives = 0;
@@ -28,9 +32,9 @@ namespace LackingPlatforms
             this.sqobject.Velocity = Vector2.Zero;
             if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 30)
                 if (PPlayer.Player.HasBlueKey)
-                {
-                    if (InputManager.JustPressed(Keys.Space))
-                    {
+				{
+					if (IsPressingUnlock())
+					{
                         PPlayer.Player.HasBlueKey = false;
                         Lives = 0;
                     }
@@ -41,9 +45,9 @@ namespace LackingPlatforms
             this.sqobject.Velocity = Vector2.Zero;
             if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 30)
                 if (PPlayer.Player.HasGreenKey)
-                {
-                    if (InputManager.JustPressed(Keys.Space))
-                    {
+				{
+					if (IsPressingUnlock())
+					{
                         PPlayer.Player.HasGreenKey = false;
                         Lives = 0;
                     }
@@ -54,9 +58,9 @@ namespace LackingPlatforms
             this.sqobject.Velocity = Vector2.Zero;
             if (Vector2.Distance(this.sqobject.Position, PPlayer.Player.sqobject.Position) < 30)
                 if (PPlayer.Player.HasYellowKey)
-                {
-                    if (InputManager.JustPressed(Keys.Space))
-                    {
+				{
+					if (IsPressingUnlock())
+					{
                         PPlayer.Player.HasYellowKey = false;
                         Lives = 0;
                     }

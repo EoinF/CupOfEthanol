@@ -12,7 +12,14 @@
 
         public static void CheckInput()
         {
-            for (int i = Keystate.Length - 1; i > 0; i--)
+
+			for (int i = GamepadState.Length - 1; i > 0; i--)
+			{
+				GamepadState[i] = GamepadState[i - 1];
+			}
+			GamepadState[0] = GamePad.GetState(0);
+
+			for (int i = Keystate.Length - 1; i > 0; i--)
             {
                 Keystate[i] = Keystate[i - 1];
             }
@@ -137,15 +144,15 @@
         public static void InGameControls()
         {
             PPlayer.Player.Walking = false;
-            if (Keystate[0].IsKeyDown(Keys.W) || Keystate[0].IsKeyDown(Keys.Up))
+            if (Keystate[0].IsKeyDown(Keys.W) || Keystate[0].IsKeyDown(Keys.Up) || GamepadState[0].IsButtonDown(Buttons.A))
             {
                 PlayerJump();
             }
-            if (Keystate[0].IsKeyDown(Keys.A) || Keystate[0].IsKeyDown(Keys.Left))
+            if (Keystate[0].IsKeyDown(Keys.A) || Keystate[0].IsKeyDown(Keys.Left) || GamepadState[0].IsButtonDown(Buttons.DPadLeft))
             {
                 PlayerLeft();
             }
-            if (Keystate[0].IsKeyDown(Keys.D) || Keystate[0].IsKeyDown(Keys.Right))
+            if (Keystate[0].IsKeyDown(Keys.D) || Keystate[0].IsKeyDown(Keys.Right) || GamepadState[0].IsButtonDown(Buttons.DPadRight))
             {
                 PlayerRight();
             }
@@ -169,13 +176,18 @@
 		}
 
 		public static bool JustPressed(Keys key)
-        {
-            return (Keystate[0].IsKeyDown(key) && Keystate[1].IsKeyUp(key));
-        }
+		{
+			return (Keystate[0].IsKeyDown(key) && Keystate[1].IsKeyUp(key));
+		}
 
-        public static void PauseCheck()
+		public static bool JustPressed(Buttons button)
+		{
+			return (GamepadState[0].IsButtonDown(button) && GamepadState[1].IsButtonUp(button));
+		}
+
+		public static void PauseCheck()
         {
-            if ((!ScreenManager.Mainmenu && !InputBox.Active) && JustPressed(Keys.Escape))
+            if ((!ScreenManager.Mainmenu && !InputBox.Active) && (JustPressed(Keys.Escape) || JustPressed(Buttons.Start)))
             {
                 if (ScreenManager.Editing)
                 {
@@ -300,6 +312,11 @@
                 _mousestate = value;
             }
         }
+
+		public static GamePadState[] GamepadState
+		{
+			get; set;
+		}
     }
 }
 

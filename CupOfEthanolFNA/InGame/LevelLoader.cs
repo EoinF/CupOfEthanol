@@ -2,7 +2,8 @@
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using System;
+	using Microsoft.Xna.Framework.Input;
+	using System;
     using System.Collections.Generic;
 	using System.IO;
 	using System.Xml;
@@ -10,7 +11,6 @@
     internal class LevelLoader
     {
         public static bool LevelComplete = false;
-
 
         public static Vector2 GetCoords(string s)
         {

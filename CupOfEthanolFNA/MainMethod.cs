@@ -25,28 +25,15 @@
         {
             this.graphics = new GraphicsDeviceManager(this);
             base.Content.RootDirectory = "Content";
-
-            DecideMenuColour();
-
-            foreach (string s in args)
+			rand = new Random();
+			
+			foreach (string s in args)
             {
                 if (s == "-debug")
                     DebugMode = true;
             }
         }
-
-        private static void DecideMenuColour()
-        {
-            rand = new Random();
-
-            float r = rand.Next(500) / 1000f;
-            float g = rand.Next(400) / 1000f;
-            float b = rand.Next(400) / 1000f;
-
-            InstanceColour = new Color(r, g, b, 0);
-
-        }
-
+		
         protected override void LoadContent()
         {
             this.spriteBatch = new SpriteBatch(this.device);
@@ -54,8 +41,7 @@
             Sounds.LoadSounds(Content);
         }
 
-
-        protected override void Initialize()
+		protected override void Initialize()
 		{
 			SteamIntegration.Init();
 			this.device = this.graphics.GraphicsDevice;
@@ -78,6 +64,7 @@
             Entity.EntityList = new List<Entity>();
             Checkpoint.checkpointList = new List<Checkpoint>();
             InputManager.Mousestate = new MouseState[5];
+			InputManager.GamepadState = new GamePadState[2];
 			this.isAppStarting = true;
             base.Initialize();
         }
