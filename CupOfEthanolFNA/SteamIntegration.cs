@@ -59,6 +59,18 @@ namespace LackingPlatforms
 			{
 				Unlock("COASTERS_COLLECTED_40");
 			}
+			public static void CoastersCollected50()
+			{
+				Unlock("COASTERS_COLLECTED_50");
+			}
+			public static void CoastersCollected60()
+			{
+				Unlock("COASTERS_COLLECTED_60");
+			}
+			public static void CoastersCollected70()
+			{
+				Unlock("COASTERS_COLLECTED_70");
+			}
 			public static void CoastersCollected72()
 			{
 				Unlock("COASTERS_COLLECTED_72");
