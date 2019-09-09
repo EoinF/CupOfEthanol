@@ -4,8 +4,9 @@
     using Microsoft.Xna.Framework.Graphics;
     using System;
     using System.Collections.Generic;
+	using System.Globalization;
 
-    public partial class Entity
+	public partial class Entity
     {
         public string _jumpAnim;
         public string _walkAnim;
@@ -473,13 +474,13 @@
                     //}
 
                     if (this.Job.Contains("M"))
-                        this.Cannon(int.Parse(this.Job.Substring(1)));
+                        this.Cannon(int.Parse(this.Job.Substring(1), CultureInfo.InvariantCulture));
 
                     if (this.Job.Contains("N"))
-                        this.Wheelbot(int.Parse(this.Job.Substring(1)));
+                        this.Wheelbot(int.Parse(this.Job.Substring(1), CultureInfo.InvariantCulture));
 
                     if (this.Job.Contains("O"))
-                        this.Robot(int.Parse(this.Job.Substring(1)));
+                        this.Robot(int.Parse(this.Job.Substring(1), CultureInfo.InvariantCulture));
 
                     switch (this.Job)
                     {

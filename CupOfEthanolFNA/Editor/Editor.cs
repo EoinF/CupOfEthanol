@@ -4,8 +4,9 @@
     using Microsoft.Xna.Framework.Graphics;
     using System;
     using System.Collections.Generic;
+	using System.Globalization;
 
-    public static class Editor
+	public static class Editor
     {
         public static int BrushSize = 1;
         public static SquareObject CurrentBlock;
@@ -459,7 +460,7 @@
         public static void Update_Items()
         {
             string item = EditorPauseMenu.LabelList[0].Text;
-			BrushSize = int.Parse(EditorPauseMenu.LabelList[3].Text);
+			BrushSize = int.Parse(EditorPauseMenu.LabelList[3].Text, CultureInfo.InvariantCulture);
 			if (item != null)
             {
                 if (item != "Player")
@@ -516,7 +517,7 @@
         public static void Update_Static()
         {
             string texture = Textures.LabelTextToStaticTexture(EditorPauseMenu.LabelList[0].Text);
-            BrushSize = int.Parse(EditorPauseMenu.LabelList[3].Text);
+            BrushSize = int.Parse(EditorPauseMenu.LabelList[3].Text, CultureInfo.InvariantCulture);
             CurrentBlock = new SquareObject(texture, new Vector2(80f, 420f), 0.98f, 0.25f);
         }
 

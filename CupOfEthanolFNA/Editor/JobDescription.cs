@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
@@ -246,7 +247,7 @@ Moves twice as fast as 'Shadow1'";
 					}
 					break;
 				case "Icicle":
-					int jobInt = int.Parse(job);
+					int jobInt = int.Parse(job, CultureInfo.InvariantCulture);
 					int rate = 1 + (jobInt - 1) % 3;
 					int distance = (jobInt - 1) / 3;
 					string description = "Drops down vertically at a rate of " + rate + @".

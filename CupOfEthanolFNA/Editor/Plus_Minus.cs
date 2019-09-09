@@ -3,7 +3,8 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Microsoft.Xna.Framework.Graphics;
+	using System.Globalization;
+	using Microsoft.Xna.Framework.Graphics;
 
     public static class Plus_Minus
     {
@@ -163,7 +164,7 @@
                 }
                 else
                 {
-                    k = int.Parse(Editor.LabelList[4].Text);
+                    k = int.Parse(Editor.LabelList[4].Text, CultureInfo.InvariantCulture);
                     k -= 30;
                     if (k < 0)
                         k = 0;
@@ -336,7 +337,7 @@
                 }
                 else
                 {
-                    k = int.Parse(Editor.LabelList[2].Text);
+                    k = int.Parse(Editor.LabelList[2].Text, CultureInfo.InvariantCulture);
 
                     if (k < 0)
                         k = 0;
@@ -375,7 +376,7 @@
                 }
                 else
                 {
-                    k = int.Parse(Editor.LabelList[3].Text);
+                    k = int.Parse(Editor.LabelList[3].Text, CultureInfo.InvariantCulture);
 
                     if (k < 0)
                         k = 0;
@@ -429,7 +430,7 @@
                 }
                 else
                 {
-                    k = int.Parse(Editor.LabelList[4].Text);
+                    k = int.Parse(Editor.LabelList[4].Text, CultureInfo.InvariantCulture);
                     k += 30;
                     Editor.LabelList[4].Text = k.ToString();
                     Entity.EntityList[Editor.SelectedEntity].StartDelay = k;
@@ -442,7 +443,7 @@
                 {
                     try
                     {
-                        k = int.Parse(EditorPauseMenu.LabelList[5].Text);
+                        k = int.Parse(EditorPauseMenu.LabelList[5].Text, CultureInfo.InvariantCulture);
 
 
                         if (k < 0)
