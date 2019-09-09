@@ -5,6 +5,7 @@
 	using Microsoft.Xna.Framework.Input;
 	using System;
     using System.Collections.Generic;
+	using System.Globalization;
 	using System.IO;
 	using System.Xml;
 
@@ -289,10 +290,10 @@
 								Level._backgroundTexture = node.InnerText;
 								break;
 							case "Gravity":
-								Level.Gravity = new Vector2(0f, float.Parse(node.InnerText));
+								Level.Gravity = new Vector2(0f, float.Parse(node.InnerText, CultureInfo.InvariantCulture));
 								break;
 							case "AirResistance":
-								Level.AirResistance = float.Parse(node.InnerText);
+								Level.AirResistance = float.Parse(node.InnerText, CultureInfo.InvariantCulture);
 								break;
 							case "SongName":
 								Level.SongName = node.InnerText;
@@ -313,20 +314,23 @@
 
         public static void LoadNewLevel()
         {
-			switch (Level.Current)
+			if (!ScreenManager.Editing && !ScreenManager.Custom)
 			{
-				case 1:
-					SteamIntegration.Achievements.AdventureStarted();
-					break;
-				case 7:
-					SteamIntegration.Achievements.IceClimbStarted();
-					break;
-				case 13:
-					SteamIntegration.Achievements.EthanolTempleStarted();
-					break;
-				case 19:
-					SteamIntegration.Achievements.MinistryInfiltrationStarted();
-					break;
+				switch (Level.Current)
+				{
+					case 1:
+						SteamIntegration.Achievements.AdventureStarted();
+						break;
+					case 7:
+						SteamIntegration.Achievements.IceClimbStarted();
+						break;
+					case 13:
+						SteamIntegration.Achievements.EthanolTempleStarted();
+						break;
+					case 19:
+						SteamIntegration.Achievements.MinistryInfiltrationStarted();
+						break;
+				}
 			}
 
 			Level.SongName = "";
