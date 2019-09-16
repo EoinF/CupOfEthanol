@@ -10,39 +10,60 @@
         public static int CurrentGroup;
         public static List<LevelButton> lvButtonList;
         public Vector2 Position;
+		public int _level;
         public string Status;
         public int CoastersCollected;
         private static Vector2 ImageOffset = new Vector2(20, 20);
+		protected Texture2D Thumbnail;
 
-        public LevelButton(Vector2 position, string status)
+		public LevelButton()
+		{
+
+		}
+
+        public LevelButton(int level, Vector2 position, string status)
         {
+			this._level = level;
             this.Status = status;
             this.Position = position;
             CoastersCollected = -1;
-        }
+
+			this.Thumbnail = Textures.GetThumbnail(level - 1);
+		}
 
 
-        public LevelButton(Vector2 position, string status, int coasters)
-        {
-            this.Status = status;
+        public LevelButton(int level, Vector2 position, string status, int coasters)
+		{
+			this._level = level;
+			this.Status = status;
             this.Position = position;
             CoastersCollected = coasters;
-        }
+			this.Thumbnail = Textures.GetThumbnail(level - 1);
+		}
 
-        public static void DrawAll(SpriteBatch spriteBatch)
+		public virtual void Draw(SpriteBatch spriteBatch)
+		{
+			spriteBatch.Draw(Thumbnail, this.Position + Level.Offset + ImageOffset, null, this.ThumbnailColour, 0, Vector2.Zero, 1, SpriteEffects.None, 0.895f);
+			spriteBatch.Draw(Textures.GetTexture("Button2"), this.Position + Level.Offset, null, this.Colour, 0f, Vector2.Zero, 1f, 0, 0.89f);
+			DrawLabels(spriteBatch);
+		}
+
+		public virtual void DrawLabels(SpriteBatch spriteBatch)
+		{
+			spriteBatch.DrawString(Textures.GetFont("Medium"), _level.ToString(), (this.Position + new Vector2(22f, 18f)) + Level.Offset, Color.Black, 0f, Vector2.Zero, 1f, 0, 0.9f);
+
+			if (this.Status == "Locked")
+				spriteBatch.DrawString(Textures.GetFont("Medium"), "Locked", (this.Position + new Vector2(28f, 148f)) + Level.Offset, Color.LightGray, 0f, Vector2.Zero, 1f, 0, 0.9f);
+			else if (this.CoastersCollected != -1)
+				spriteBatch.DrawString(Textures.GetFont("Medium"), "Coasters: " + this.CoastersCollected.ToString() + "/3", (this.Position + new Vector2(28f, 148f)) + Level.Offset, Color.Wheat, 0f, Vector2.Zero, 1f, 0, 0.9f);
+		}
+
+		public static void DrawAll(SpriteBatch spriteBatch)
         {
             for (int i = CurrentGroup * 6; (i < ((CurrentGroup + 1) * 6)) && (i < lvButtonList.Count); i++)
             {
-				Texture2D thumbnail = ScreenManager.Custom || ScreenManager.Editing ? Textures.GetCustomThumbnail(i) : Textures.GetThumbnail(i);
-                spriteBatch.Draw(thumbnail, lvButtonList[i].Position + Level.Offset + ImageOffset, null, lvButtonList[i].ThumbnailColour, 0, Vector2.Zero, 1, SpriteEffects.None, 0.895f);
-                spriteBatch.Draw(Textures.GetTexture("Button2"), lvButtonList[i].Position + Level.Offset, null, lvButtonList[i].Colour, 0f, Vector2.Zero, 1f, 0, 0.89f);
-                spriteBatch.DrawString(Textures.GetFont("Medium"), (i + 1).ToString(), (lvButtonList[i].Position + new Vector2(22f, 18f)) + Level.Offset, Color.Black, 0f, Vector2.Zero, 1f, 0, 0.9f);
-
-				if (lvButtonList[i].Status == "Locked")
-					spriteBatch.DrawString(Textures.GetFont("Medium"), "Locked", (lvButtonList[i].Position + new Vector2(28f, 148f)) + Level.Offset, Color.LightGray, 0f, Vector2.Zero, 1f, 0, 0.9f);
-				else if (lvButtonList[i].CoastersCollected != -1)
-					spriteBatch.DrawString(Textures.GetFont("Medium"), "Coasters: " + lvButtonList[i].CoastersCollected.ToString() + "/3", (lvButtonList[i].Position + new Vector2(28f, 148f)) + Level.Offset, Color.Wheat, 0f, Vector2.Zero, 1f, 0, 0.9f);
-            }
+				lvButtonList[i].Draw(spriteBatch);
+			}
         }
 
         public static void NextGroup()

@@ -4,8 +4,9 @@
     using Microsoft.Xna.Framework.Graphics;
     using System;
     using System.Collections.Generic;
+	using System.IO;
 
-    public static class MainMenu
+	public static class MainMenu
     {
 		static int pintTimer = 0;
 		static Random rand = new Random();
@@ -229,38 +230,66 @@
 				{
 					for (int i = 0; i < 3; i++)
 					{
+						int levelIndex = (j * 3) + i;
 						int collected = 0;
-                        for (int h = 0; h < SaveFile.SaveData.MainCoastersCollected[(j * 3) + i].Length; h++)
-                            if (SaveFile.SaveData.MainCoastersCollected[(j * 3) + i][h])
+                        for (int h = 0; h < SaveFile.SaveData.MainCoastersCollected[levelIndex].Length; h++)
+                            if (SaveFile.SaveData.MainCoastersCollected[levelIndex][h])
                                 collected++;
 
                         string status = "Locked";
-                        if (SaveFile.SaveData.LevelsCompleted > ((j * 3) + i))
+                        if (SaveFile.SaveData.LevelsCompleted > (levelIndex))
                         {
                             if (collected == 3)
                                 status = "Complete";
                             else
                                 status = "Unlocked";
                         }
-                        if (SaveFile.SaveData.LevelsCompleted == ((j * 3) + i))
+                        if (SaveFile.SaveData.LevelsCompleted == (levelIndex))
                         {
                             status = "Unlocked";
                         }
 
-                        LevelButton.lvButtonList.Add(new LevelButton(new Vector2((float)((220 * (i % 3)) + 80), (float)((220 * (j % 2)) + 0x69)), status, collected));
+                        LevelButton.lvButtonList.Add(new LevelButton(levelIndex + 1, new Vector2((float)((220 * (i % 3)) + 80), (float)((220 * (j % 2)) + 0x69)), status, collected));
                     }
                 }
             }
             else
             {
-                for (int j = 0; j < Level.customLevels / 3; j++)
+				//Load custom levels here
+				String[] levels = Directory.GetDirectories(LevelSaver.CustomLevelsPath);
+				int levelIndex = 0;
+				Texture2D thumbnail;
+                for (int j = 0; j < levels.Length / 3; j++)
                 {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        LevelButton.lvButtonList.Add(new LevelButton(new Vector2((float) ((220 * (i %3 )) + 80), (float) ((220 * (j % 2)) + 0x69)), "Unlocked"));
-                    }
+					for (int i = 0; i < 3; i++)
+					{
+						while (levelIndex < levels.Length && !File.Exists(levels[levelIndex] + "/LevelData.xml"))
+						{
+							levelIndex++;
+						}
+						if (levelIndex < levels.Length)
+						{
+							if (File.Exists(levels[levelIndex] + "/Thumbnail.png"))
+							{
+								FileStream filestream = new FileStream(levels[levelIndex] + "/Thumbnail.png", FileMode.Open);
+								thumbnail = Texture2D.FromStream(MainMethod.device, filestream);
+								filestream.Close();
+							}
+							else
+							{
+								thumbnail = Textures.GetCustomThumbnail();
+							}
+							LevelButton.lvButtonList.Add(new CustomLevelButton(levels[levelIndex], new Vector2((float)((220 * (i % 3)) + 80), (float)((220 * (j % 2)) + 0x69)), thumbnail));
+							levelIndex++;
+						}
+					}
                 }
             }
+
+			if (LevelButton.lvButtonList.Count < 7)
+			{
+				Button.ButtonList[1].Active = false;
+			}
         }
     }
 }

@@ -16,6 +16,7 @@
         public static float AirResistance;
         public static List<Collectable> ChaliceList;
         public static int Current = -1;
+		public static CustomLevelButton CurrentLevelButton;
         public static Vector2 Gravity;
         public static Vector2 Offset = Vector2.Zero;
 		public static String SongName;

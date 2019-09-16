@@ -444,9 +444,9 @@
             return mainThumnails[i];
         }
 
-        public static Texture2D GetCustomThumbnail(int i)
+        public static Texture2D GetCustomThumbnail()
         {
-            return customThumnails[i];
+            return Default_Thumbnail;
         }
 
         public static string LabelTextToEntityTexture(string text)
@@ -742,25 +742,6 @@
                     mainThumnails[i] = Default_Thumbnail;
                 }
             }
-
-			for (int i = 0; i < Level.customLevels; i++)
-			{
-				try
-				{
-					string directoryName = LevelSaver.CustomLevelsPath + (i + 1);
-					string pathName = directoryName + "/Thumbnail.png";
-					if (!File.Exists(pathName))
-					{
-						Directory.CreateDirectory(directoryName);
-						File.Copy(@"Content/Levels/Custom/" + (i + 1) + "/Thumbnail.png", pathName);
-					}
-					customThumnails[i] = Texture2D.FromStream(graphicsDevice, File.OpenRead(pathName));
-				}
-				catch (Exception ex)
-				{
-					customThumnails[i] = Default_Thumbnail;
-				}
-			}
 		}
 
         public static string StaticTextureToLabelText(string text)

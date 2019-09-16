@@ -142,18 +142,18 @@
         {
             if (ScreenManager.Levelselect && (LevelButton.lvButtonList != null))
             {
-                for (int i = (LevelButton.CurrentGroup * 6); i < 6 + (LevelButton.CurrentGroup * 6); i++)
+                for (int i = (LevelButton.CurrentGroup * 6); i < 6 + (LevelButton.CurrentGroup * 6) && i < LevelButton.lvButtonList.Count; i++)
                 {
                     if (MouseClick.Rect.Intersects(LevelButton.lvButtonList[i].Rect))
 					{
 						if (ScreenManager.Custom)
 						{
-							LevelLoader.StartCustomLevel(i + 1);
+							LevelLoader.StartCustomLevel(i, LevelButton.lvButtonList[i] as CustomLevelButton);
 							return true;
 						}
 						if (ScreenManager.Editing)
                         {
-                            LevelLoader.StartEditorLevel(i + 1);
+                            LevelLoader.StartEditorLevel(i, LevelButton.lvButtonList[i] as CustomLevelButton);
                             return true;
                         }
                         if (LevelButton.lvButtonList[i].Status != "Locked")
@@ -177,7 +177,7 @@
                 {
                     for (i = 0; i < Button.ButtonList.Count; i++)
                     {
-                        if (MouseClick.Rect.Intersects(Button.ButtonList[i].Rect))
+                        if (Button.ButtonList[i].Active && MouseClick.Rect.Intersects(Button.ButtonList[i].Rect))
                         {
                             switch (Button.ButtonList[i].Text.Text)
                             {
@@ -251,12 +251,12 @@
 								case "Save & Test":
 									LevelSaver.SaveMap();
 									SaveFile.LoadSaveFiles();
-									LevelLoader.StartCustomLevel(Level.Current);
+									LevelLoader.StartCustomLevel(Level.Current - 1, Level.CurrentLevelButton);
 									ScreenManager.Testing = true;
 									return;
 
 								case "Back to Editor":
-									LevelLoader.StartEditorLevel(Level.Current);
+									LevelLoader.StartEditorLevel(Level.Current - 1, Level.CurrentLevelButton);
 									return;
 
 								case "+":

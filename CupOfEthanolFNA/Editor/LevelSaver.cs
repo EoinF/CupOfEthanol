@@ -8,8 +8,6 @@
     using Microsoft.Xna.Framework.Graphics;
     internal class LevelSaver
     {
-		// TODO: Replace usage of '-' as a separator so negative positions can be saved in a level.
-
 		public static string CustomLevelsPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/CupOfEthanol/Levels/Custom/";
         public static XmlDocument PrepareNewLevelDocument(string errormsg, string filename)
         {
@@ -196,7 +194,8 @@
         public static void SaveMap()
         {
 			SteamIntegration.Achievements.LevelCreated();
-			Save_StaticObjects(Save_Objects(SaveFile.LoadDocument(CustomLevelsPath + Level.Current.ToString() + "/LevelData.xml"))).Save(CustomLevelsPath + Level.Current.ToString() + "/LevelData.xml");
+			string path = Level.CurrentLevelButton.Path;
+			Save_StaticObjects(Save_Objects(SaveFile.LoadDocument(path + "/LevelData.xml"))).Save(path + "/LevelData.xml");
             MessageBox.StatusMessage = new MessageBox("Save Successful!", new Vector2(217, 190), 120);
         }
     }

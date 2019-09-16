@@ -134,6 +134,7 @@
     <Compile Include="Input\PopupBox.cs" />
     <Compile Include="MainMethod.cs" />
     <Compile Include="Menu\Button.cs" />
+    <Compile Include="Menu\CustomLevelButton.cs" />
     <Compile Include="Menu\LevelButton.cs" />
     <Compile Include="Menu\MainMenu.cs" />
     <Compile Include="Menu\MenuNavigation.cs" />

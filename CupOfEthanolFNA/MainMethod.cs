@@ -9,7 +9,7 @@
 
     public class MainMethod : Game
     {
-        private GraphicsDevice device;
+        public static GraphicsDevice device;
         public GraphicsDeviceManager graphics;
         public static PopupBox popupBox;
         public static bool Restarting;
@@ -36,15 +36,15 @@
 		
         protected override void LoadContent()
         {
-            this.spriteBatch = new SpriteBatch(this.device);
-            Textures.LoadTextures(Content, this.device);
+            this.spriteBatch = new SpriteBatch(device);
+            Textures.LoadTextures(Content, device);
             Sounds.LoadSounds(Content);
         }
 
 		protected override void Initialize()
 		{
 			SteamIntegration.Init();
-			this.device = this.graphics.GraphicsDevice;
+			device = this.graphics.GraphicsDevice;
             this.graphics.IsFullScreen = false;
             this.graphics.PreferredBackBufferWidth = 800;
             this.graphics.PreferredBackBufferHeight = 600;

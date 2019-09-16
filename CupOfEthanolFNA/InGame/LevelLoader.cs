@@ -16,63 +16,67 @@
         public static Vector2 GetCoords(string s)
         {
             string[] coords = s.Split(',');
-            return new Vector2((float) int.Parse(coords[0]), (float) int.Parse(coords[1]));
+            return new Vector2(int.Parse(coords[0], CultureInfo.InvariantCulture), int.Parse(coords[1], CultureInfo.InvariantCulture));
         }
 
         private static Objectdata[] GetEntityObjectData(XmlNode node)
         {
-                List<string[]> info = new List<string[]>();
-                string[] singobj = node.InnerText.Split('`');
+            List<string[]> info = new List<string[]>();
+            string[] singobj = node.InnerText.Split('`');
 
-                if (singobj[singobj.Length - 1] == "")
-                    Array.ConstrainedCopy(singobj, 0, singobj, 0, singobj.Length - 1);
+            if (singobj[singobj.Length - 1] == "")
+                Array.ConstrainedCopy(singobj, 0, singobj, 0, singobj.Length - 1);
 
-                Objectdata[] objectlist = new Objectdata[singobj.Length];
-
-                if (singobj.Length == 1 && singobj[0] == "")
+            Objectdata[] objectlist = new Objectdata[singobj.Length];
+			string currentValue = "undefined";
+            if (singobj.Length == 1 && singobj[0] == "")
+            {
+                return null;
+            }
+            try
+            {
+                for (int i = 0; i < singobj.Length; i++)
                 {
-                    return null;
-                }
-                //try
-                {
-                    for (int i = 0; i < singobj.Length; i++)
+					currentValue = singobj[0];
+
+					info.Add(singobj[i].Split(new char[] { '~', '#' }));
+                    if (info[i].Length == 6)
                     {
-                        info.Add(singobj[i].Split(new char[] { '~', '#' }));
-                        if (info[i].Length == 6)
-                        {
-                            objectlist[i] = new Objectdata(new Vector2((float)int.Parse(info[i][1]), (float)int.Parse(info[i][2])), info[i][0], byte.Parse(info[i][4]), byte.Parse(info[i][5]), info[i][3]);
-                        }
-                        else
-                        {
-                            if (info[i].Length == 4)
-                                throw new Exception();
-                            if (info[i].Length == 7)
-                                objectlist[i] = new Objectdata(new Vector2((float)int.Parse(info[i][1]), (float)int.Parse(info[i][2])), info[i][0], byte.Parse(info[i][4]), byte.Parse(info[i][5]), info[i][3], int.Parse(info[i][6]));
-                        }
+                        objectlist[i] = new Objectdata(new Vector2(int.Parse(info[i][1], CultureInfo.InvariantCulture), int.Parse(info[i][2], CultureInfo.InvariantCulture)), info[i][0], byte.Parse(info[i][4]), byte.Parse(info[i][5]), info[i][3]);
+                    }
+                    else
+                    {
+                        if (info[i].Length == 4)
+                            throw new Exception();
+                        if (info[i].Length == 7)
+                            objectlist[i] = new Objectdata(new Vector2((float)int.Parse(info[i][1]), (float)int.Parse(info[i][2])), info[i][0], byte.Parse(info[i][4]), byte.Parse(info[i][5]), info[i][3], int.Parse(info[i][6]));
                     }
                 }
-                try { }
-                catch (Exception e)
-                {
-                    ErrorReporter.LogException(new string[] { "Failed to load the objectdata list", e.Message, "MethodName = " + e.TargetSite.Name, e.StackTrace });
-                    throw e;
-                }
+            }
+            catch (Exception e)
+            {
+                ErrorReporter.LogException(new string[] { "Failed to load the objectdata list", e.Message, "MethodName = " + e.TargetSite.Name, "currentValue = " + currentValue, e.StackTrace });
+                throw e;
+            }
             return objectlist;
         }
 
         private static Objectdata[] GetStaticObjectData(XmlNode node)
         {
-                List<string[]> coordsNtexture = new List<string[]>();
-                string[] singobj = node.InnerText.Split(new char[] { '`' });
-                coordsNtexture.Add(new string[] { "", singobj[0].Split('#')[0], singobj[0].Split('#')[1] });
-                Objectdata[] objectlist = new Objectdata[singobj.Length + 1];
-            try
-            {
-                objectlist[0] = new Objectdata(new Vector2((float) int.Parse(coordsNtexture[0][1]), (float) int.Parse(coordsNtexture[0][2])), coordsNtexture[0][0], 0, 0);
+            List<string[]> coordsNtexture = new List<string[]>();
+            string[] singobj = node.InnerText.Split(new char[] { '`' });
+            coordsNtexture.Add(new string[] { "", singobj[0].Split('#')[0], singobj[0].Split('#')[1] });
+            Objectdata[] objectlist = new Objectdata[singobj.Length + 1];
+
+			string currentValue = singobj[0];
+			try
+			{
+				objectlist[0] = new Objectdata(new Vector2((float) int.Parse(coordsNtexture[0][1]), (float) int.Parse(coordsNtexture[0][2])), coordsNtexture[0][0], 0, 0);
                 for (int i = 1; i < singobj.Length; i++)
                 {
+					currentValue = singobj[i];
 
-                    coordsNtexture.Add(singobj[i].Split(new char[] { '~', '#' }));
+					coordsNtexture.Add(singobj[i].Split(new char[] { '~', '#' }));
                     if (coordsNtexture[i].Length == 3)
                     {
                         objectlist[i] = new Objectdata(new Vector2((float) int.Parse(coordsNtexture[i][1]), (float) int.Parse(coordsNtexture[i][2])), coordsNtexture[i][0], 0, 0);
@@ -81,7 +85,7 @@
             }
             catch (Exception e)
             {
-                ErrorReporter.LogException(new string[] { "Failed to load the objectdata list", e.Message, "MethodName = " + e.TargetSite.Name, e.StackTrace });
+                ErrorReporter.LogException(new string[] { "Failed to load the objectdata list", e.Message, "MethodName = " + e.TargetSite.Name, "CurrentValue = " + currentValue, e.StackTrace });
                 throw e;
             }
             return objectlist;
@@ -89,7 +93,7 @@
 
         public static void LoadEditorLevel()
         {
-            //try
+            try
             {
                 Editor.Reset();
                 LoadNewLevel();
@@ -136,7 +140,6 @@
                 Editor.Mouse_Move = true;
                 PPlayer.Player.sqobject.Velocity = new Vector2(2f, 0f);
             }
-            try { }
             catch (Exception e)
             {
                 ErrorReporter.LogException(new string[] { "Failed on LoadEditorLevel() method", e.Message, "MethodName = " + e.TargetSite.Name, e.StackTrace });
@@ -154,7 +157,7 @@
             }
             if (datalist != null)
             {
-                //try
+                try
                 {
                     for (int k = 0; k < datalist.Length; k++)
                     {
@@ -267,7 +270,6 @@
                     }
                     doc = null;
                 }
-                try { }
                 catch (Exception e)
                 {
                     ErrorReporter.LogException(new string[] { "Failed to load entities", e.Message, "MethodName = " + e.TargetSite.Name, e.StackTrace });
@@ -277,14 +279,17 @@
         }
 
         public static void LoadLevelSettings(XmlDocument doc)
-        {
-            try
+		{
+			string name = "undefined";
+			string value = "undefined";
+			try
             {
                 foreach (XmlNode node in doc.FirstChild.NextSibling.FirstChild)
                 {
-                    string name = node.Name;
+                    name = node.Name;
                     if (name != null)
                     {
+						value = node.InnerText;
 						switch (name) {
 							case "BackgroundTexture":
 								Level._backgroundTexture = node.InnerText;
@@ -305,7 +310,7 @@
             }
             catch (Exception e)
             {
-                ErrorReporter.LogException(new string[] { "Failed to load level settings", e.Message, "MethodName = " + e.TargetSite.Name, e.StackTrace });
+                ErrorReporter.LogException(new string[] { "Failed to load level settings", e.Message, "MethodName = " + e.TargetSite.Name, "Node Name = " + name, "Value = " + value, e.StackTrace });
                 throw e;
             }
 			
@@ -340,16 +345,8 @@
 			XmlDocument doc;
 			if (ScreenManager.Custom || ScreenManager.Editing)
 			{
-				string directoryName = LevelSaver.CustomLevelsPath + Level.Current.ToString();
+				string directoryName = Level.CurrentLevelButton.Path;
 				string pathName = directoryName + "/LevelData.xml";
-				if (!File.Exists(pathName))
-				{
-					Directory.CreateDirectory(directoryName);
-					if (File.Exists(@"Content/Levels/Custom/" + Level.Current.ToString() + "/LevelData.xml"))
-					{
-						File.Copy(@"Content/Levels/Custom/" + Level.Current.ToString() + "/LevelData.xml", pathName);
-					}
-				}
 				doc = SaveFile.LoadDocument(pathName);
 			}
 			else
@@ -540,7 +537,6 @@
                     SquareObject.sqObjectArray = sq;
 
                 }
-
                 catch (Exception e)
                 {
                     ErrorReporter.LogException(new string[] { "Failed to load player and/or blocks", e.Message, "MethodName = " + e.TargetSite.Name, e.StackTrace });
@@ -591,24 +587,24 @@
             }
         }
 
-		public static void StartCustomLevel(int Lvl)
+		public static void StartCustomLevel(int Lvl, CustomLevelButton customLevelButton)
 		{
 			Level.Current = Lvl;
+			Level.CurrentLevelButton = customLevelButton;
 			ScreenManager.NoMode();
 			ScreenManager.Custom = true;
 			ScreenManager.Ingame = true;
 			Button.ButtonList = null;
-			LevelButton.lvButtonList = null;
 			LoadNewLevel();
 		}
 
-		public static void StartEditorLevel(int Lvl)
+		public static void StartEditorLevel(int index, CustomLevelButton customLevelButton)
         {
-            Level.Current = Lvl;
-            ScreenManager.NoMode();
+            Level.Current = index + 1;
+			Level.CurrentLevelButton = customLevelButton;
+			ScreenManager.NoMode();
             ScreenManager.Editing = true;
             Button.ButtonList = null;
-            LevelButton.lvButtonList = null;
             LoadEditorLevel();
         }
 
