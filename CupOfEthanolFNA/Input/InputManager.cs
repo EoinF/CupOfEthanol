@@ -12,7 +12,6 @@
 
         public static void CheckInput()
         {
-
 			for (int i = GamepadState.Length - 1; i > 0; i--)
 			{
 				GamepadState[i] = GamepadState[i - 1];

@@ -9,8 +9,7 @@
     public static class Textures
     {
         private static Texture2D[] mainThumnails = new Texture2D[Level.maxLevels]; //i.e. thumnails for the main levels
-
-        private static Texture2D[] customThumnails = new Texture2D[Level.customLevels]; //i.e. thumnails for user created levels
+		
         private static string[] subThumnailsNames;
 
         #region MenuTextures
@@ -19,7 +18,8 @@
         private static Texture2D Button3;
         private static Texture2D Button4;
         private static Texture2D Button5;
-        private static Texture2D Cursor;
+		private static Texture2D Button6;
+		private static Texture2D Cursor;
         private static Texture2D EPause_Menu;
 		private static Texture2D Pause_Menu;
 		private static Texture2D JobDescriptionBackground;
@@ -364,10 +364,13 @@
                 case "4":
                     return Button4;
 
-                case "5":
-                    return Button5;
+				case "5":
+					return Button5;
 
-                case "Cursor":
+				case "6":
+					return Button6;
+
+				case "Cursor":
                     return Cursor;
 
                 case "EPause_Menu":
@@ -627,8 +630,9 @@
                 Button2 = Content.Load<Texture2D>("Textures/Menu/Button2");
                 Button3 = Content.Load<Texture2D>("Textures/Menu/Button3");
                 Button4 = Content.Load<Texture2D>("Textures/Menu/Button4");
-                Button5 = Content.Load<Texture2D>("Textures/Menu/Button5");
-                EPause_Menu = Content.Load<Texture2D>("Textures/Menu/EPauseMenuBackground");
+				Button5 = Content.Load<Texture2D>("Textures/Menu/Button5");
+				Button6 = Content.Load<Texture2D>("Textures/Menu/Button6");
+				EPause_Menu = Content.Load<Texture2D>("Textures/Menu/EPauseMenuBackground");
                 Pause_Menu = Content.Load<Texture2D>("Textures/Menu/PauseMenuBackground");
 				JobDescriptionBackground = Content.Load<Texture2D>("Textures/Menu/JobDescriptionBackground");
 			}

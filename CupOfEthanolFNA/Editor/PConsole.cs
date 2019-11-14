@@ -33,28 +33,17 @@
             {
                 case "/n":
                     Level.Current++;
-                    if (Level.Current > 30)
+                    if (Level.Current > LevelButton.lvButtonList.Count + 1)
                         Level.Current = 1;
                     LevelLoader.LoadEditorLevel();
                     return true;
                 case "/p":
                     Level.Current--;
                     if (Level.Current < 1)
-                        Level.Current = 30;
+                        Level.Current = LevelButton.lvButtonList.Count + 1;
                     LevelLoader.LoadEditorLevel();
                     return true;
-
-                case "/load":
-                    if (int.TryParse(SplitText[1], out i))
-                    {
-                        Level.Current = i;
-                        if (Level.Current < 1)
-                            Level.Current = 1;
-                        if (Level.Current > 30)
-                            Level.Current = 30;
-                        LevelLoader.LoadEditorLevel();
-                    }
-                    return true;
+					
 				case "/moveall":
 					if (int.TryParse(SplitText[1], out i) && int.TryParse(SplitText[2], out j))
 					{

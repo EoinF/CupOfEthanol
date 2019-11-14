@@ -132,12 +132,14 @@
     <Compile Include="Input\InputManager.cs" />
     <Compile Include="Input\MouseClick.cs" />
     <Compile Include="Input\PopupBox.cs" />
+    <Compile Include="Input\TextInput.cs" />
     <Compile Include="MainMethod.cs" />
     <Compile Include="Menu\Button.cs" />
     <Compile Include="Menu\CustomLevelButton.cs" />
     <Compile Include="Menu\LevelButton.cs" />
     <Compile Include="Menu\MainMenu.cs" />
     <Compile Include="Menu\MenuNavigation.cs" />
+    <Compile Include="Menu\NewLevelButton.cs" />
     <Compile Include="Menu\ScreenManager.cs" />
     <Compile Include="Menu\FallingObject.cs" />
     <Compile Include="Menu\TextSprite.cs" />
@@ -148,7 +150,7 @@
     <Compile Include="Textures.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Levels\Custom\1\Thumbnail.png" />
+    <Content Include="Content\Levels\Custom\Through fire and flames\Thumbnail.png" />
     <Content Include="Content\Levels\Main\13\Thumbnail.png" />
     <Content Include="Content\Levels\Main\14\Thumbnail.png" />
     <Content Include="Content\Levels\Main\16\Thumbnail.png" />
@@ -159,9 +161,8 @@
     <Content Include="Content\Textures\Entities\ButtonPedastal.walking.png" />
     <Content Include="client-logo.ico" />
     <Content Include="client-logo2.ico" />
-    <Content Include="Content\Levels\Custom\3\LevelData.xml" />
-    <Content Include="Content\Levels\Custom\1\LevelData.xml" />
-    <Content Include="Content\Levels\Custom\2\LevelData.xml" />
+    <Content Include="Content\Levels\Custom\Through fire and flames\LevelData.xml" />
+    <Content Include="Content\Levels\Custom\Hell on ice\LevelData.xml" />
     <Content Include="Content\Levels\Main\10\LevelData.xml" />
     <Content Include="Content\Levels\Main\11\LevelData.xml" />
     <Content Include="Content\Levels\Main\11\Thumbnail.png" />
@@ -200,6 +201,7 @@
     <Content Include="Content\SavedData.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\Textures\Menu\Button6.png" />
     <Content Include="Content\Textures\Menu\JobDescriptionBackground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -308,34 +310,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Levels\Custom\10\" />
-    <Folder Include="Content\Levels\Custom\11\" />
-    <Folder Include="Content\Levels\Custom\12\" />
-    <Folder Include="Content\Levels\Custom\13\" />
-    <Folder Include="Content\Levels\Custom\14\" />
-    <Folder Include="Content\Levels\Custom\15\" />
-    <Folder Include="Content\Levels\Custom\16\" />
-    <Folder Include="Content\Levels\Custom\17\" />
-    <Folder Include="Content\Levels\Custom\18\" />
-    <Folder Include="Content\Levels\Custom\19\" />
-    <Folder Include="Content\Levels\Custom\20\" />
-    <Folder Include="Content\Levels\Custom\21\" />
-    <Folder Include="Content\Levels\Custom\22\" />
-    <Folder Include="Content\Levels\Custom\23\" />
-    <Folder Include="Content\Levels\Custom\24\" />
-    <Folder Include="Content\Levels\Custom\4\" />
-    <Folder Include="Content\Levels\Custom\5\" />
-    <Folder Include="Content\Levels\Custom\6\" />
-    <Folder Include="Content\Levels\Custom\7\" />
-    <Folder Include="Content\Levels\Custom\8\" />
-    <Folder Include="Content\Levels\Custom\9\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="Steamworks.NET, Version=12.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Steamworks.NET.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>

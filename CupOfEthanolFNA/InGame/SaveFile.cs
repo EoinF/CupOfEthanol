@@ -72,11 +72,8 @@
 
         public static void CompleteLevel()
         {
-            if (Level.IsMain)
-            {
-                if (SaveData.LevelsCompleted < Level.Current)
-					SaveData.LevelsCompleted++;
-            }
+            if (SaveData.LevelsCompleted < Level.Current)
+				SaveData.LevelsCompleted++;
             SaveGame();
         }
 

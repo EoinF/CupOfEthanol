@@ -347,6 +347,11 @@
 			{
 				string directoryName = Level.CurrentLevelButton.Path;
 				string pathName = directoryName + "/LevelData.xml";
+
+				if (!Directory.Exists(directoryName))
+				{
+					Directory.CreateDirectory(directoryName);
+				}
 				doc = SaveFile.LoadDocument(pathName);
 			}
 			else
@@ -602,6 +607,8 @@
         {
             Level.Current = index + 1;
 			Level.CurrentLevelButton = customLevelButton;
+			Console.WriteLine(customLevelButton.Name);
+			Console.WriteLine(customLevelButton.Path);
 			ScreenManager.NoMode();
             ScreenManager.Editing = true;
             Button.ButtonList = null;

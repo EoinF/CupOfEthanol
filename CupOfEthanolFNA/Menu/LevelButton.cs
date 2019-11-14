@@ -70,9 +70,9 @@
         {
             CurrentGroup++;
             Button.ButtonList[2].Active = true;
-            if (CurrentGroup >= (lvButtonList.Count / 6) - 1)
+            if (CurrentGroup >= (int)Math.Ceiling(lvButtonList.Count / 6f) - 1)
             {
-                CurrentGroup = (lvButtonList.Count / 6) - 1;
+                //CurrentGroup = (lvButtonList.Count / 6) - 1;
                 Button.ButtonList[1].Active = false;
             }
             else
@@ -83,7 +83,7 @@
         {
             CurrentGroup--;
             Button.ButtonList[1].Active = true;
-            if (CurrentGroup <= 0 )
+            if (CurrentGroup <= 0)
             {
                 CurrentGroup = 0;
                 Button.ButtonList[2].Active = false;

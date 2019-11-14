@@ -4,13 +4,16 @@
     using Microsoft.Xna.Framework.Graphics;
     using System;
     using System.Collections.Generic;
+	using System.IO;
 
 	public enum PopupType
 	{
 		QUIT,
 		ERASE_BLOCKS,
 		ERASE_ENTITIES,
-		START_NEW_GAME
+		START_NEW_GAME,
+		DELETE_LEVEL,
+		OVERWRITE_LEVEL
 	}
 
 	public class PopupBox
@@ -49,6 +52,37 @@
                 this.ButtonList[i].Draw(spriteBatch);
             }
         }
+
+		public void DeleteLevel(bool Choice)
+		{
+			this.IsFinished = true;
+			if (Choice)
+			{
+				Directory.Delete(Level.CurrentLevelButton.Path, true);
+				MainMenu.Activate();
+			}
+		}
+
+		public void OverwriteLevel(bool Choice)
+		{
+			this.IsFinished = true;
+			if (Choice)
+			{
+				CustomLevelButton oldData = null;
+				foreach (CustomLevelButton customLevelButton in LevelButton.lvButtonList)
+				{
+					if (customLevelButton != Level.CurrentLevelButton // Don't compare the button with itself
+						&& customLevelButton.Name == Level.CurrentLevelButton.Name) // If the level name already exists
+					{
+						oldData = customLevelButton;
+						break;
+					}
+				}
+				LevelButton.lvButtonList.Remove(oldData);
+
+				LevelSaver.SaveMap();
+			}
+		}
 
         public void EraseBlocks(bool Choice)
         {

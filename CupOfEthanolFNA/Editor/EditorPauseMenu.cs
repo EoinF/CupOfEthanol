@@ -37,6 +37,7 @@
         private static void Load_Buttons()
         {
             Button.ButtonList = new List<Button>();
+			TextInput.TextInputList = new List<TextInput>();
             Button.ButtonList.Add(new Button(new TextSprite("+", "Small", new Vector2(50f, 560f), Color.Red), new Vector2(50f, 560f), 5));
             Button.ButtonList.Add(new Button(new TextSprite("-", "Small", new Vector2(70f, 560f), Color.Red), new Vector2(70f, 560f), 5));
             Button.ButtonList.Add(new Button(new TextSprite("+", "Small", new Vector2(200f, 500f), Color.Red), new Vector2(200f, 500f), 5));
@@ -56,13 +57,21 @@
             Button.ButtonList.Add(new Button(new TextSprite("Entity", "Small", new Vector2(60f, 120f), Color.Red), new Vector2(60f, 120f), 4));
             Button.ButtonList.Add(new Button(new TextSprite("Static", "Small", new Vector2(60f, 190f), Color.Red), new Vector2(60f, 190f), 4));
             Button.ButtonList.Add(new Button(new TextSprite("Items", "Small", new Vector2(60f, 260f), Color.Red), new Vector2(60f, 260f), 4));
-            Button.ButtonList.Add(new Button(new TextSprite("Main Menu", "Small", new Vector2(180f, 75f), Color.Red), new Vector2(180f, 75f), 3));
-			Button.ButtonList.Add(new Button(new TextSprite("Save", "Small", new Vector2(225f, 150f), Color.Red), new Vector2(225f, 150f), 4));
-			Button.ButtonList.Add(new Button(new TextSprite("Save & Test", "Small", new Vector2(180f, 225f), Color.Red), new Vector2(180f, 225f), 3));
-			Button.ButtonList.Add(new Button(new TextSprite("DelAllBlocks", "Small", new Vector2(420f, 75f), Color.Red), new Vector2(420f, 75f), 3));
-            Button.ButtonList.Add(new Button(new TextSprite("DelAllEntities", "Small", new Vector2(420f, 150f), Color.Red), new Vector2(420f, 150f), 3));
-            Button.ButtonList.Add(new Button(new TextSprite("Cycle Entities", "Small", new Vector2(430f, 240f), Color.Red), new Vector2(420f, 230f), 3));
-        }
+
+            Button.ButtonList.Add(new Button(new TextSprite("Main Menu", "Small", new Vector2(180f, 75f), Color.Red), new Vector2(180f, 100f), 3));
+			Button.ButtonList.Add(new Button(new TextSprite("Save", "Small", new Vector2(225f, 150f), Color.Red), new Vector2(225f, 160f), 4));
+			Button.ButtonList.Add(new Button(new TextSprite("Save & Test", "Small", new Vector2(180f, 225f), Color.Red), new Vector2(180f, 220f), 3));
+
+			Button.ButtonList.Add(new Button(new TextSprite("DelAllBlocks", "Small", new Vector2(420f, 75f), Color.Red), new Vector2(420f, 100f), 3));
+            Button.ButtonList.Add(new Button(new TextSprite("DelAllEntities", "Small", new Vector2(420f, 150f), Color.Red), new Vector2(420f, 160f), 3));
+            Button.ButtonList.Add(new Button(new TextSprite("Cycle Entities", "Small", new Vector2(430f, 240f), Color.Red), new Vector2(420f, 220f), 3));
+			Button.ButtonList.Add(new Button(new TextSprite("Delete Map", "Small", new Vector2(420f, 20f), Color.Red), new Vector2(420f, 45f), 3));
+
+			TextInput.TextInputList.Add(new TextInput("Level Name",
+				new Vector2(180f, 30f),
+				new TextSprite(Level.CurrentLevelButton.Name + "|", "Small", new Vector2(195f, 55f), Color.White),
+				new Vector2(180f, 45f)));
+		}
 
         private static void Load_Labels()
         {
@@ -132,9 +141,7 @@
                 tex = Editor.CurrentEntity.StartCheckpoint.ToString();
             }
             LabelList.Add(new TextSprite(tex, "Medium", new Vector2(640f, 450f), Color.Yellow)); //6
-            
-
-        }
+		}
 
         private static void Load_TextSprites()
         {
@@ -160,8 +167,10 @@
 
         public static void Unpause()
         {
-            TextSprite.TextList = new List<TextSprite>();
-            Button.ButtonList = new List<Button>(); ;
+			TextSprite.TextList = new List<TextSprite>();
+			TextInput.TextInputList = new List<TextInput>();
+
+			Button.ButtonList = new List<Button>(); ;
             if (Editor.Mouse_Move && Editor.SelectedEntity != -1)
                 Reload_MoveButtonsandLabels();
 
@@ -234,7 +243,14 @@
 
         private static void DrawButtonsAndLabels(SpriteBatch spriteBatch)
         {
-            TextSprite.DrawAll(spriteBatch);
+			if (TextInput.TextInputList != null)
+			{
+				foreach (TextInput input in TextInput.TextInputList)
+				{
+					input.Draw(spriteBatch);
+				}
+			}
+			TextSprite.DrawAll(spriteBatch);
             foreach (TextSprite ts in LabelList)
             {
                 spriteBatch.DrawString(ts.Spritefont, ts.Text, ts.Position, ts.Colour, 0f, Vector2.Zero, 1f, 0, 0.999f);

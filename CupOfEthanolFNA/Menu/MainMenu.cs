@@ -255,16 +255,37 @@
             }
             else
             {
+				if (!Directory.Exists(LevelSaver.CustomLevelsPath))
+				{
+					Directory.CreateDirectory(LevelSaver.CustomLevelsPath);
+					string[] premadeCustoms = Directory.GetDirectories(@"Content\Levels\Custom");
+					foreach (string custom in premadeCustoms)
+					{
+						string[] parts = custom.Split('\\');
+						string customName = parts[parts.Length - 1];
+						Directory.CreateDirectory(LevelSaver.CustomLevelsPath + customName);
+						if (File.Exists(custom + "\\LevelData.xml"))
+						{
+							File.Copy(custom + "\\LevelData.xml", LevelSaver.CustomLevelsPath + customName + "\\LevelData.xml", true);
+						}
+						if (File.Exists(custom + "\\Thumbnail.png"))
+						{
+							File.Copy(custom + "\\Thumbnail.png", LevelSaver.CustomLevelsPath + customName + "\\Thumbnail.png", true);
+						}
+					}
+				}
 				//Load custom levels here
 				String[] levels = Directory.GetDirectories(LevelSaver.CustomLevelsPath);
 				int levelIndex = 0;
 				Texture2D thumbnail;
-                for (int j = 0; j < levels.Length / 3; j++)
+                for (int j = 0; j < Math.Ceiling(levels.Length / 3f); j++)
                 {
 					for (int i = 0; i < 3; i++)
 					{
 						while (levelIndex < levels.Length && !File.Exists(levels[levelIndex] + "/LevelData.xml"))
 						{
+							// Delete folders that don't contain a level
+							Directory.Delete(levels[levelIndex], true);
 							levelIndex++;
 						}
 						if (levelIndex < levels.Length)
@@ -283,8 +304,19 @@
 							levelIndex++;
 						}
 					}
-                }
-            }
+				}
+				int x = (LevelButton.lvButtonList.Count) % 3;
+				int y = (int)Math.Floor((LevelButton.lvButtonList.Count) / 3f) % 2;
+				int levelSuffix = LevelButton.lvButtonList.Count;
+				string name = "";
+				do
+				{
+					levelSuffix++;
+					name = "Untitled" + levelSuffix;
+				} while (LevelButton.lvButtonList.Exists(item => (item as CustomLevelButton).Name == name));
+
+				LevelButton.lvButtonList.Add(new NewLevelButton(name, new Vector2((float)((220 * (x % 3)) + 80), (float)((220 * (y % 2)) + 0x69)), "unlocked"));
+			}
 
 			if (LevelButton.lvButtonList.Count < 7)
 			{

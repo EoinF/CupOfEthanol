@@ -9,8 +9,6 @@
 	{
 		// Note: Must be in multiples of 6 or crashes will occur
 		public const int maxLevels = 24;
-		public const int customLevels = 24; //12
-
 
 		public static string _backgroundTexture;
         public static float AirResistance;
@@ -20,7 +18,6 @@
         public static Vector2 Gravity;
         public static Vector2 Offset = Vector2.Zero;
 		public static String SongName;
-        public static bool IsMain = true;
 
         public static void DrawBackground(SpriteBatch spriteBatch)
         {

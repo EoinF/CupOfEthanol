@@ -2,7 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
+	using System.IO;
+	using System.Text;
     using System.Xml;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -18,7 +19,18 @@
             writer.WriteStartElement("Main");
             writer.Close();
             doc.Load(filename);
-            doc.DocumentElement.InnerXml = "<Settings><BackgroundTexture>SkyA</BackgroundTexture><Gravity>1</Gravity><AirResistance>0.1</AirResistance></Settings><Entities></Entities><Static>28#21`f~14#12`a~14#15`f~15#11`a~15#15`b~15#16`f~16#6`f~16#10`A~16#13`a~16#15`b~16#16`f~17#10`a~17#15`b~17#16`f~18#10`a~18#15`b~18#16`f~19#10`a~19#15`b~19#16`f~20#10`a~20#15`b~20#16`f~21#6`f~21#10`a~21#15`b~21#16`f~22#11`a~22#15`b~22#16`f~23#12`a~23#15`" + errormsg + "~22#14</Static>";
+			doc.DocumentElement.InnerXml = @"
+  <Settings>
+    <BackgroundTexture>SkyA</BackgroundTexture>
+    <Gravity>1</Gravity>
+    <AirResistance>0.1</AirResistance>
+    <SongName>
+    </SongName>
+  </Settings>
+  <Entities />
+  <Static>653#647`a~637#641`a~638#641`b~638#642`A~639#639`a~639#641`b~639#642`a~640#641`b~640#642`a~641#641`a~644#639`a~645#639`b~645#640`Chalice~646#638`a~646#639`b~646#640`a~647#639`b~647#640`a~648#639`</Static>
+";
+
             doc.Save(filename);
             doc.Load(filename);
             return doc;
@@ -192,11 +204,36 @@
         }
 
         public static void SaveMap()
-        {
+		{
+			if (TextInput.TextInputList[0].Text.Length == 0)
+			{
+				MessageBox.StatusMessage = new MessageBox("Level must have a name!", new Vector2(217, 190), 120);
+				return;
+			}
 			SteamIntegration.Achievements.LevelCreated();
 			string path = Level.CurrentLevelButton.Path;
-			Save_StaticObjects(Save_Objects(SaveFile.LoadDocument(path + "/LevelData.xml"))).Save(path + "/LevelData.xml");
-            MessageBox.StatusMessage = new MessageBox("Save Successful!", new Vector2(217, 190), 120);
+			string newPath = path.Substring(0, path.Length - Level.CurrentLevelButton.Name.Length) + TextInput.TextInputList[0].Text;
+
+			Console.WriteLine("old = " + path);
+			Console.WriteLine("new = " + newPath);
+
+			if (Level.CurrentLevelButton.Name != TextInput.TextInputList[0].Text)
+			{
+				if (!Directory.Exists(newPath))
+				{
+					Directory.CreateDirectory(newPath);
+				}
+			}
+
+			Save_StaticObjects(Save_Objects(SaveFile.LoadDocument(newPath + "/LevelData.xml"))).Save(newPath + "/LevelData.xml");
+
+			if (Level.CurrentLevelButton.Name != TextInput.TextInputList[0].Text)
+			{
+				Directory.Delete(path, true); // Delete the level with the old name first
+				Level.CurrentLevelButton.Name = TextInput.TextInputList[0].Text;
+				Level.CurrentLevelButton.Path = newPath;
+			}
+			MessageBox.StatusMessage = new MessageBox("Save Successful!", new Vector2(217, 190), 120);
         }
     }
 }

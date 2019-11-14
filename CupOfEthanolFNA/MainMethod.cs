@@ -104,7 +104,11 @@
             }
             if (LevelLoader.LevelComplete)
 			{
-				SaveFile.CompleteLevel();
+
+				if (!ScreenManager.Custom)
+				{
+					SaveFile.CompleteLevel();
+				}
 				if (Level.Current == Level.maxLevels)
 				{
 					if (ScreenManager.Custom)

@@ -205,7 +205,6 @@
                     TextSprite.DrawAll(spriteBatch);
                 }
             }
-
         }
 
         public static void Entity_ClickCheck()
@@ -437,6 +436,10 @@
                 {
                     CurrentEntity.sqobject.Position = new Vector2(InputManager.Mousestate[0].X - (CurrentEntity.sqobject.Texture.Width * CurrentEntity.sqobject.Size), InputManager.Mousestate[0].Y - (CurrentEntity.sqobject.Texture.Height * CurrentEntity.sqobject.Size)) - Level.Offset;
                 }
+				if (ScreenManager.Paused)
+				{
+					TextInput.Update();
+				}
                 if (MessageBox.GameMessage != null)
                 {
                     MessageBox.GameMessage.Update();

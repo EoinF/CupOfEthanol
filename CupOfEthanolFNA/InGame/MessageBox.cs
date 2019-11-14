@@ -64,57 +64,6 @@
             }
         }
 
-        public MessageBox(string text, Vector2 StartLocation)
-        {
-            text = text + " ";
-
-            startLocation = StartLocation;
-            this.LifeTime = 80;
-            this.Row = "";
-            int h = 0;
-            int k = 0;
-            text = CheckForSpSymbols(text);
-            while (h != text.Length)
-            {
-                for (int i = 50; i > 0; i--)
-                {
-                    if (text.Length < (i + h))
-                    {
-                        i = text.Length - h;
-                    }
-                    if (Textures.GetFont("Medium").MeasureString(text.Substring(h, i)).X < 800f)
-                    {
-                        string tx = text.Substring(h, i);
-                        string[] split = tx.Split(new char[] { ' ' });
-                        if (split[split.Length - 1].Length != 0)
-                        {
-                            if (text.Length < (split[split.Length - 1].Length + h))
-                            {
-                                i = text.Length - h;
-                            }
-                            else
-                            {
-                                if (i != split[split.Length - 1].Length)
-                                {
-                                    i -= split[split.Length - 1].Length;
-                                }
-                                tx = text.Substring(h, i);
-                            }
-                        }
-                        this.Row = this.Row + "\n" + tx;
-                        if (k > 2)
-                        {
-                            //used to be k = k.  /Eoin
-                            k = h;
-                        }
-                        h += i;
-                        break;
-                    }
-                }
-                k++;
-            }
-        }
-
         public MessageBox(string text, Vector2 StartLocation, int lifetime)
         {
             text = text + " ";

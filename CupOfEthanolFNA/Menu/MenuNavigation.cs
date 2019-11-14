@@ -2,8 +2,9 @@
 {
     using Microsoft.Xna.Framework.Input;
     using System;
+	using System.Windows.Forms;
 
-    public static class MenuNavigation
+	public static class MenuNavigation
     {
         private static void BClick_CycleEntities()
         {
@@ -121,6 +122,10 @@
                 {
                     MainMethod.popupBox.QuitGame(choice);
                 }
+				if (MainMethod.popupBox.type == PopupType.DELETE_LEVEL)
+				{
+					MainMethod.popupBox.DeleteLevel(choice);
+				}
                 if (MainMethod.popupBox.type == PopupType.ERASE_BLOCKS)
                 {
                     MainMethod.popupBox.EraseBlocks(choice);
@@ -132,6 +137,10 @@
 				if (MainMethod.popupBox.type == PopupType.START_NEW_GAME)
 				{
 					MainMethod.popupBox.NewGame(choice);
+				}
+				if (MainMethod.popupBox.type == PopupType.OVERWRITE_LEVEL)
+				{
+					MainMethod.popupBox.OverwriteLevel(choice);
 				}
 				return true;
             }
@@ -153,8 +162,8 @@
 						}
 						if (ScreenManager.Editing)
                         {
-                            LevelLoader.StartEditorLevel(i, LevelButton.lvButtonList[i] as CustomLevelButton);
-                            return true;
+							LevelLoader.StartEditorLevel(i, LevelButton.lvButtonList[i] as CustomLevelButton);
+							return true;
                         }
                         if (LevelButton.lvButtonList[i].Status != "Locked")
                         {
@@ -170,7 +179,7 @@
         public static void NextScreen()
         {
 
-            if (InputManager.Mousestate[1].LeftButton != ButtonState.Pressed)
+            if (InputManager.Mousestate[1].LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed)
             {
                 int i;
                 if (!LevelSelect_Nav())
@@ -245,10 +254,41 @@
                                     return;
 
 								case "Save":
+									foreach (CustomLevelButton customLevelButton in LevelButton.lvButtonList)
+									{
+										if (customLevelButton != Level.CurrentLevelButton // Don't compare the button with itself
+											&& customLevelButton.Name == TextInput.TextInputList[0].Text) // If the level name already exists
+										{
+											MainMethod.popupBox = new PopupBox(new string[] {
+												"This filename already exists",
+												"This will overwrite the existing level",
+												"Really overwrite the old data?"
+											}, PopupType.OVERWRITE_LEVEL);
+											return;
+										}
+									}
 									LevelSaver.SaveMap();
 									return;
 
 								case "Save & Test":
+									if (TextInput.TextInputList[0].Text.Length == 0)
+									{
+										MessageBox.StatusMessage = new MessageBox("Level must have a name!", new Microsoft.Xna.Framework.Vector2(217, 190), 120);
+										return;
+									}
+									foreach (CustomLevelButton customLevelButton in LevelButton.lvButtonList)
+									{
+										if (customLevelButton != Level.CurrentLevelButton // Don't compare the button with itself
+											&& customLevelButton.Name == TextInput.TextInputList[0].Text) // If the level name already exists
+										{
+											MainMethod.popupBox = new PopupBox(new string[] {
+												"This filename already exists",
+												"This will overwrite the existing level",
+												"Really overwrite the old data?"
+											}, PopupType.OVERWRITE_LEVEL);
+											return;
+										}
+									}
 									LevelSaver.SaveMap();
 									SaveFile.LoadSaveFiles();
 									LevelLoader.StartCustomLevel(Level.Current - 1, Level.CurrentLevelButton);
@@ -267,7 +307,11 @@
                                     Plus_Minus.Minus(i);
                                     return;
 
-                                case "DelAllBlocks":
+								case "Delete Map":
+									MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This map can not be restored", "once deleted." }, PopupType.DELETE_LEVEL);
+									return;
+
+								case "DelAllBlocks":
                                     MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This will delete all the blocks", "in this level permanently." }, PopupType.ERASE_BLOCKS);
                                     return;
 
