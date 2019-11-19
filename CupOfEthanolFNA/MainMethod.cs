@@ -6,8 +6,9 @@
     using System;
     using System.Collections.Generic;
 	using Steamworks;
+	using System.IO;
 
-    public class MainMethod : Game
+	public class MainMethod : Game
     {
         public static GraphicsDevice device;
         public GraphicsDeviceManager graphics;
@@ -39,7 +40,8 @@
             this.spriteBatch = new SpriteBatch(device);
             Textures.LoadTextures(Content, device);
             Sounds.LoadSounds(Content);
-        }
+			LevelSaver.Screenshot = new RenderTarget2D(GraphicsDevice, 800, 600, false, SurfaceFormat.Color, DepthFormat.Depth24);
+		}
 
 		protected override void Initialize()
 		{
@@ -48,7 +50,8 @@
             this.graphics.IsFullScreen = false;
             this.graphics.PreferredBackBufferWidth = 800;
             this.graphics.PreferredBackBufferHeight = 600;
-            this.graphics.ApplyChanges();            
+			this.graphics.ApplyChanges();
+			this.graphics.GraphicsProfile = GraphicsProfile.Reach;
 
             if (DebugMode)
             {
@@ -70,8 +73,9 @@
         }
 
         protected override void UnloadContent()
-        {
-        }
+		{
+			LevelSaver.Screenshot.Dispose();
+		}
 
         protected override void Update(GameTime gameTime)
 		{
@@ -82,12 +86,14 @@
 			}
 			if (ScreenManager.GameClosing)
             {
-                base.Exit();
+				base.Exit();
             }
             if (base.IsActive)
             {
 				MainMenu.Update();
-                if (popupBox == null)
+				LevelSaver.Update();
+
+				if (popupBox == null)
                 {
                     InGame.Update();
                     Editor.Update();
@@ -104,7 +110,6 @@
             }
             if (LevelLoader.LevelComplete)
 			{
-
 				if (!ScreenManager.Custom)
 				{
 					SaveFile.CompleteLevel();
@@ -139,14 +144,47 @@
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(InstanceColour);
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
-            if (popupBox != null)
+			//Console.WriteLine(LevelSaver.SavingTimeout);
+			if (LevelSaver.SavingTimeout == 1)
+			{
+				Console.WriteLine("Taking the screenshot now");
+				GraphicsDevice.SetRenderTarget(LevelSaver.Screenshot); // rendering to the render target
+				GraphicsDevice.Clear(Color.Transparent);
+				spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+
+				InGame.Draw(this.spriteBatch, gameTime, true);
+				Editor.Draw(this.spriteBatch, gameTime, true);
+
+				string path = Level.CurrentLevelButton.Path;
+				string newPath = path.Substring(0, path.Length - Level.CurrentLevelButton.Name.Length) + TextInput.TextInputList[0].Text;
+				Console.WriteLine(newPath);
+
+				if (!Directory.Exists(newPath))
+				{
+					Directory.CreateDirectory(newPath);
+				}
+				this.spriteBatch.End();
+
+				//
+				// Take a screenshot
+				//
+				using (FileStream fs = File.Create(newPath + "\\Thumbnail.png"))
+				{
+					LevelSaver.Screenshot.SaveAsPng(fs, 160, 120);
+				}
+				GraphicsDevice.SetRenderTarget(null);
+			}
+
+			GraphicsDevice.Clear(InstanceColour);
+			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+
+			if (popupBox != null)
             {
                 popupBox.Draw(this.spriteBatch);
             }
-            InGame.Draw(this.spriteBatch, gameTime);
-            Editor.Draw(this.spriteBatch, gameTime);
+            InGame.Draw(this.spriteBatch, gameTime, false);
+
+            Editor.Draw(this.spriteBatch, gameTime, false);
             MainMenu.Draw(this.spriteBatch);
             if (DebugMode)
                 debug.Draw(this.spriteBatch);

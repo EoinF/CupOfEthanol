@@ -201,8 +201,35 @@
             XmlElement child = Save_Collectables(Save_SqObjects(Save_MapSize(doc.CreateElement("Static"))));
             root.AppendChild(child);
             return doc;
-        }
+		}
 
+		public static int SavingTimeout = -1;
+		public static RenderTarget2D Screenshot;
+
+		public static void Update()
+		{
+			SavingTimeout--;
+
+			if (SavingTimeout == 0)
+			{
+				Console.WriteLine("Starting to save...");
+				string path = Level.CurrentLevelButton.Path;
+			
+				SteamIntegration.Achievements.LevelCreated();
+				string newPath = path.Substring(0, path.Length - Level.CurrentLevelButton.Name.Length) + TextInput.TextInputList[0].Text;
+
+				Save_StaticObjects(Save_Objects(SaveFile.LoadDocument(newPath + "/LevelData.xml"))).Save(newPath + "/LevelData.xml");
+
+				if (Level.CurrentLevelButton.Name != TextInput.TextInputList[0].Text)
+				{
+					Directory.Delete(path, true); // Delete the level with the old name first
+					Level.CurrentLevelButton.Name = TextInput.TextInputList[0].Text;
+					Level.CurrentLevelButton.Path = newPath;
+				}
+				MessageBox.StatusMessage = new MessageBox("Save Successful!", new Vector2(217, 190), 120);
+			}
+		}
+		
         public static void SaveMap()
 		{
 			if (TextInput.TextInputList[0].Text.Length == 0)
@@ -210,30 +237,7 @@
 				MessageBox.StatusMessage = new MessageBox("Level must have a name!", new Vector2(217, 190), 120);
 				return;
 			}
-			SteamIntegration.Achievements.LevelCreated();
-			string path = Level.CurrentLevelButton.Path;
-			string newPath = path.Substring(0, path.Length - Level.CurrentLevelButton.Name.Length) + TextInput.TextInputList[0].Text;
-
-			Console.WriteLine("old = " + path);
-			Console.WriteLine("new = " + newPath);
-
-			if (Level.CurrentLevelButton.Name != TextInput.TextInputList[0].Text)
-			{
-				if (!Directory.Exists(newPath))
-				{
-					Directory.CreateDirectory(newPath);
-				}
-			}
-
-			Save_StaticObjects(Save_Objects(SaveFile.LoadDocument(newPath + "/LevelData.xml"))).Save(newPath + "/LevelData.xml");
-
-			if (Level.CurrentLevelButton.Name != TextInput.TextInputList[0].Text)
-			{
-				Directory.Delete(path, true); // Delete the level with the old name first
-				Level.CurrentLevelButton.Name = TextInput.TextInputList[0].Text;
-				Level.CurrentLevelButton.Path = newPath;
-			}
-			MessageBox.StatusMessage = new MessageBox("Save Successful!", new Vector2(217, 190), 120);
+			SavingTimeout = 2;
         }
     }
 }

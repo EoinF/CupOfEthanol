@@ -57,18 +57,24 @@
             return true;
         }
 
-        public static void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public static void Draw(SpriteBatch spriteBatch, GameTime gameTime, bool IsHidingUI)
         {
             if (ScreenManager.Editing && !ScreenManager.Levelselect)
             {
-                DrawBackGrounds(spriteBatch);
+                DrawBackGrounds(spriteBatch, IsHidingUI);
                 if (PPlayer.DeathCountdown < 0)
                 {
                     SquareObject.DrawSquares(SquareObject.sqObjectArray, spriteBatch, 17, 16);
                     DrawEntities(spriteBatch, gameTime);
-                    DrawMisc(spriteBatch);
+					if (!IsHidingUI)
+					{
+						DrawMisc(spriteBatch);
+					}
                     DrawCollectables(spriteBatch);
-                    DrawAttachedItems(spriteBatch);
+					if (!IsHidingUI)
+					{
+						DrawAttachedItems(spriteBatch);
+					}
                 }
             }
         }
@@ -104,11 +110,14 @@
             }
         }
 
-        private static void DrawBackGrounds(SpriteBatch spriteBatch)
+        private static void DrawBackGrounds(SpriteBatch spriteBatch, bool IsHidingUI)
         {
             if (ScreenManager.Paused)
             {
-                EditorPauseMenu.Draw(spriteBatch);
+				if (!IsHidingUI)
+				{
+					EditorPauseMenu.Draw(spriteBatch);
+				}
             }
             Level.DrawBackground(spriteBatch);
         }

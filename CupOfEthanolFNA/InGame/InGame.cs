@@ -6,13 +6,16 @@
 
     public static class InGame
     {
-        public static void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public static void Draw(SpriteBatch spriteBatch, GameTime gameTime, bool IsHidingUI)
         {
             if (ScreenManager.Ingame || (ScreenManager.Paused && !ScreenManager.Editing))
             {
                 if (ScreenManager.Paused)
                 {
-                    PauseMenu.Draw(spriteBatch);
+					if (!IsHidingUI)
+					{
+						PauseMenu.Draw(spriteBatch);
+					}
                 }
                 Level.DrawBackground(spriteBatch);
                 if (PPlayer.DeathCountdown != 0)
@@ -26,8 +29,11 @@
                             entity.Draw(spriteBatch, gameTime);
                     }
                     if (MessageBox.GameMessage != null)
-                    {
-                        MessageBox.GameMessage.Draw(spriteBatch);
+					{
+						if (!IsHidingUI)
+						{
+							MessageBox.GameMessage.Draw(spriteBatch);
+						}
                     }
                     for (int w = 0; w < Checkpoint.checkpointList.Count; w++)
                     {
