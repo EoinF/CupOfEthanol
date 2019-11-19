@@ -274,6 +274,9 @@
 						}
 					}
 				}
+
+				SteamIntegration.LoadWorkshopLevels();
+
 				//Load custom levels here
 				String[] levels = Directory.GetDirectories(LevelSaver.CustomLevelsPath);
 				int levelIndex = 0;
@@ -293,7 +296,7 @@
 							if (File.Exists(levels[levelIndex] + "/Thumbnail.png"))
 							{
 								FileStream filestream = new FileStream(levels[levelIndex] + "/Thumbnail.png", FileMode.Open);
-								thumbnail = Texture2D.FromStream(MainMethod.device, filestream);
+								thumbnail = Texture2D.FromStream(MainMethod.device, filestream, 160, 120, true);
 								filestream.Close();
 							}
 							else
@@ -315,7 +318,7 @@
 					name = "Untitled" + levelSuffix;
 				} while (LevelButton.lvButtonList.Exists(item => (item as CustomLevelButton).Name == name));
 
-				LevelButton.lvButtonList.Add(new NewLevelButton(name, new Vector2((float)((220 * (x % 3)) + 80), (float)((220 * (y % 2)) + 0x69)), "unlocked"));
+				LevelButton.lvButtonList.Add(new NewLevelButton(name, new Vector2((float)((220 * (x % 3)) + 80), (float)((220 * (y % 2)) + 0x69))));
 			}
 
 			if (LevelButton.lvButtonList.Count < 7)

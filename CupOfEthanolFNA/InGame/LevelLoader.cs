@@ -345,14 +345,22 @@
 			XmlDocument doc;
 			if (ScreenManager.Custom || ScreenManager.Editing)
 			{
-				string directoryName = Level.CurrentLevelButton.Path;
-				string pathName = directoryName + "/LevelData.xml";
-
-				if (!Directory.Exists(directoryName))
+				if (Level.CurrentLevelButton is WorkshopLevelButton)
 				{
-					Directory.CreateDirectory(directoryName);
+					doc = new XmlDocument();
+					doc.LoadXml((Level.CurrentLevelButton as WorkshopLevelButton).LevelData);
 				}
-				doc = SaveFile.LoadDocument(pathName);
+				else
+				{
+					string directoryName = Level.CurrentLevelButton.Path;
+					string pathName = directoryName + "/LevelData.xml";
+
+					if (!Directory.Exists(directoryName))
+					{
+						Directory.CreateDirectory(directoryName);
+					}
+					doc = SaveFile.LoadDocument(pathName);
+				}
 			}
 			else
 			{
@@ -594,6 +602,10 @@
 
 		public static void StartCustomLevel(int Lvl, CustomLevelButton customLevelButton)
 		{
+			if (customLevelButton is WorkshopLevelButton && !(customLevelButton as WorkshopLevelButton).IsReady)
+			{
+				return;
+			}
 			Level.Current = Lvl;
 			Level.CurrentLevelButton = customLevelButton;
 			ScreenManager.NoMode();
@@ -604,8 +616,12 @@
 		}
 
 		public static void StartEditorLevel(int index, CustomLevelButton customLevelButton)
-        {
-            Level.Current = index + 1;
+		{
+			if (customLevelButton is WorkshopLevelButton && !(customLevelButton as WorkshopLevelButton).IsReady)
+			{
+				return;
+			}
+			Level.Current = index + 1;
 			Level.CurrentLevelButton = customLevelButton;
 			Console.WriteLine(customLevelButton.Name);
 			Console.WriteLine(customLevelButton.Path);

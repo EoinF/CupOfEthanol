@@ -62,8 +62,8 @@
 			Button.ButtonList.Add(new Button(new TextSprite("Save", "Small", new Vector2(225f, 150f), Color.Red), new Vector2(225f, 160f), 4));
 			Button.ButtonList.Add(new Button(new TextSprite("Save & Test", "Small", new Vector2(180f, 225f), Color.Red), new Vector2(180f, 220f), 3));
 
-			Button.ButtonList.Add(new Button(new TextSprite("DelAllBlocks", "Small", new Vector2(420f, 75f), Color.Red), new Vector2(420f, 100f), 3));
-            Button.ButtonList.Add(new Button(new TextSprite("DelAllEntities", "Small", new Vector2(420f, 150f), Color.Red), new Vector2(420f, 160f), 3));
+			Button.ButtonList.Add(new Button(new TextSprite("Publish to Workshop", "Small", new Vector2(420f, 75f), Color.Red), new Vector2(420f, 100f), 3));
+            Button.ButtonList.Add(new Button(new TextSprite("Delete All Objects", "Small", new Vector2(420f, 150f), Color.Red), new Vector2(420f, 160f), 3));
             Button.ButtonList.Add(new Button(new TextSprite("Cycle Entities", "Small", new Vector2(430f, 240f), Color.Red), new Vector2(420f, 220f), 3));
 			Button.ButtonList.Add(new Button(new TextSprite("Delete Map", "Small", new Vector2(420f, 20f), Color.Red), new Vector2(420f, 45f), 3));
 

@@ -9,8 +9,7 @@
 	public enum PopupType
 	{
 		QUIT,
-		ERASE_BLOCKS,
-		ERASE_ENTITIES,
+		ERASE_ALL_OBJECTS,
 		START_NEW_GAME,
 		DELETE_LEVEL,
 		OVERWRITE_LEVEL
@@ -84,23 +83,17 @@
 			}
 		}
 
-        public void EraseBlocks(bool Choice)
+        public void EraseAllObjects(bool Choice)
         {
             this.IsFinished = true;
             if (Choice)
             {
                 SquareObject.sqObjectArray = new SquareObject[0x7d0, 0x7d0];
-            }
-        }
-
-		public void EraseEntities(bool Choice)
-		{
-			this.IsFinished = true;
-			if (Choice)
-			{
 				Entity.EntityList = new List<Entity>();
+				Collectable.collectableList.Clear();
 			}
-		}
+        }
+		
 		public void NewGame(bool Choice)
 		{
 			this.IsFinished = true;

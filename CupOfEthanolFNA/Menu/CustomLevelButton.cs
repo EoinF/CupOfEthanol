@@ -22,8 +22,6 @@ namespace LackingPlatforms
 				this.Name = this.Name.Substring(0, TextInput.maxLevelNameLength);
 			}
 			LabelText = splitTextAcrossLines(this.Name);
-			Console.WriteLine(this.Name + " becomes:");
-			Console.WriteLine(LabelText);
 
 			this.Position = position;
 			this.Thumbnail = thumbnail;

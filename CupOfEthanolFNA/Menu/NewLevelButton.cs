@@ -9,7 +9,7 @@ namespace LackingPlatforms
 {
 	class NewLevelButton : CustomLevelButton
 	{
-		public NewLevelButton(string name, Vector2 position, string status)
+		public NewLevelButton(string name, Vector2 position)
 			: base(LevelSaver.CustomLevelsPath + name, position, Textures.GetTexture("6"))
 		{
 

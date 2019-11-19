@@ -84,8 +84,13 @@
 				MainMenu.Activate();
 				this.isAppStarting = false;
 			}
+			else
+			{
+				SteamIntegration.Update();
+			}
 			if (ScreenManager.GameClosing)
             {
+				SteamAPI.Shutdown();
 				base.Exit();
             }
             if (base.IsActive)
@@ -144,7 +149,6 @@
 
         protected override void Draw(GameTime gameTime)
         {
-			//Console.WriteLine(LevelSaver.SavingTimeout);
 			if (LevelSaver.SavingTimeout == 1)
 			{
 				Console.WriteLine("Taking the screenshot now");
@@ -171,6 +175,13 @@
 				using (FileStream fs = File.Create(newPath + "\\Thumbnail.png"))
 				{
 					LevelSaver.Screenshot.SaveAsPng(fs, 160, 120);
+				}
+				if (LevelSaver.IsPublishingToWorkshop)
+				{
+					using (FileStream fs = File.OpenWrite(LevelSaver.CustomLevelsPath + "\\Preview.png"))
+					{
+						LevelSaver.Screenshot.SaveAsPng(fs, 800, 600);
+					}
 				}
 				GraphicsDevice.SetRenderTarget(null);
 			}

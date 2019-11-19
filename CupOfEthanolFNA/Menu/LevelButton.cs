@@ -14,7 +14,7 @@
         public string Status;
         public int CoastersCollected;
         private static Vector2 ImageOffset = new Vector2(20, 20);
-		protected Texture2D Thumbnail;
+		public Texture2D Thumbnail;
 
 		public LevelButton()
 		{
@@ -66,7 +66,16 @@
 			}
         }
 
-        public static void NextGroup()
+		public static void CalculateGroup()
+		{
+			int offset = LevelButton.lvButtonList.Count - ((CurrentGroup + 1) * 6);
+			if (offset >= 0)
+			{
+				Button.ButtonList[1].Active = true;
+			}
+		}
+
+		public static void NextGroup()
         {
             CurrentGroup++;
             Button.ButtonList[2].Active = true;
@@ -131,7 +140,7 @@
 			}
 		}
 
-		public Color Colour
+		public virtual Color Colour
         {
             get
             {

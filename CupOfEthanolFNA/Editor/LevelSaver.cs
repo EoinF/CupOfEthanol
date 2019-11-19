@@ -205,6 +205,7 @@
 
 		public static int SavingTimeout = -1;
 		public static RenderTarget2D Screenshot;
+		public static bool IsPublishingToWorkshop = false;
 
 		public static void Update()
 		{
@@ -227,6 +228,12 @@
 					Level.CurrentLevelButton.Path = newPath;
 				}
 				MessageBox.StatusMessage = new MessageBox("Save Successful!", new Vector2(217, 190), 120);
+
+				if (IsPublishingToWorkshop)
+				{
+					SteamIntegration.UploadWorkshopLevel();
+					IsPublishingToWorkshop = false;
+				}
 			}
 		}
 		

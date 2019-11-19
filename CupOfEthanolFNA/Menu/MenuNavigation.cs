@@ -126,13 +126,9 @@
 				{
 					MainMethod.popupBox.DeleteLevel(choice);
 				}
-                if (MainMethod.popupBox.type == PopupType.ERASE_BLOCKS)
+                if (MainMethod.popupBox.type == PopupType.ERASE_ALL_OBJECTS)
                 {
-                    MainMethod.popupBox.EraseBlocks(choice);
-				}
-				if (MainMethod.popupBox.type == PopupType.ERASE_ENTITIES)
-				{
-					MainMethod.popupBox.EraseEntities(choice);
+                    MainMethod.popupBox.EraseAllObjects(choice);
 				}
 				if (MainMethod.popupBox.type == PopupType.START_NEW_GAME)
 				{
@@ -254,42 +250,11 @@
                                     return;
 
 								case "Save":
-									foreach (CustomLevelButton customLevelButton in LevelButton.lvButtonList)
-									{
-										if (customLevelButton != Level.CurrentLevelButton // Don't compare the button with itself
-											&& customLevelButton.Name == TextInput.TextInputList[0].Text) // If the level name already exists
-										{
-											MainMethod.popupBox = new PopupBox(new string[] {
-												"This filename already exists",
-												"This will overwrite the existing level",
-												"Really overwrite the old data?"
-											}, PopupType.OVERWRITE_LEVEL);
-											return;
-										}
-									}
-									LevelSaver.SaveMap();
+									Save();
 									return;
 
 								case "Save & Test":
-									if (TextInput.TextInputList[0].Text.Length == 0)
-									{
-										MessageBox.StatusMessage = new MessageBox("Level must have a name!", new Microsoft.Xna.Framework.Vector2(217, 190), 120);
-										return;
-									}
-									foreach (CustomLevelButton customLevelButton in LevelButton.lvButtonList)
-									{
-										if (customLevelButton != Level.CurrentLevelButton // Don't compare the button with itself
-											&& customLevelButton.Name == TextInput.TextInputList[0].Text) // If the level name already exists
-										{
-											MainMethod.popupBox = new PopupBox(new string[] {
-												"This filename already exists",
-												"This will overwrite the existing level",
-												"Really overwrite the old data?"
-											}, PopupType.OVERWRITE_LEVEL);
-											return;
-										}
-									}
-									LevelSaver.SaveMap();
+									Save();
 									SaveFile.LoadSaveFiles();
 									LevelLoader.StartCustomLevel(Level.Current - 1, Level.CurrentLevelButton);
 									ScreenManager.Testing = true;
@@ -311,13 +276,15 @@
 									MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This map can not be restored", "once deleted." }, PopupType.DELETE_LEVEL);
 									return;
 
-								case "DelAllBlocks":
-                                    MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This will delete all the blocks", "in this level permanently." }, PopupType.ERASE_BLOCKS);
+								case "Publish to Workshop":
+									Save();
+									LevelSaver.IsPublishingToWorkshop = true;
+									return;
+
+								case "Delete All Objects":
+                                    MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This will delete all objects", "in this level permanently." }, PopupType.ERASE_ALL_OBJECTS);
                                     return;
 
-                                case "DelAllEntities":
-                                    MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This will delete all the entities", "in this level permanently." }, PopupType.ERASE_ENTITIES);
-                                    return;
 
                                 case "Cycle Entities":
                                     BClick_CycleEntities();
@@ -336,6 +303,29 @@
                 }
             }
         }
+
+		private static void Save()
+		{
+			if (TextInput.TextInputList[0].Text.Length == 0)
+			{
+				MessageBox.StatusMessage = new MessageBox("Level must have a name!", new Microsoft.Xna.Framework.Vector2(217, 190), 120);
+				return;
+			}
+			foreach (CustomLevelButton customLevelButton in LevelButton.lvButtonList)
+			{
+				if (customLevelButton != Level.CurrentLevelButton // Don't compare the button with itself
+					&& customLevelButton.Name == TextInput.TextInputList[0].Text) // If the level name already exists
+				{
+					MainMethod.popupBox = new PopupBox(new string[] {
+												"This filename already exists",
+												"This will overwrite the existing level",
+												"Really overwrite the old data?"
+											}, PopupType.OVERWRITE_LEVEL);
+					return;
+				}
+			}
+			LevelSaver.SaveMap();
+		}
     }
 }
 
