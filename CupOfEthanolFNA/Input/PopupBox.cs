@@ -30,8 +30,8 @@
             //this.MessageList[0] = new TextSprite(message[0], "Small", new Vector2(300f, 110f), Color.Red);
             for (int i = 0; i < message.Length; i++)
             {
-                float PositionX = (Textures.GetTexture("Pause_Menu").Width - Textures.GetFont("Small").MeasureString(message[i]).X) / 2f + 200;
-                this.MessageList[i] = new TextSprite(message[i], "Small", new Vector2(PositionX, (float)(140 + (30 * i))), Color.Red);
+                float PositionX = (Textures.GetTexture("Pause_Menu").Width - Textures.GetFont("Medium").MeasureString(message[i]).X) / 2f + 200;
+                this.MessageList[i] = new TextSprite(message[i], "Medium", new Vector2(PositionX, (float)(140 + (30 * i))), Color.Red);
             }
             this.ButtonList = new List<Button>();
             this.ButtonList.Add(new Button(new TextSprite("Yes", "Small", new Vector2(200f, 250f), Color.Red), new Vector2(263f, 255f), 4, 0.9998f));
@@ -41,7 +41,7 @@
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Textures.GetTexture("Pause_Menu"), new Vector2(200f, 100f), null, Color.Yellow, 0f, Vector2.Zero, 1f, 0, 0.9996f);
+            spriteBatch.Draw(Textures.GetTexture("Pause_Menu"), new Vector2(200f, 100f), null, Color.WhiteSmoke, 0f, Vector2.Zero, 1f, 0, 0.9996f);
             for (int h = 0; h < this.MessageList.Length; h++)
             {
                 spriteBatch.DrawString(this.MessageList[h].Spritefont, this.MessageList[h].Text, this.MessageList[h].Position, this.MessageList[h].Colour, 0f, Vector2.Zero, 1f, 0, 0.9998f);

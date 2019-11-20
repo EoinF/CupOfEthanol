@@ -93,7 +93,7 @@
 				SteamAPI.Shutdown();
 				base.Exit();
             }
-            if (base.IsActive)
+            if (base.IsActive && !SteamIntegration.instance.IsPublishing)
             {
 				MainMenu.Update();
 				LevelSaver.Update();

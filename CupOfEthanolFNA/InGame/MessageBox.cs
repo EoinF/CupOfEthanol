@@ -127,12 +127,21 @@
             return text;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            Color colour = new Color(0.75f, 0.1f, 0.75f, 1);
-            if (LifeTime < 61)
-                colour = new Color(this.LifeTime / 80f, this.LifeTime / 600f, this.LifeTime / 80f, 0.035f * this.LifeTime);
+        public void Draw(SpriteBatch spriteBatch, bool isStatus = false)
+		{
+			Color colour = new Color(isStatus ? 0.9f: 0.75f, isStatus? 0.6f : 0.1f, isStatus ? 0.9f : 0.75f, 1);
+			float alpha = 0.035f * this.LifeTime;
+			float brightness = alpha > 0.4f ? 0.2f : 0;
+			Color backgroundColour = new Color(brightness, brightness, 0.5f + brightness, alpha > 0.4f ? alpha : 0f);
+			if (LifeTime < 61)
+			{
+				colour = new Color(this.LifeTime / 80f, this.LifeTime / 100f, this.LifeTime / 80f, 0.035f * this.LifeTime);
+			}
 
+			if (isStatus)
+			{
+				spriteBatch.Draw(Textures.GetTexture("StatusBackground"), startLocation + new Vector2(-10, 17), null, backgroundColour, 0, Vector2.Zero, 1f, SpriteEffects.None, 0.9999f); 
+			}
             spriteBatch.DrawString(Textures.GetFont("Medium"), this.Row, startLocation, colour, 0f, Vector2.Zero, 1f, 0, 1f);
         }
 

@@ -22,6 +22,7 @@
 		private static Texture2D Cursor;
         private static Texture2D EPause_Menu;
 		private static Texture2D Pause_Menu;
+		private static Texture2D Status_Background;
 		private static Texture2D JobDescriptionBackground;
 		private static Texture2D Default_Thumbnail;
 		#endregion
@@ -379,6 +380,9 @@
                 case "Pause_Menu":
                     return Pause_Menu;
 
+				case "StatusBackground":
+					return Status_Background;
+
 				case "JobDescriptionBackground":
 					return JobDescriptionBackground;
 
@@ -634,6 +638,7 @@
 				Button6 = Content.Load<Texture2D>("Textures/Menu/Button6");
 				EPause_Menu = Content.Load<Texture2D>("Textures/Menu/EPauseMenuBackground");
                 Pause_Menu = Content.Load<Texture2D>("Textures/Menu/PauseMenuBackground");
+				Status_Background = Content.Load<Texture2D>("Textures/Menu/StatusBackground");
 				JobDescriptionBackground = Content.Load<Texture2D>("Textures/Menu/JobDescriptionBackground");
 			}
             catch (Exception e)
@@ -741,7 +746,7 @@
                 {
                     mainThumnails[i] = Content.Load<Texture2D>("Levels/Main/" + (i + 1) + "/Thumbnail");
                 }
-                catch (Exception ex)
+                catch
                 {
                     mainThumnails[i] = Default_Thumbnail;
                 }

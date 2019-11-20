@@ -190,11 +190,11 @@
             }
             if (MessageBox.GameMessage != null)
             {
-                MessageBox.GameMessage.Draw(spriteBatch);
+                MessageBox.GameMessage.Draw(spriteBatch, false);
             }
             if (MessageBox.StatusMessage != null)
             {
-                MessageBox.StatusMessage.Draw(spriteBatch);
+                MessageBox.StatusMessage.Draw(spriteBatch, true);
             }
             if (PConsole.Active)
             {

@@ -237,15 +237,16 @@
 			}
 		}
 		
-        public static void SaveMap()
+        public static bool SaveMap()
 		{
 			if (TextInput.TextInputList[0].Text.Length == 0)
 			{
 				MessageBox.StatusMessage = new MessageBox("Level must have a name!", new Vector2(217, 190), 120);
-				return;
+				return false;
 			}
 			SavingTimeout = 2;
-        }
+			return true;
+		}
     }
 }
 

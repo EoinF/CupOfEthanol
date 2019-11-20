@@ -254,13 +254,15 @@
 									return;
 
 								case "Save & Test":
-									Save();
-									SaveFile.LoadSaveFiles();
-									LevelLoader.StartCustomLevel(Level.Current - 1, Level.CurrentLevelButton);
-									ScreenManager.Testing = true;
+									if (Save())
+									{
+										SaveFile.LoadSaveFiles();
+										LevelLoader.StartCustomLevel(Level.Current - 1, Level.CurrentLevelButton);
+										ScreenManager.Testing = true;
+									}
 									return;
 
-								case "Back to Editor":
+								case "Back to Editor":	
 									LevelLoader.StartEditorLevel(Level.Current - 1, Level.CurrentLevelButton);
 									return;
 
@@ -273,12 +275,21 @@
                                     return;
 
 								case "Delete Map":
-									MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This map can not be restored", "once deleted." }, PopupType.DELETE_LEVEL);
+									if (Level.CurrentLevelButton is WorkshopLevelButton)
+									{
+										MessageBox.StatusMessage = new MessageBox("Workshop levels can't be deleted!", new Microsoft.Xna.Framework.Vector2(217, 190), 120);
+									}
+									else
+									{
+										MainMethod.popupBox = new PopupBox(new string[] { "Are you sure?", "This map can not be restored", "once deleted." }, PopupType.DELETE_LEVEL);
+									}
 									return;
 
 								case "Publish to Workshop":
-									Save();
-									LevelSaver.IsPublishingToWorkshop = true;
+									if (Save())
+									{
+										LevelSaver.IsPublishingToWorkshop = true;
+									}
 									return;
 
 								case "Delete All Objects":
@@ -304,12 +315,12 @@
             }
         }
 
-		private static void Save()
+		private static bool Save()
 		{
 			if (TextInput.TextInputList[0].Text.Length == 0)
 			{
 				MessageBox.StatusMessage = new MessageBox("Level must have a name!", new Microsoft.Xna.Framework.Vector2(217, 190), 120);
-				return;
+				return false;
 			}
 			foreach (CustomLevelButton customLevelButton in LevelButton.lvButtonList)
 			{
@@ -321,10 +332,10 @@
 												"This will overwrite the existing level",
 												"Really overwrite the old data?"
 											}, PopupType.OVERWRITE_LEVEL);
-					return;
+					return false;
 				}
 			}
-			LevelSaver.SaveMap();
+			return LevelSaver.SaveMap();
 		}
     }
 }
