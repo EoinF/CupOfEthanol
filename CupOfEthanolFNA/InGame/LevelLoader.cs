@@ -1,8 +1,6 @@
 ﻿namespace LackingPlatforms
 {
     using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-	using Microsoft.Xna.Framework.Input;
 	using System;
     using System.Collections.Generic;
 	using System.Globalization;
@@ -22,7 +20,9 @@
         private static Objectdata[] GetEntityObjectData(XmlNode node)
         {
             List<string[]> info = new List<string[]>();
-            string[] singobj = node.InnerText.Split('`');
+            string[] singobj = node.InnerText
+				.Replace(',', '.') // Fixes old bug where positions were being written using locale settings instead of always the decimal point
+				.Split('`');
 
             if (singobj[singobj.Length - 1] == "")
                 Array.ConstrainedCopy(singobj, 0, singobj, 0, singobj.Length - 1);
@@ -42,14 +42,14 @@
 					info.Add(singobj[i].Split(new char[] { '~', '#' }));
                     if (info[i].Length == 6)
                     {
-                        objectlist[i] = new Objectdata(new Vector2(int.Parse(info[i][1], CultureInfo.InvariantCulture), int.Parse(info[i][2], CultureInfo.InvariantCulture)), info[i][0], byte.Parse(info[i][4]), byte.Parse(info[i][5]), info[i][3]);
+                        objectlist[i] = new Objectdata(new Vector2(float.Parse(info[i][1], CultureInfo.InvariantCulture), float.Parse(info[i][2], CultureInfo.InvariantCulture)), info[i][0], byte.Parse(info[i][4]), byte.Parse(info[i][5]), info[i][3]);
                     }
                     else
                     {
                         if (info[i].Length == 4)
                             throw new Exception();
                         if (info[i].Length == 7)
-                            objectlist[i] = new Objectdata(new Vector2((float)int.Parse(info[i][1]), (float)int.Parse(info[i][2])), info[i][0], byte.Parse(info[i][4]), byte.Parse(info[i][5]), info[i][3], int.Parse(info[i][6]));
+                            objectlist[i] = new Objectdata(new Vector2(float.Parse(info[i][1], CultureInfo.InvariantCulture), float.Parse(info[i][2], CultureInfo.InvariantCulture)), info[i][0], byte.Parse(info[i][4]), byte.Parse(info[i][5]), info[i][3], int.Parse(info[i][6]));
                     }
                 }
             }
@@ -134,7 +134,7 @@
                     }
                 }
                 for (int i = 0; i < Level.ChaliceList.Count; i++)
-                {
+				{
                     SquareObject.sqObjectArray[(int)(Level.ChaliceList[i].Position.X / 25f), (int)(Level.ChaliceList[i].Position.Y / 25f)] = new SquareObject("Chalice", Level.ChaliceList[i].Position, 0.83f, 0.8f);
                 }
                 Editor.Mouse_Move = true;
@@ -289,19 +289,19 @@
                     name = node.Name;
                     if (name != null)
                     {
-						value = node.InnerText;
+						value = node.InnerText.Replace(',', '.');
 						switch (name) {
 							case "BackgroundTexture":
-								Level._backgroundTexture = node.InnerText;
+								Level._backgroundTexture = value;
 								break;
 							case "Gravity":
-								Level.Gravity = new Vector2(0f, float.Parse(node.InnerText, CultureInfo.InvariantCulture));
+								Level.Gravity = new Vector2(0f, float.Parse(value, CultureInfo.InvariantCulture));
 								break;
 							case "AirResistance":
-								Level.AirResistance = float.Parse(node.InnerText, CultureInfo.InvariantCulture);
+								Level.AirResistance = float.Parse(value, CultureInfo.InvariantCulture);
 								break;
 							case "SongName":
-								Level.SongName = node.InnerText;
+								Level.SongName = value;
 								break;
 						}
                     }

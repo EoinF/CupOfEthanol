@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+	using System.Globalization;
 	using System.IO;
 	using System.Text;
     using System.Xml;
@@ -87,9 +88,9 @@
                     string text = child.InnerText;
                     text +=
 						nonNullEntities[i].Job + "~"
-                        + nonNullEntities[i].sqobject.Position.X.ToString()
+                        + nonNullEntities[i].sqobject.Position.X.ToString(CultureInfo.InvariantCulture)
                         + "#"
-                        + nonNullEntities[i].sqobject.Position.Y.ToString()
+                        + nonNullEntities[i].sqobject.Position.Y.ToString(CultureInfo.InvariantCulture)
                         + "~"
                         + dir
                         + "~"
@@ -158,12 +159,12 @@
             child.AppendChild(text);
 
             child = doc.CreateElement("Gravity");
-            text = doc.CreateTextNode(Level.Gravity.Y.ToString());
+            text = doc.CreateTextNode(Level.Gravity.Y.ToString(CultureInfo.InvariantCulture));
             root.AppendChild(child);
             child.AppendChild(text);
 
 			child = doc.CreateElement("AirResistance");
-			text = doc.CreateTextNode(Level.AirResistance.ToString());
+			text = doc.CreateTextNode(Level.AirResistance.ToString(CultureInfo.InvariantCulture));
 			root.AppendChild(child);
 			child.AppendChild(text);
 
