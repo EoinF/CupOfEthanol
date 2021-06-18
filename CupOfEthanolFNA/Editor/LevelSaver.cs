@@ -48,7 +48,7 @@
                 }
                 else
                 {
-					break;
+					continue;
                 }
                 string var3 = child.InnerText;
                 string[] stringlist = new string[8];
@@ -235,7 +235,14 @@
 					SteamIntegration.UploadWorkshopLevel();
 					IsPublishingToWorkshop = false;
 				}
-			}
+
+                if (ScreenManager.Testing)
+                {
+                    SaveFile.LoadSaveFiles();
+                    LevelLoader.StartCustomLevel(Level.Current - 1, Level.CurrentLevelButton);
+                    ScreenManager.Testing = true;
+                }
+            }
 		}
 		
         public static bool SaveMap()

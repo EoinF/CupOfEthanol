@@ -256,8 +256,6 @@
 								case "Save & Test":
 									if (Save())
 									{
-										SaveFile.LoadSaveFiles();
-										LevelLoader.StartCustomLevel(Level.Current - 1, Level.CurrentLevelButton);
 										ScreenManager.Testing = true;
 									}
 									return;
