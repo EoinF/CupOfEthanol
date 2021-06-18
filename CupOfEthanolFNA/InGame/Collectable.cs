@@ -53,28 +53,29 @@
                         {
                             collected--;
                             SaveFile.SaveData.MainCoastersCollected[Level.Current - 1][q] = true;
-
-							int total = SaveFile.SaveData.TotalMainCoasters();
-							if (total >= 10)
-								SteamIntegration.Achievements.CoastersCollected10();
-							else if (total >= 25)
-								SteamIntegration.Achievements.CoastersCollected25();
-							else if (total >= 40)
-								SteamIntegration.Achievements.CoastersCollected40();
-							else if (total >= 50)
-								SteamIntegration.Achievements.CoastersCollected50();
-							else if (total >= 60)
-								SteamIntegration.Achievements.CoastersCollected60();
-							else if (total >= 70)
-								SteamIntegration.Achievements.CoastersCollected70();
-							else if (total >= 72)
-								SteamIntegration.Achievements.CoastersCollected72();
-
-							MessageBox.GameMessage = new MessageBox("New Coaster Collected!££" + collected.ToString() + " remaining...", new Vector2(50,50), 180);
+                            MessageBox.GameMessage = new MessageBox("New Coaster Collected!££" + collected.ToString() + " remaining...", new Vector2(50, 50), 180);
                             SaveFile.SaveGame();
                         }
                         else
+                        {
                             MessageBox.GameMessage = new MessageBox("Old Coaster Re-Collected!££" + collected.ToString() + " remaining...", new Vector2(50, 50), 180);
+                        }
+                        int total = SaveFile.SaveData.TotalMainCoasters();
+                        if (total >= 10)
+                            SteamIntegration.Achievements.CoastersCollected10();
+                        if (total >= 25)
+                            SteamIntegration.Achievements.CoastersCollected25();
+                        if (total >= 40)
+                            SteamIntegration.Achievements.CoastersCollected40();
+                        if (total >= 50)
+                            SteamIntegration.Achievements.CoastersCollected50();
+                        if (total >= 60)
+                            SteamIntegration.Achievements.CoastersCollected60();
+                        if (total >= 70)
+                            SteamIntegration.Achievements.CoastersCollected70();
+                        if (total >= 72)
+                            SteamIntegration.Achievements.CoastersCollected72();
+
                     }
                     if (collect.Type == 5)
                     {
